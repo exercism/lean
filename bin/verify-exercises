@@ -35,16 +35,7 @@ unskip_tests() {
 }
 
 run_tests() {
-    # Get the test executable name from the lakefile
-    local test_exe
-    test_exe=$(jq -r '.files.test[0] | sub("\\.lean$"; "")' .meta/config.json)
-
-    # Update dependencies and build
-    lake update
-    lake build
-
-    # Run the test executable
-    "./.lake/build/bin/${test_exe}"
+    lake test
 }
 
 verify_exercise() {

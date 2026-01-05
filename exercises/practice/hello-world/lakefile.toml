@@ -1,11 +1,10 @@
 name = "hello-world"
 version = "0.1.0"
 defaultTargets = ["HelloWorldTest"]
+testDriver = "HelloWorldTest"
 
-[[require]]
+[[lean_lib]]
 name = "LeanTest"
-git = "https://github.com/tim-br/LeanTest"
-rev = "main"
 
 [[lean_lib]]
 name = "HelloWorld"

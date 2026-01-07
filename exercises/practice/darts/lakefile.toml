@@ -1,0 +1,15 @@
+name = "darts"
+version = "0.1.0"
+defaultTargets = ["DartsTest"]
+testDriver = "DartsTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Darts"
+
+[[lean_exe]]
+name = "DartsTest"
+root = "DartsTest"

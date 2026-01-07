@@ -1,0 +1,18 @@
+{
+  "authors": [
+    "tim-br"
+  ],
+  "files": {
+    "solution": [
+      "Darts.lean"
+    ],
+    "test": [
+      "DartsTest.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ]
+  },
+  "blurb": "Calculate the points scored in a single toss of a Darts game.",
+  "source": "Inspired by an exercise created by a professor Della Paolera in Argentina"
+}

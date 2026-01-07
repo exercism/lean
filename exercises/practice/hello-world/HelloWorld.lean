@@ -1,6 +1,6 @@
 namespace HelloWorld
 
 def hello : String :=
-  "Hello, World!"
+  "Goodbye, Mars!"
 
 end HelloWorld

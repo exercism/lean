@@ -1,0 +1,32 @@
+{
+  "docs": [
+    {
+      "uuid": "4b2efdff-2450-42f0-87bd-41e62cbf2c54",
+      "slug": "installation",
+      "path": "docs/INSTALLATION.md",
+      "title": "Installing Lean locally",
+      "blurb": "Learn how to install Lean locally to solve Exercism's exercises on your own machine"
+    },
+    {
+      "uuid": "a165afe0-c9b2-4002-9328-59316880c1dc",
+      "slug": "learning",
+      "path": "docs/LEARNING.md",
+      "title": "How to learn Lean",
+      "blurb": "An overview of how to get started from scratch with Lean"
+    },
+    {
+      "uuid": "4a922a01-2b91-4f1d-ba67-5566dcbc7918",
+      "slug": "tests",
+      "path": "docs/TESTS.md",
+      "title": "Testing on the Lean track",
+      "blurb": "Learn how to test your Lean exercises on Exercism"
+    },
+    {
+      "uuid": "804d90a5-6568-48d1-a014-6793d3fc80e7",
+      "slug": "resources",
+      "path": "docs/RESOURCES.md",
+      "title": "Useful Lean resources",
+      "blurb": "A collection of useful resources to help you master Lean"
+    }
+  ]
+}

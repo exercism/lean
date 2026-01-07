@@ -1,0 +1,15 @@
+name = "rotational-cipher"
+version = "0.1.0"
+defaultTargets = ["RotationalCipherTest"]
+testDriver = "RotationalCipherTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "RotationalCipher"
+
+[[lean_exe]]
+name = "RotationalCipherTest"
+root = "RotationalCipherTest"

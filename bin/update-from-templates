@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# This script updates all exercises with the contents from the `templates` directory.
+# If everything is up-to-date (i.e., the script did not make any changes), it returns with
+# an exit code of 0. Otherwise, a non-zero exit code is returned.
+
+set -eo pipefail
+
+die() { echo "$*" >&2; exit 3; }
+
+hash_dir() {
+    (cd "$1" && find . ! -name "*.o" -type f | sort --unique | xargs cat) | md5sum
+}
+
+cd "$(dirname "$0")/.."
+
+vendor_hash=$(hash_dir templates/vendor)
+toolchain_hash=$(md5sum templates/lean-toolchain | cut -d' ' -f1)
+
+num_updated=0
+for exercise_dir in exercises/practice/*; do
+    [[ -d "${exercise_dir}" ]] || continue
+
+    # Update lean-toolchain
+    toolchain_file="${exercise_dir}/lean-toolchain"
+    if [[ -f "${toolchain_file}" ]]; then
+        current_toolchain_hash=$(md5sum "${toolchain_file}" | cut -d' ' -f1)
+        if [[ "${current_toolchain_hash}" != "${toolchain_hash}" ]]; then
+            echo "Updating ${toolchain_file}"
+            cp templates/lean-toolchain "${toolchain_file}"
+            num_updated=$((num_updated + 1))
+        fi
+    else
+        echo "Adding ${toolchain_file}"
+        cp templates/lean-toolchain "${toolchain_file}"
+        num_updated=$((num_updated + 1))
+    fi
+
+    # Update vendor directory (LeanTest)
+    vendor_dir="${exercise_dir}/vendor"
+    if [[ -d "${vendor_dir}" ]]; then
+        current_vendor_hash=$(hash_dir "${vendor_dir}")
+        if [[ "${current_vendor_hash}" != "${vendor_hash}" ]]; then
+            echo "Updating ${vendor_dir}"
+            rm -rf "${vendor_dir}"
+            cp -r templates/vendor "${vendor_dir}"
+            num_updated=$((num_updated + 1))
+        fi
+    else
+        echo "Adding ${vendor_dir}"
+        cp -r templates/vendor "${vendor_dir}"
+        num_updated=$((num_updated + 1))
+    fi
+done
+
+[[ ${num_updated} -eq 0 ]] || exit 1
+
+echo "Everything up-to-date."

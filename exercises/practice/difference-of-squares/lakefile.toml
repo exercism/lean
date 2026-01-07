@@ -1,0 +1,15 @@
+name = "difference-of-squares"
+version = "0.1.0"
+defaultTargets = ["DifferenceOfSquaresTest"]
+testDriver = "DifferenceOfSquaresTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "DifferenceOfSquares"
+
+[[lean_exe]]
+name = "DifferenceOfSquaresTest"
+root = "DifferenceOfSquaresTest"

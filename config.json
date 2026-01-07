@@ -8,23 +8,74 @@
     "representer": false,
     "analyzer": false
   },
-  "blurb": "TODO: add blurb",
+  "blurb": "Lean is a functional programming language and theorem prover, designed for writing mathematical proofs and verified software.",
   "version": 3,
   "online_editor": {
     "indent_style": "space",
-    "indent_size": 4
+    "indent_size": 2
   },
   "files": {
-    "solution": [],
-    "test": [],
-    "example": [],
-    "exemplar": []
+    "solution": [
+      "%{pascal_slug}.lean"
+    ],
+    "test": [
+      "%{pascal_slug}Test.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ],
+    "exemplar": [
+      ".meta/Exemplar.lean"
+    ]
   },
   "exercises": {
-    "concept": [],
-    "practice": []
+    "practice": [
+      {
+        "slug": "eliuds-eggs",
+        "name": "Eliud's Eggs",
+        "uuid": "62ae2a02-61c3-436f-8b46-40cd0431d6e9",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
+        "slug": "hello-world",
+        "name": "Hello World",
+        "uuid": "1f7788fe-42cc-45f7-814a-7392452b1fad",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
+      },
+      {
+        "slug": "rotational-cipher",
+        "name": "Rotational Cipher",
+        "uuid": "014d61d3-07ae-42fe-9305-5979394a86c0",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
+        "slug": "darts",
+        "name": "Darts",
+        "uuid": "1c8d6d26-be14-4d55-9ae0-0029411a626f",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
+      },
+      {
+        "slug": "difference-of-squares",
+        "name": "Difference of Squares",
+        "uuid": "474e19d5-739e-43ad-9dca-b97e9104c179",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      }
+    ]
   },
-  "concepts": [],
-  "key_features": [],
-  "tags": []
+  "tags": [
+    "paradigm/declarative",
+    "paradigm/functional",
+    "typing/static",
+    "typing/strong"
+  ]
 }

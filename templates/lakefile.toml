@@ -1,0 +1,15 @@
+name = "%{kebab_slug}"
+version = "0.1.0"
+defaultTargets = ["%{pascal_slug}Test"]
+testDriver = "%{pascal_slug}Test"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "%{pascal_slug}"
+
+[[lean_exe]]
+name = "%{pascal_slug}Test"
+root = "%{pascal_slug}Test"

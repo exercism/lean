@@ -1,0 +1,15 @@
+name = "pangram"
+version = "0.1.0"
+defaultTargets = ["PangramTest"]
+testDriver = "PangramTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Pangram"
+
+[[lean_exe]]
+name = "PangramTest"
+root = "PangramTest"

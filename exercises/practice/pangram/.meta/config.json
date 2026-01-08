@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "keiravillekode"
+  ],
+  "files": {
+    "solution": [
+      "Pangram.lean"
+    ],
+    "test": [
+      "PangramTest.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ]
+  },
+  "blurb": "Determine if a sentence is a pangram.",
+  "source": "Wikipedia",
+  "source_url": "https://en.wikipedia.org/wiki/Pangram"
+}

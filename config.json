@@ -31,6 +31,14 @@
   "exercises": {
     "practice": [
       {
+        "slug": "pangram",
+        "name": "Pangram",
+        "uuid": "eebacc01-4f43-4d03-a497-b482c08b5896",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "eliuds-eggs",
         "name": "Eliud's Eggs",
         "uuid": "62ae2a02-61c3-436f-8b46-40cd0431d6e9",

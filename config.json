@@ -31,6 +31,14 @@
   "exercises": {
     "practice": [
       {
+        "slug": "hamming",
+        "name": "Hamming",
+        "uuid": "90d5a8e5-8b82-4675-b338-425607897933",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "pangram",
         "name": "Pangram",
         "uuid": "eebacc01-4f43-4d03-a497-b482c08b5896",

@@ -1,0 +1,15 @@
+name = "scrabble-score"
+version = "0.1.0"
+defaultTargets = ["ScrabbleScoreTest"]
+testDriver = "ScrabbleScoreTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "ScrabbleScore"
+
+[[lean_exe]]
+name = "ScrabbleScoreTest"
+root = "ScrabbleScoreTest"

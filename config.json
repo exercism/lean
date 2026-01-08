@@ -63,6 +63,14 @@
         "difficulty": 1
       },
       {
+        "slug": "scrabble-score",
+        "name": "Scrabble Score",
+        "uuid": "6a9cd9b6-8dbe-4811-a5a6-d681687bd2e6",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "difference-of-squares",
         "name": "Difference of Squares",
         "uuid": "474e19d5-739e-43ad-9dca-b97e9104c179",

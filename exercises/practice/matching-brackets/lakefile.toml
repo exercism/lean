@@ -1,0 +1,15 @@
+name = "matching-brackets"
+version = "0.1.0"
+defaultTargets = ["MatchingBracketsTest"]
+testDriver = "MatchingBracketsTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "MatchingBrackets"
+
+[[lean_exe]]
+name = "MatchingBracketsTest"
+root = "MatchingBracketsTest"

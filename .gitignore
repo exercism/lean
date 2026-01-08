@@ -5,3 +5,7 @@ bin/configlet.exe
 bin/latest-configlet.tar.gz
 bin/latest-configlet.zip
 bin/configlet.zip
+
+# Lake build artifacts
+.lake/
+lake-manifest.json

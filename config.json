@@ -47,6 +47,14 @@
         "difficulty": 1
       },
       {
+        "slug": "matching-brackets",
+        "name": "Matching Brackets",
+        "uuid": "ab9e4f55-cdde-4caf-be65-49427c497e78",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "rotational-cipher",
         "name": "Rotational Cipher",
         "uuid": "014d61d3-07ae-42fe-9305-5979394a86c0",

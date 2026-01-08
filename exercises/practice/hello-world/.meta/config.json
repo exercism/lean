@@ -1,5 +1,7 @@
 {
-  "authors": [],
+  "authors": [
+    "tim-br"
+  ],
   "files": {
     "solution": [
       "HelloWorld.lean"

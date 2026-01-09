@@ -71,6 +71,14 @@
         "difficulty": 1
       },
       {
+        "slug": "flatten-array",
+        "name": "Flatten Array",
+        "uuid": "758ddbdc-a11a-4fe0-a0aa-f47d25a7e126",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "matching-brackets",
         "name": "Matching Brackets",
         "uuid": "ab9e4f55-cdde-4caf-be65-49427c497e78",

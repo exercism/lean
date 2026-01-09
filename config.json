@@ -55,6 +55,14 @@
         "difficulty": 1
       },
       {
+        "slug": "sum-of-multiples",
+        "name": "Sum of Multiples",
+        "uuid": "70018adc-082f-4982-8ecf-c97f70c7b244",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "hello-world",
         "name": "Hello World",
         "uuid": "1f7788fe-42cc-45f7-814a-7392452b1fad",

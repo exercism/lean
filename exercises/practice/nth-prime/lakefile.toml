@@ -1,0 +1,15 @@
+name = "nth-prime"
+version = "0.1.0"
+defaultTargets = ["NthPrimeTest"]
+testDriver = "NthPrimeTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "NthPrime"
+
+[[lean_exe]]
+name = "NthPrimeTest"
+root = "NthPrimeTest"

@@ -117,6 +117,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 4
+      },
+      {
+        "slug": "nth-prime",
+        "name": "Nth Prime",
+        "uuid": "5ff6afa5-aaca-4cdb-84cf-844f4ef64591",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
       }
     ]
   },

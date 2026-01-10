@@ -4,7 +4,7 @@ import TwoFer
 open LeanTest
 
 def twoFerTests : TestSuite :=
-  (TestSuite.empty "Darts")
+  (TestSuite.empty "TwoFer")
   |>.addTest "no name given" (do
       return assertEqual "One for you, one for me." (TwoFer.twoFer none))
   |>.addTest "a name given" (do

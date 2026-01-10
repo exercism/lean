@@ -1,0 +1,15 @@
+name = "two-fer"
+version = "0.1.0"
+defaultTargets = ["TwoFerTest"]
+testDriver = "TwoFerTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "TwoFer"
+
+[[lean_exe]]
+name = "TwoFerTest"
+root = "TwoFerTest"

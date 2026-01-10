@@ -1,0 +1,15 @@
+name = "knapsack"
+version = "0.1.0"
+defaultTargets = ["KnapsackTest"]
+testDriver = "KnapsackTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Knapsack"
+
+[[lean_exe]]
+name = "KnapsackTest"
+root = "KnapsackTest"

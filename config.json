@@ -47,6 +47,14 @@
         "difficulty": 2
       },
       {
+        "slug": "knapsack",
+        "name": "Knapsack",
+        "uuid": "8ed9aa32-f678-4b33-9717-544d85e1dfbf",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 6
+      },
+      {
         "slug": "eliuds-eggs",
         "name": "Eliud's Eggs",
         "uuid": "62ae2a02-61c3-436f-8b46-40cd0431d6e9",

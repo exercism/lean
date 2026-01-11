@@ -1,0 +1,15 @@
+name = "change"
+version = "0.1.0"
+defaultTargets = ["ChangeTest"]
+testDriver = "ChangeTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Change"
+
+[[lean_exe]]
+name = "ChangeTest"
+root = "ChangeTest"

@@ -10,7 +10,6 @@ def findFewestCoins (coins : List Nat) (target : Int) : Result := Id.run do
   | none => return .error "target can't be negative"
   | some targetNat =>
     if validTarget : target > 0 then
-      let targetNat := target.toNat
       let mut memo : Array (Option (Array Nat)) := Array.replicate (targetNat + 1) none
       let mut assigned := true
 

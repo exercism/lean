@@ -5,7 +5,7 @@ inductive Result where
   | error : String -> Result
   deriving BEq, Repr
 
-def findFewestCoins (coins : List Nat) (target : Int) : Result :=
+def findFewestCoins (coins : Array Nat) (target : Int) : Result :=
   sorry
 
 end Change

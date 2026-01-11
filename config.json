@@ -170,6 +170,14 @@
         "difficulty": 5
       },
       {
+        "slug": "affine-cipher",
+        "name": "Affine Cipher",
+        "uuid": "66f25c42-5f5c-4f99-9286-d20242b92889",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 6
+      },
+      {
         "slug": "two-fer",
         "name": "Two-Fer",
         "uuid": "cf1abbb8-6ff9-4895-9bc2-3c275155cd3c",

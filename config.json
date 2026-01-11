@@ -143,6 +143,14 @@
         "difficulty": 4
       },
       {
+        "slug": "luhn",
+        "name": "Luhn",
+        "uuid": "f0c92afa-1e8d-4917-8e6c-13a0b57219d4",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "nth-prime",
         "name": "Nth Prime",
         "uuid": "5ff6afa5-aaca-4cdb-84cf-844f4ef64591",

@@ -130,6 +130,14 @@
         "difficulty": 1
       },
       {
+        "slug": "raindrops",
+        "name": "Raindrops",
+        "uuid": "ec5b9a61-5244-400e-93ab-1b0078073cb3",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "scrabble-score",
         "name": "Scrabble Score",
         "uuid": "6a9cd9b6-8dbe-4811-a5a6-d681687bd2e6",

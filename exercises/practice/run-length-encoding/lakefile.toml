@@ -1,0 +1,15 @@
+name = "run-length-encoding"
+version = "0.1.0"
+defaultTargets = ["RunLengthEncodingTest"]
+testDriver = "RunLengthEncodingTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "RunLengthEncoding"
+
+[[lean_exe]]
+name = "RunLengthEncodingTest"
+root = "RunLengthEncodingTest"

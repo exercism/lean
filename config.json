@@ -74,6 +74,14 @@
         "difficulty": 1
       },
       {
+        "slug": "run-length-encoding",
+        "name": "Run-Length Encoding",
+        "uuid": "9968ce8f-8d43-454c-bd27-b79978786eb8",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "sum-of-multiples",
         "name": "Sum of Multiples",
         "uuid": "70018adc-082f-4982-8ecf-c97f70c7b244",

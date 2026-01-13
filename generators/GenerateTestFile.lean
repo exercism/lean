@@ -6,8 +6,13 @@ open Lean
 open Std
 
 structure OrderedMap where
-  order : Array Json
+  order : Array String
   map : TreeMap.Raw String Json
+
+structure Case where
+  parent : String
+  case : Json
+  deriving Inhabited
 
 def empty : OrderedMap := { order := #[], map := .empty }
 
@@ -33,27 +38,36 @@ def getMap (data : Except String Json) : Except String (TreeMap.Raw String Json)
 def processCases (array : Array Json) : OrderedMap := Id.run do
   let mut fullArray := #[]
   let mut fullMap := TreeMap.Raw.empty
-  let mut stack := array.toList
+  let mut stack : List Case := array.foldr (fun json acc =>
+    { parent := "", case := json } :: acc
+  ) []
   while !stack.isEmpty do
-    let caseJson := stack.head!
+    let { parent, case } : Case := stack.head!
     stack := stack.tail
-    match caseJson.getObjVal? "cases" with
+    match case.getObjVal? "cases" with
     | .error _ =>
-      fullArray := fullArray.push caseJson
-      let uuid := caseJson.getObjVal? "uuid" |> getOk
-      match caseJson.getObjVal? "reimplements" with
+      match case.getObjVal? "reimplements" with
       | .error _ =>
-        fullMap := fullMap.insert uuid.compress caseJson
+        let uuid := case.getObjValD "uuid"
+        let key := uuid.compress
+        let description := case.getObjValD "description" |> Json.getStr? |> getOk
+        let caseWithParentDescription := case.setObjVal! "description" (parent ++ description)
+        fullArray := fullArray.push key
+        fullMap := fullMap.insert key caseWithParentDescription
       | .ok other =>
-        fullMap := fullMap.insert other.compress caseJson
+        let key := other.compress
+        fullMap := fullMap.insert key case
     | .ok cases =>
-      let childList := getOk cases.getArr? |> Array.toList
+      let description := case.getObjValD "description" |> Json.compress
+      let childList := getOk cases.getArr?
+                    |> Array.foldr (fun child acc =>
+                      { parent := parent ++ " : " ++ description, case := child } :: acc
+                    ) []
       stack := childList ++ stack
   return { order := fullArray, map := fullMap }
 
 def getCases (dataMap : Except String (TreeMap.Raw String Json)) : OrderedMap :=
-  let map : TreeMap.Raw String Json := getOk dataMap
-
+  let map := getOk dataMap
   match map.get? "cases" with
   | none => empty
   | some json =>
@@ -64,8 +78,7 @@ def pascalCase  (input : String) : String :=
   input.splitOn "-" |> List.map String.capitalize |> String.join
 
 def startTest (genTestCase : String -> TreeMap.Raw String Json -> String) (exercise : String) (cases : OrderedMap) : String :=
-  cases.order.foldl (fun acc json =>
-    let uuid := json.getObjVal? "uuid" |> getOk |> Json.compress
+  cases.order.foldl (fun acc uuid =>
     let case := cases.map.get! uuid
     match case.getObj? with
     | .error _ => acc

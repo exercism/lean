@@ -10,7 +10,7 @@ structure OrderedMap where
   map : TreeMap.Raw String Json
 
 structure Case where
-  parent : String
+  descriptionPath : Array String
   case : Json
   deriving Inhabited
 
@@ -39,10 +39,10 @@ def processCases (array : Array Json) : OrderedMap := Id.run do
   let mut fullArray := #[]
   let mut fullMap := TreeMap.Raw.empty
   let mut stack : List Case := array.foldr (fun json acc =>
-    { parent := "", case := json } :: acc
+    { descriptionPath := #[], case := json } :: acc
   ) []
   while !stack.isEmpty do
-    let { parent, case } : Case := stack.head!
+    let { descriptionPath, case } : Case := stack.head!
     stack := stack.tail
     match case.getObjVal? "cases" with
     | .error _ =>
@@ -51,17 +51,18 @@ def processCases (array : Array Json) : OrderedMap := Id.run do
         let uuid := case.getObjValD "uuid"
         let key := uuid.compress
         let description := case.getObjValD "description" |> Json.getStr? |> getOk
-        let caseWithParentDescription := case.setObjVal! "description" (parent ++ description)
+        let fullDescription := descriptionPath.push description |> Array.toList
+        let caseWithParentDescription := case.setObjVal! "description" (" : ".intercalate fullDescription)
         fullArray := fullArray.push key
         fullMap := fullMap.insert key caseWithParentDescription
       | .ok other =>
         let key := other.compress
         fullMap := fullMap.insert key case
     | .ok cases =>
-      let description := case.getObjValD "description" |> Json.compress
+      let description := case.getObjValD "description" |> Json.getStr? |> getOk
       let childList := getOk cases.getArr?
                     |> Array.foldr (fun child acc =>
-                      { parent := parent ++ " : " ++ description, case := child } :: acc
+                      { descriptionPath := descriptionPath.push description, case := child } :: acc
                     ) []
       stack := childList ++ stack
   return { order := fullArray, map := fullMap }

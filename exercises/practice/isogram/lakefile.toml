@@ -1,0 +1,15 @@
+name = "isogram"
+version = "0.1.0"
+defaultTargets = ["IsogramTest"]
+testDriver = "IsogramTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Isogram"
+
+[[lean_exe]]
+name = "IsogramTest"
+root = "IsogramTest"

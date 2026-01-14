@@ -146,6 +146,14 @@
         "difficulty": 3
       },
       {
+        "slug": "line-up",
+        "name": "Line Up",
+        "uuid": "d6972b96-7abb-47d8-a342-d874b297c471",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "matrix",
         "name": "Matrix",
         "uuid": "10660d8f-1894-42f2-bddc-ac6458ca900f",

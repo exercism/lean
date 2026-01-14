@@ -178,6 +178,14 @@
         "difficulty": 3
       },
       {
+        "slug": "square-root",
+        "name": "Square Root",
+        "uuid": "f3882b5e-5286-41fb-afe8-44eafcf18342",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "isbn-verifier",
         "name": "ISBN Verifier",
         "uuid": "49804a1c-35e4-4645-9ee5-932e2c7e5e01",

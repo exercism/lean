@@ -9,14 +9,15 @@ structure OrderedMap where
   order : Array String
   map : TreeMap.Raw String Json
 
-structure Case where
-  parent : Array String
-  case : Json
-  deriving Inhabited
-
 def empty : OrderedMap := { order := #[], map := .empty }
 
 def getOk {α β} (except : Except α β) [Inhabited β] : β := except.toOption |> Option.get!
+
+def strip (string : String) (char : Char) : String :=
+  String.dropWhile string (·==char) |> (String.dropRightWhile · (·==char))
+
+def stripWhiteSpace (string : String) : String :=
+  String.dropWhile string (·.isWhitespace) |> (String.dropRightWhile . (·.isWhitespace))
 
 def readCanonicalData (exercise : String) : IO (Except String Json) := do
   let info <- IO.Process.run {
@@ -35,52 +36,35 @@ def readCanonicalData (exercise : String) : IO (Except String Json) := do
   catch _ =>
     return .error "No canonical data."
 
-def processCases (array : Array Json) : Except String OrderedMap := Id.run do
+def processCases (tests : TreeMap String String) (array : Array Json) : Except String OrderedMap := Id.run do
   let mut fullArray := #[]
   let mut fullMap := TreeMap.Raw.empty
-  let mut stack : List Case := array.foldr (fun json acc =>
-    { parent := #[], case := json } :: acc
-  ) []
+  let mut stack := array.toList
   while !stack.isEmpty do
-    let { parent, case } : Case := stack.head!
+    let case := stack.head!
     stack := stack.tail
     match case.getObjVal? "cases" with
     | .error _ =>
-      match case.getObjVal? "reimplements" with
-      | .error _ =>
-        match case.getObjVal? "uuid" with
-        | .error _ => return .error s!"No uuid for case: {case}."
-        | .ok uuid =>
-          let key := uuid.compress
-          match case.getObjVal? "description" with
-          | .error _ => return .error s!"No description for case: {case}."
-          | .ok descriptionJson =>
-            let description := getOk descriptionJson.getStr?
-            let fullDescription := parent.push description |> Array.toList
-            let caseWithParentDescription := case.setObjVal! "description" (" : ".intercalate fullDescription)
-            fullArray := fullArray.push key
-            fullMap := fullMap.insert key caseWithParentDescription
-      | .ok other =>
-        let key := other.compress
-        fullMap := fullMap.insert key case
+      match case.getObjVal? "uuid" with
+      | .error _ => return .error s!"No uuid for case: {case}."
+      | .ok uuid =>
+        let key := getOk uuid.getStr?
+        match tests.get? key with
+        | none => continue /- include false -/
+        | some description =>
+          fullArray := fullArray.push key
+          fullMap := fullMap.insert key (case.setObjVal! "description" description)
     | .ok cases =>
-      match case.getObjVal? "description" with
-      | .error _ => return .error s!"No description for case: {case}."
-      | .ok descriptionJson =>
-        let description := getOk descriptionJson.getStr?
-        let childList := getOk cases.getArr?
-                      |> Array.foldr (fun child acc =>
-                        { parent := parent.push description, case := child } :: acc
-                      ) []
-        stack := childList ++ stack
+      let childList := getOk cases.getArr? |> Array.toList
+      stack := childList ++ stack
   return .ok { order := fullArray, map := fullMap }
 
-def getCases (map : TreeMap.Raw String Json) : Except String OrderedMap :=
+def getCases (map : TreeMap.Raw String Json) (tests : TreeMap String String) : Except String OrderedMap :=
   match map.get? "cases" with
   | none => .error "No cases in canonical data."
   | some json =>
     let array := getOk json.getArr?
-    processCases array
+    processCases tests array
 
 def pascalCase  (input : String) : String :=
   input.splitOn "-" |> List.map String.capitalize |> String.join
@@ -108,22 +92,62 @@ def genTestFileContent (pascalExercise : String) (cases : OrderedMap) : Except S
     let ending := genEnd pascalExercise
     .ok (intro ++ tests ++ extraTests ++ ending)
 
+def getToml (exercise : String) : IO (Except String String) := do
+  let path := s!"../exercises/practice/{exercise}/.meta/tests.toml"
+  try
+    let toml <- IO.FS.readFile path
+    return .ok toml
+  catch _ =>
+    return .error "No toml file."
+
+def getTestsToInclude (toml : String) : IO (TreeMap String String) := do
+  let cases := toml.splitOn "\n\n"
+            |> List.map (·.splitOn "\n" |> List.map stripWhiteSpace)
+  let includes := cases.filter (fun xs =>
+    let hasInclude := xs.find? (stripWhiteSpace . |> (·.startsWith "include"))
+    match hasInclude with
+    | none => true
+    | some string =>
+      let words := string.splitOn " " |> List.map stripWhiteSpace |> String.join
+      words != "include=false"
+  )
+  return includes.foldr (fun xs acc =>
+    match xs with
+    | uuid :: descriptionLine :: _ =>
+      let formattedUUID := uuid.stripPrefix "[" |> (·.stripSuffix "]")
+      let description := stripWhiteSpace descriptionLine
+                        |> (·.stripPrefix "description")
+                        |> (·.dropWhile (·.isWhitespace))
+                        |> (·.stripPrefix "=")
+                        |> (·.dropWhile (·.isWhitespace))
+                        |> (strip . '"')
+      acc.insert formattedUUID description
+    | _ => acc
+  ) Std.TreeMap.empty
+
 def main (args : List String) : IO Unit := do
   match args with
   | [] => throw <| IO.userError "No exercise name found. Usage is: lake exe generator <exercise-in-kebab-case>"
   | exercise :: _ =>
     let pascalExercise := pascalCase exercise
-    let canonicalData <- readCanonicalData exercise
-    let data := match canonicalData with
-              | .error _ => Json.null
-              | .ok data => data
-    match data.getObj? with
+    let maybeToml <- getToml exercise
+    match maybeToml with
     | .error _ => match genTestFileContent pascalExercise empty with
                   | .error msg => throw <| IO.userError msg
                   | .ok testContent => IO.FS.writeFile s!"../exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
-    | .ok maybeMap =>
-      match getCases maybeMap with
-      | .error msg => throw <| IO.userError msg
-      | .ok cases => match genTestFileContent pascalExercise cases with
+    | .ok toml =>
+      let tests <- getTestsToInclude toml
+      let canonicalData <- readCanonicalData exercise
+      let data := match canonicalData with
+                  | .error _ => Json.null
+                  | .ok data => data
+      match data.getObj? with
+      | .error _ => match genTestFileContent pascalExercise empty with
                     | .error msg => throw <| IO.userError msg
                     | .ok testContent => IO.FS.writeFile s!"../exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+      | .ok maybeMap =>
+        match getCases maybeMap tests with
+        | .error msg => throw <| IO.userError msg
+        | .ok cases => match genTestFileContent pascalExercise cases with
+                      | .error msg => throw <| IO.userError msg
+                      | .ok testContent => IO.FS.writeFile s!"../exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent

@@ -29,8 +29,11 @@ def readCanonicalData (exercise : String) : IO (Except String Json) := do
     List.map (·.stripPrefix dirPrefix) |>
     List.head!
   let path := s!"{directory}/exercises/{exercise}/canonical-data.json"
-  let json <- IO.FS.readFile path
-  return Json.parse json
+  try
+    let json <- IO.FS.readFile path
+    return Json.parse json
+  catch _ =>
+    return .error "No canonical data."
 
 def processCases (array : Array Json) : Except String OrderedMap := Id.run do
   let mut fullArray := #[]
@@ -46,11 +49,11 @@ def processCases (array : Array Json) : Except String OrderedMap := Id.run do
       match case.getObjVal? "reimplements" with
       | .error _ =>
         match case.getObjVal? "uuid" with
-        | .error _ => return .error s!"no uuid for case: {case}"
+        | .error _ => return .error s!"No uuid for case: {case}."
         | .ok uuid =>
           let key := uuid.compress
           match case.getObjVal? "description" with
-          | .error _ => return .error s!"no description for case: {case}"
+          | .error _ => return .error s!"No description for case: {case}."
           | .ok descriptionJson =>
             let description := getOk descriptionJson.getStr?
             let fullDescription := parent.push description |> Array.toList
@@ -62,7 +65,7 @@ def processCases (array : Array Json) : Except String OrderedMap := Id.run do
         fullMap := fullMap.insert key case
     | .ok cases =>
       match case.getObjVal? "description" with
-      | .error _ => return .error s!"no description for case: {case}"
+      | .error _ => return .error s!"No description for case: {case}."
       | .ok descriptionJson =>
         let description := getOk descriptionJson.getStr?
         let childList := getOk cases.getArr?
@@ -74,7 +77,7 @@ def processCases (array : Array Json) : Except String OrderedMap := Id.run do
 
 def getCases (map : TreeMap.Raw String Json) : Except String OrderedMap :=
   match map.get? "cases" with
-  | none => .error "no cases in canonical data."
+  | none => .error "No cases in canonical data."
   | some json =>
     let array := getOk json.getArr?
     processCases array
@@ -95,25 +98,32 @@ def getExtraTests (pascalExercise : String) : String :=
   | none => ""
   | some xs => String.join xs
 
-def genTestFileContent (pascalExercise : String) (cases : OrderedMap) : String :=
-  let (genIntro, genTestCase, genEnd) := Generator.dispatch.get! pascalExercise
-  let intro := genIntro pascalExercise
-  let tests := startTest genTestCase pascalExercise cases
-  let extraTests := getExtraTests pascalExercise
-  let allTests := tests ++ extraTests
-  let ending := genEnd pascalExercise
-  intro ++ allTests ++ ending
+def genTestFileContent (pascalExercise : String) (cases : OrderedMap) : Except String String :=
+  match Generator.dispatch.get? pascalExercise with
+  | none => .error "No key was found for the exercise in Generator.dispatch. Add it in ./Generator/Generator.lean."
+  | some (genIntro, genTestCase, genEnd) =>
+    let intro := genIntro pascalExercise
+    let tests := startTest genTestCase pascalExercise cases
+    let extraTests := getExtraTests pascalExercise
+    let ending := genEnd pascalExercise
+    .ok (intro ++ tests ++ extraTests ++ ending)
 
 def main (args : List String) : IO Unit := do
-  let exercise := args.head!
-  let canonicalData <- readCanonicalData exercise
-  match canonicalData with
-  | .error _ => throw <| IO.userError "couldn't fetch canonical data."
-  | .ok data =>
-    let maybeMap := getOk data.getObj?
-    match getCases maybeMap with
-    | .error msg => throw <| IO.userError msg
-    | .ok cases =>
-      let pascalExercise := pascalCase exercise
-      let testContent := genTestFileContent pascalExercise cases
-      IO.FS.writeFile s!"../exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+  match args with
+  | [] => throw <| IO.userError "No exercise name found. Usage is: lake exe generator <exercise-in-kebab-case>"
+  | exercise :: _ =>
+    let pascalExercise := pascalCase exercise
+    let canonicalData <- readCanonicalData exercise
+    let data := match canonicalData with
+              | .error _ => Json.null
+              | .ok data => data
+    match data.getObj? with
+    | .error _ => match genTestFileContent pascalExercise empty with
+                  | .error msg => throw <| IO.userError msg
+                  | .ok testContent => IO.FS.writeFile s!"../exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+    | .ok maybeMap =>
+      match getCases maybeMap with
+      | .error msg => throw <| IO.userError msg
+      | .ok cases => match genTestFileContent pascalExercise cases with
+                    | .error msg => throw <| IO.userError msg
+                    | .ok testContent => IO.FS.writeFile s!"../exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent

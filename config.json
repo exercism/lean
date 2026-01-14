@@ -146,6 +146,14 @@
         "difficulty": 2
       },
       {
+        "slug": "anagram",
+        "name": "Anagram",
+        "uuid": "d2edf255-fbfc-4ce4-8211-9e4120da1264",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "flatten-array",
         "name": "Flatten Array",
         "uuid": "758ddbdc-a11a-4fe0-a0aa-f47d25a7e126",

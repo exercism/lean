@@ -1,0 +1,15 @@
+name = "anagram"
+version = "0.1.0"
+defaultTargets = ["AnagramTest"]
+testDriver = "AnagramTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Anagram"
+
+[[lean_exe]]
+name = "AnagramTest"
+root = "AnagramTest"

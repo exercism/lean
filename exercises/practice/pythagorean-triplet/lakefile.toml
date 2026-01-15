@@ -1,0 +1,15 @@
+name = "pythagorean-triplet"
+version = "0.1.0"
+defaultTargets = ["PythagoreanTripletTest"]
+testDriver = "PythagoreanTripletTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "PythagoreanTriplet"
+
+[[lean_exe]]
+name = "PythagoreanTripletTest"
+root = "PythagoreanTripletTest"

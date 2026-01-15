@@ -1,0 +1,15 @@
+name = "grains"
+version = "0.1.0"
+defaultTargets = ["GrainsTest"]
+testDriver = "GrainsTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Grains"
+
+[[lean_exe]]
+name = "GrainsTest"
+root = "GrainsTest"

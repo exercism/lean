@@ -146,6 +146,14 @@
         "difficulty": 2
       },
       {
+        "slug": "triangle",
+        "name": "Triangle",
+        "uuid": "29a6947f-8ade-4367-9a05-f3c876b42b72",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "anagram",
         "name": "Anagram",
         "uuid": "d2edf255-fbfc-4ce4-8211-9e4120da1264",

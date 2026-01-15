@@ -250,6 +250,14 @@
         "difficulty": 4
       },
       {
+        "slug": "roman-numerals",
+        "name": "Roman Numerals",
+        "uuid": "c6213ea4-ba17-4030-b6e1-a30019ae1840",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "run-length-encoding",
         "name": "Run-Length Encoding",
         "uuid": "9968ce8f-8d43-454c-bd27-b79978786eb8",

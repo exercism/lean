@@ -30,4 +30,11 @@ def genEnd (exercise : String) : String :=
     runTestSuitesWithExitCode [{exercise.decapitalize}Tests]
   "
 
+def extraCases : List String :=
+  [
+    s!"
+  |>.addTest \"triplets for very large number\" (do
+      return assertEqual [[68145, 71672, 98897]] (PythagoreanTriplet.tripletsWithSum 238714))"
+  ]
+
 end PythagoreanTripletGenerator

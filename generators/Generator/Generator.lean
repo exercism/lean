@@ -23,7 +23,8 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
 
 def extraCases : Std.HashMap String extraCasesList :=
   Std.HashMap.ofList [
-    ("Anagram", AnagramGenerator.extraCases)
+    ("Anagram", AnagramGenerator.extraCases),
+    ("PythagoreanTriplet", PythagoreanTripletGenerator.extraCases)
   ]
 
 end Generator

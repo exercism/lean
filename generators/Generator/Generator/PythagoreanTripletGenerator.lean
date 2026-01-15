@@ -28,7 +28,7 @@ def genEnd (exercise : String) : String :=
 
   def main : IO UInt32 := do
     runTestSuitesWithExitCode [{exercise.decapitalize}Tests]
-  "
+"
 
 def extraCases : List String :=
   [

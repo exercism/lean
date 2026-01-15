@@ -24,4 +24,3 @@ def pythagoreanTripletTests : TestSuite :=
 
   def main : IO UInt32 := do
     runTestSuitesWithExitCode [pythagoreanTripletTests]
-  

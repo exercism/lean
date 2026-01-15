@@ -256,7 +256,7 @@ def main : IO UInt32 := do
 end {pascalExercise}Generator
 "
   let path := s!"./Generator/Generator/{pascalExercise}Generator.lean"
-  IO.FS.writeFile path content
+  IO.FS.writeFile path (stripWhiteSpace content ++ "\n")
   addImport pascalExercise
 
 def main (args : List String) : IO Unit := do

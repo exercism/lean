@@ -2,6 +2,7 @@
 -- Import modules here that should be built as part of the library.
 import Generator.PythagoreanTripletGenerator
 import Generator.ForthGenerator
+import Generator.TriangleGenerator
 import Generator.Anagram
 
 import Std
@@ -18,6 +19,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
   Std.HashMap.ofList [
     ("PythagoreanTriplet", (PythagoreanTripletGenerator.genIntro, PythagoreanTripletGenerator.genTestCase, PythagoreanTripletGenerator.genEnd)),
     ("Forth", (ForthGenerator.genIntro, ForthGenerator.genTestCase, ForthGenerator.genEnd)),
+    ("Triangle", (TriangleGenerator.genIntro, TriangleGenerator.genTestCase, TriangleGenerator.genEnd)),
     ("Anagram", (AnagramGenerator.genIntro, AnagramGenerator.genTestCase, AnagramGenerator.genEnd))
   ]
 

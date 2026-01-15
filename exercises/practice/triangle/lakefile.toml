@@ -1,0 +1,15 @@
+name = "triangle"
+version = "0.1.0"
+defaultTargets = ["TriangleTest"]
+testDriver = "TriangleTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Triangle"
+
+[[lean_exe]]
+name = "TriangleTest"
+root = "TriangleTest"

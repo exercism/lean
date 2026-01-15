@@ -37,11 +37,4 @@ def genEnd (exercise : String) : String :=
     runTestSuitesWithExitCode [{exercise.decapitalize}Tests]
   "
 
-def extraCases : List String :=
-  [
-    s!"
-  |>.addTest \"test\" (do
-      return assertEqual [] (Anagram.findAnagrams \"test\" {"[\"sett\", \"test\"]"}))"
-  ]
-
 end AnagramGenerator

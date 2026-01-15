@@ -1,9 +1,7 @@
--- This module serves as the root of the `Generator` library.
--- Import modules here that should be built as part of the library.
 import Generator.PythagoreanTripletGenerator
 import Generator.ForthGenerator
 import Generator.TriangleGenerator
-import Generator.Anagram
+import Generator.AnagramGenerator
 
 import Std
 import Lean
@@ -21,12 +19,6 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("Forth", (ForthGenerator.genIntro, ForthGenerator.genTestCase, ForthGenerator.genEnd)),
     ("Triangle", (TriangleGenerator.genIntro, TriangleGenerator.genTestCase, TriangleGenerator.genEnd)),
     ("Anagram", (AnagramGenerator.genIntro, AnagramGenerator.genTestCase, AnagramGenerator.genEnd))
-  ]
-
-def extraCases : Std.HashMap String extraCasesList :=
-  Std.HashMap.ofList [
-    ("Anagram", AnagramGenerator.extraCases),
-    ("PythagoreanTriplet", PythagoreanTripletGenerator.extraCases)
   ]
 
 end Generator

@@ -42,6 +42,14 @@
         "difficulty": 1
       },
       {
+        "slug": "leap",
+        "name": "Leap",
+        "uuid": "6b67166f-60d8-442e-96d7-f2630c7a091d",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
+      },
+      {
         "slug": "rna-transcription",
         "name": "RNA Transcription",
         "uuid": "a070940a-1e7b-4e41-898c-b5381ba63bde",

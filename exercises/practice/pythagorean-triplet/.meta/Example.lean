@@ -28,18 +28,16 @@ def tripletsWithSum (sum : Nat) : List (List Nat) := Id.run do
   else
     let mut triplets : Std.TreeSet (List Nat) := {}
     let target := sum >>> 1 /- k * m * (m + n)-/
-    let divisors := getDivisors target
-    for factor1 in divisors do
+    for factor1 in getDivisors target do
       let factor2 := target / factor1
-      for divisor in getDivisors factor1 do
-        let m1 := factor1 / divisor
-        let n1 := factor2 - m1
-        let k1 := divisor
-        if n1 > 0 && m1 > n1 then
-          let a := m1*m1 - n1*n1
-          let b := 2*m1*n1
-          let c := m1*m1 + n1*n1
-          triplets := triplets.insert [k1*a, k1*b, k1*c].mergeSort
+      for k in getDivisors factor1 do
+        let m := factor1 / k
+        let n := factor2 - m
+        if n > 0 && m > n then
+          let a := m*m - n*n
+          let b := 2*m*n
+          let c := m*m + n*n
+          triplets := triplets.insert [k*a, k*b, k*c].mergeSort
     return triplets.toList
 
 end PythagoreanTriplet

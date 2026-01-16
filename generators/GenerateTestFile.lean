@@ -272,7 +272,9 @@ end {pascalExercise}Generator
 "
   let path := s!"./Generator/Generator/{pascalExercise}Generator.lean"
   IO.FS.writeFile path (stripWhiteSpace content ++ "\n")
-  addImport pascalExercise
+  match Generator.dispatch.get? pascalExercise with
+  | none => addImport pascalExercise
+  | some _ => return
 
 def main (args : List String) : IO Unit := do
   match args with

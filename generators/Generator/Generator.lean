@@ -2,6 +2,7 @@ import Generator.PrimeFactorsGenerator
 import Generator.AllYourBaseGenerator
 import Generator.SayGenerator
 import Generator.BinarySearchGenerator
+import Generator.CryptoSquareGenerator
 import Generator.PythagoreanTripletGenerator
 import Generator.RomanNumeralsGenerator
 import Generator.GrainsGenerator
@@ -26,6 +27,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("AllYourBase", (AllYourBaseGenerator.genIntro, AllYourBaseGenerator.genTestCase, AllYourBaseGenerator.genEnd)),
     ("Say", (SayGenerator.genIntro, SayGenerator.genTestCase, SayGenerator.genEnd)),
     ("BinarySearch", (BinarySearchGenerator.genIntro, BinarySearchGenerator.genTestCase, BinarySearchGenerator.genEnd)),
+    ("CryptoSquare", (CryptoSquareGenerator.genIntro, CryptoSquareGenerator.genTestCase, CryptoSquareGenerator.genEnd)),
     ("PythagoreanTriplet", (PythagoreanTripletGenerator.genIntro, PythagoreanTripletGenerator.genTestCase, PythagoreanTripletGenerator.genEnd)),
     ("RomanNumerals", (RomanNumeralsGenerator.genIntro, RomanNumeralsGenerator.genTestCase, RomanNumeralsGenerator.genEnd)),
     ("Grains", (GrainsGenerator.genIntro, GrainsGenerator.genTestCase, GrainsGenerator.genEnd)),

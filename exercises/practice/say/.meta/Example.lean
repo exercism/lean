@@ -9,7 +9,7 @@ def tens : Array String := #[
   "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"
 ]
 
-def say (number : Fin 999999999999) : String :=
+def say (number : Fin 1000000000000) : String :=
   let rec helper := fun n =>
     if n >= 1000000000 then
       let billion := n / 1000000000

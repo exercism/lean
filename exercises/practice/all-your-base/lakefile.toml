@@ -1,0 +1,15 @@
+name = "all-your-base"
+version = "0.1.0"
+defaultTargets = ["AllYourBaseTest"]
+testDriver = "AllYourBaseTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "AllYourBase"
+
+[[lean_exe]]
+name = "AllYourBaseTest"
+root = "AllYourBaseTest"

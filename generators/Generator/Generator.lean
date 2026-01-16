@@ -1,3 +1,4 @@
+import Generator.SpaceAgeGenerator
 import Generator.PrimeFactorsGenerator
 import Generator.AllYourBaseGenerator
 import Generator.SayGenerator
@@ -22,6 +23,7 @@ abbrev extraCasesList := List String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("SpaceAge", (SpaceAgeGenerator.genIntro, SpaceAgeGenerator.genTestCase, SpaceAgeGenerator.genEnd)),
     ("PrimeFactors", (PrimeFactorsGenerator.genIntro, PrimeFactorsGenerator.genTestCase, PrimeFactorsGenerator.genEnd)),
     ("AllYourBase", (AllYourBaseGenerator.genIntro, AllYourBaseGenerator.genTestCase, AllYourBaseGenerator.genEnd)),
     ("Say", (SayGenerator.genIntro, SayGenerator.genTestCase, SayGenerator.genEnd)),

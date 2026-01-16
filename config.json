@@ -258,6 +258,14 @@
         "difficulty": 4
       },
       {
+        "slug": "prime-factors",
+        "name": "Prime Factors",
+        "uuid": "a7bccb81-ae1c-487c-a151-6f8a2d954b8d",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "roman-numerals",
         "name": "Roman Numerals",
         "uuid": "c6213ea4-ba17-4030-b6e1-a30019ae1840",

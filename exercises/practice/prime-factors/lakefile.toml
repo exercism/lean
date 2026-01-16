@@ -1,0 +1,15 @@
+name = "prime-factors"
+version = "0.1.0"
+defaultTargets = ["PrimeFactorsTest"]
+testDriver = "PrimeFactorsTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "PrimeFactors"
+
+[[lean_exe]]
+name = "PrimeFactorsTest"
+root = "PrimeFactorsTest"

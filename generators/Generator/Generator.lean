@@ -1,3 +1,4 @@
+import Generator.SayGenerator
 import Generator.BinarySearchGenerator
 import Generator.PythagoreanTripletGenerator
 import Generator.GrainsGenerator
@@ -18,6 +19,7 @@ abbrev extraCasesList := List String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("Say", (SayGenerator.genIntro, SayGenerator.genTestCase, SayGenerator.genEnd)),
     ("BinarySearch", (BinarySearchGenerator.genIntro, BinarySearchGenerator.genTestCase, BinarySearchGenerator.genEnd)),
     ("PythagoreanTriplet", (PythagoreanTripletGenerator.genIntro, PythagoreanTripletGenerator.genTestCase, PythagoreanTripletGenerator.genEnd)),
     ("Grains", (GrainsGenerator.genIntro, GrainsGenerator.genTestCase, GrainsGenerator.genEnd)),

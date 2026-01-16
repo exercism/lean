@@ -1,0 +1,15 @@
+name = "say"
+version = "0.1.0"
+defaultTargets = ["SayTest"]
+testDriver = "SayTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Say"
+
+[[lean_exe]]
+name = "SayTest"
+root = "SayTest"

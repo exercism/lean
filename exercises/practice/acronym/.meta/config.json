@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "keiravillekode"
+  ],
+  "files": {
+    "solution": [
+      "Acronym.lean"
+    ],
+    "test": [
+      "AcronymTest.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ]
+  },
+  "blurb": "Convert a long phrase to its acronym.",
+  "source": "Julien Vanier",
+  "source_url": "https://github.com/monkbroc"
+}

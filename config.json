@@ -66,6 +66,14 @@
         "difficulty": 1
       },
       {
+        "slug": "acronym",
+        "name": "Acronym",
+        "uuid": "d7e61409-7640-4323-be6a-278f77d5c585",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "bob",
         "name": "Bob",
         "uuid": "aa0d9ca6-8d27-4f07-a3ba-3ebef7998fdb",

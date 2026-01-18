@@ -368,6 +368,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 8
+      },
+      {
+        "slug": "grep",
+        "name": "Grep",
+        "uuid": "f5f84a44-4e65-4598-811a-31766f68567c",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 8
       }
     ]
   },

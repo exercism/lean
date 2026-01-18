@@ -1,0 +1,38 @@
+[
+  {
+    "description": "Test error -> Called without arguments",
+    "property": "grep",
+    "input": {
+    "pattern": "",
+    "flags": [],
+    "files": []
+    },
+    "expected": {
+      "error": "Called without arguments"
+    }
+  },
+  {
+    "description": "Test error -> Called without a file",
+    "property": "grep",
+    "input": {
+    "pattern": "who",
+    "flags": [],
+    "files": []
+    },
+    "expected": {
+      "error": "Called without a file name"
+    }
+  },
+  {
+    "description": "Test error -> File not found",
+    "property": "grep",
+    "input": {
+    "pattern": "Agamemnon",
+    "flags": [],
+    "files": ["odyssey.txt"]
+    },
+    "expected": {
+      "error": "File not found"
+    }
+  }
+]

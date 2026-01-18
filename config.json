@@ -226,6 +226,14 @@
         "difficulty": 3
       },
       {
+        "slug": "perfect-numbers",
+        "name": "Perfect Numbers",
+        "uuid": "1e2d1960-e71d-48b7-8e65-cc9498daa713",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "phone-number",
         "name": "Phone Number",
         "uuid": "692e89e0-b392-4a82-98e5-7bf7a948ffbf",

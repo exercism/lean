@@ -1,3 +1,4 @@
+import Generator.PerfectNumbersGenerator
 import Generator.GrepGenerator
 import Generator.SpaceAgeGenerator
 import Generator.PrimeFactorsGenerator
@@ -27,6 +28,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("PerfectNumbers", (PerfectNumbersGenerator.genIntro, PerfectNumbersGenerator.genTestCase, PerfectNumbersGenerator.genEnd)),
     ("Grep", (GrepGenerator.genIntro, GrepGenerator.genTestCase, GrepGenerator.genEnd)),
     ("SpaceAge", (SpaceAgeGenerator.genIntro, SpaceAgeGenerator.genTestCase, SpaceAgeGenerator.genEnd)),
     ("PrimeFactors", (PrimeFactorsGenerator.genIntro, PrimeFactorsGenerator.genTestCase, PrimeFactorsGenerator.genEnd)),

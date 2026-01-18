@@ -74,6 +74,14 @@
         "difficulty": 2
       },
       {
+        "slug": "armstrong-numbers",
+        "name": "Armstrong Numbers",
+        "uuid": "c33aa0db-3c1e-4511-ad3e-0123ab8005a9",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "bob",
         "name": "Bob",
         "uuid": "aa0d9ca6-8d27-4f07-a3ba-3ebef7998fdb",

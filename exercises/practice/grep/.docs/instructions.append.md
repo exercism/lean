@@ -13,6 +13,11 @@ Lean allows for a file to be called as a script, either directly as a standalone
 A lean project has one point of entry, a function called `main`, that takes a `List String` with all arguments passed to it.
 In order to simulate running `Grep.lean` as an executable, arguments are passed in the same way in this exercise.
 
+## Reading files
+
+Lean offers [functions][files] to manipulate files in the `IO.FS` monad.
+For example, `IO.FS.readFile` may be used to read the contents of a file in a given path, as a `String`.
+
 ## Writing output
 
 Instead of returning a value, this exercise requires results are written to standard output or standard error.
@@ -35,4 +40,5 @@ catch msg =>
 ```
 
 [io]: https://lean-lang.org/doc/reference/latest/IO/#io
+[files]: https://lean-lang.org/doc/reference/latest/IO/Files___-File-Handles___-and-Streams/#The-Lean-Language-Reference--IO--Files___-File-Handles___-and-Streams
 [console]: https://lean-lang.org/doc/reference/latest/IO/Console-Output/#The-Lean-Language-Reference--IO--Console-Output

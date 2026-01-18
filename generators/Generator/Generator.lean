@@ -21,7 +21,6 @@ namespace Generator
 abbrev introGenerator := String -> String
 abbrev testCaseGenerator := String -> Std.TreeMap.Raw String Lean.Json -> String
 abbrev endBodyGenerator := String -> String
-abbrev extraCasesList := List String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [

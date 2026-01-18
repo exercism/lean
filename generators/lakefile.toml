@@ -6,6 +6,10 @@ defaultTargets = ["generator"]
 name = "Generator"
 srcDir = "Generator"
 
+[[lean_lib]]
+name = "Helper"
+srcDir = "Generator"
+
 [[lean_exe]]
 name = "generator"
 root = "GenerateTestFile"

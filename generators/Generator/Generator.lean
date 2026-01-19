@@ -1,4 +1,5 @@
 import Generator.ComplexNumbersGenerator
+import Generator.AllergiesGenerator
 import Generator.ProteinTranslationGenerator
 import Generator.PerfectNumbersGenerator
 import Generator.GrepGenerator
@@ -32,6 +33,7 @@ abbrev endBodyGenerator := String -> String
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
     ("ComplexNumbers", (ComplexNumbersGenerator.genIntro, ComplexNumbersGenerator.genTestCase, ComplexNumbersGenerator.genEnd)),
+    ("Allergies", (AllergiesGenerator.genIntro, AllergiesGenerator.genTestCase, AllergiesGenerator.genEnd)),
     ("ProteinTranslation", (ProteinTranslationGenerator.genIntro, ProteinTranslationGenerator.genTestCase, ProteinTranslationGenerator.genEnd)),
     ("PerfectNumbers", (PerfectNumbersGenerator.genIntro, PerfectNumbersGenerator.genTestCase, PerfectNumbersGenerator.genEnd)),
     ("Grep", (GrepGenerator.genIntro, GrepGenerator.genTestCase, GrepGenerator.genEnd)),

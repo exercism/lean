@@ -386,6 +386,14 @@
         "difficulty": 7
       },
       {
+        "slug": "complex-numbers",
+        "name": "Complex Numbers",
+        "uuid": "5860e836-932b-4eb6-9482-c1ca8bbbce02",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 7
+      },
+      {
         "slug": "pythagorean-triplet",
         "name": "Pythagorean Triplet",
         "uuid": "258987f4-9bd1-4781-b43c-434ead7920b8",

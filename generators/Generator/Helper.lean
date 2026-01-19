@@ -47,4 +47,7 @@ def toLiteral (string : String) : String :=
 def getFunName (property : Json) : String :=
   toLiteral property.compress
 
+def toStruct (string : String) : String :=
+  string.replace "[" "⟨" |> (·.replace "]" "⟩")
+
 end Helper

@@ -306,6 +306,14 @@
         "difficulty": 4
       },
       {
+        "slug": "protein-translation",
+        "name": "Protein Translation",
+        "uuid": "246139bc-0abd-4aab-80c4-f8b6c79f0366",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "roman-numerals",
         "name": "Roman Numerals",
         "uuid": "c6213ea4-ba17-4030-b6e1-a30019ae1840",

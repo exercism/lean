@@ -1,3 +1,4 @@
+import Generator.ProteinTranslationGenerator
 import Generator.PerfectNumbersGenerator
 import Generator.GrepGenerator
 import Generator.SpaceAgeGenerator
@@ -28,6 +29,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("ProteinTranslation", (ProteinTranslationGenerator.genIntro, ProteinTranslationGenerator.genTestCase, ProteinTranslationGenerator.genEnd)),
     ("PerfectNumbers", (PerfectNumbersGenerator.genIntro, PerfectNumbersGenerator.genTestCase, PerfectNumbersGenerator.genEnd)),
     ("Grep", (GrepGenerator.genIntro, GrepGenerator.genTestCase, GrepGenerator.genEnd)),
     ("SpaceAge", (SpaceAgeGenerator.genIntro, SpaceAgeGenerator.genTestCase, SpaceAgeGenerator.genEnd)),

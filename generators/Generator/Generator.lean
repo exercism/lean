@@ -1,5 +1,6 @@
 import Generator.PerfectNumbersGenerator
 import Generator.GrepGenerator
+import Generator.SeriesGenerator
 import Generator.SpaceAgeGenerator
 import Generator.PrimeFactorsGenerator
 import Generator.AllYourBaseGenerator
@@ -30,6 +31,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
   Std.HashMap.ofList [
     ("PerfectNumbers", (PerfectNumbersGenerator.genIntro, PerfectNumbersGenerator.genTestCase, PerfectNumbersGenerator.genEnd)),
     ("Grep", (GrepGenerator.genIntro, GrepGenerator.genTestCase, GrepGenerator.genEnd)),
+    ("Series", (SeriesGenerator.genIntro, SeriesGenerator.genTestCase, SeriesGenerator.genEnd)),
     ("SpaceAge", (SpaceAgeGenerator.genIntro, SpaceAgeGenerator.genTestCase, SpaceAgeGenerator.genEnd)),
     ("PrimeFactors", (PrimeFactorsGenerator.genIntro, PrimeFactorsGenerator.genTestCase, PrimeFactorsGenerator.genEnd)),
     ("AllYourBase", (AllYourBaseGenerator.genIntro, AllYourBaseGenerator.genTestCase, AllYourBaseGenerator.genEnd)),

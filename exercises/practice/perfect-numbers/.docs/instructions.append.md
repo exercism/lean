@@ -2,8 +2,9 @@
 
 ## Defining an inductive type
 
-This exercise expects the return value to be an [inductive type][inductive] `Classification`.
-It must have a [BEq][beq] instance, i.e., it can be compared for equality, and a [Repr][repr] instance, i.e., it can be formatted.
+This exercise expects the return value to be an [inductive type][inductive] `Classification` that you must define.
+
+This type must have a [BEq][beq] instance, i.e., it admits a Boolean equality test, and a [Repr][repr] instance, i.e., values of the type can be formatted for display.
 
 You can refer to [this page][instance] on instance declarations.
 Lean can automatically [generate instances][deriving] for many classes.

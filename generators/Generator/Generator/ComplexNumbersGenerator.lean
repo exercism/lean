@@ -13,6 +13,11 @@ import {exercise}
 
 open LeanTest
 
+/- define equality between two complex numbers -/
+instance : BEq {exercise}.ComplexNumber where
+  beq x y := Float.abs (x.real - y.real) <= 0.001 &&
+             Float.abs (x.imag - y.imag) <= 0.001
+
 def {exercise.decapitalize}Tests : TestSuite :=
   (TestSuite.empty \"{exercise}\")"
 

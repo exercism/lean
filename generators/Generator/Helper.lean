@@ -33,21 +33,16 @@ def exceptToString {α β} [ToString α] [ToString β] (except : Except α β) :
   | .ok value => s!"(.ok {value})"
   | .error msg => s!"(.error {msg})"
 
-def keyRest (delim : Char) : List Char -> List Char -> List Char × List Char
-  | [], acc => (acc, [])
-  | k :: rs, acc =>
-    if k == delim then (acc, rs)
-    else keyRest delim rs (k :: acc)
-
-def getKeyValues (json : Json) : List (String × String) := Id.run do
-  let mut chars := json.compress.toList.filter (fun c => c != '}' && c != '{')
-  let mut acc := []
-  while !chars.isEmpty do
-    let (key, rest) := keyRest ':' chars []
-    let (val, next) := keyRest ',' rest []
-    chars := next
-    acc := (key.reverse.asString, val.reverse.asString) :: acc
-  acc.reverse
+def getKeyValues (json : Json) : List (String × String) :=
+  let map := getOk json.getObj?
+  let list := map.toList
+  let string := json.compress
+  let sorted := list.mergeSort (fun (k1, _) (k2, _) =>
+                  let pos1 := string.toSlice.find? k1 |> (Option.get! ·)
+                  let pos2 := string.toSlice.find? k2 |> (Option.get! ·)
+                  pos1 < pos2
+                )
+  sorted.map (fun (k, v) => (k, v.compress))
 
 def insertAllInputs (input : Json) : String :=
   let values := getKeyValues input

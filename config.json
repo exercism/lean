@@ -378,6 +378,14 @@
         "difficulty": 6
       },
       {
+        "slug": "complex-numbers",
+        "name": "Complex Numbers",
+        "uuid": "5860e836-932b-4eb6-9482-c1ca8bbbce02",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 6
+      },
+      {
         "slug": "knapsack",
         "name": "Knapsack",
         "uuid": "8ed9aa32-f678-4b33-9717-544d85e1dfbf",
@@ -389,14 +397,6 @@
         "slug": "change",
         "name": "Change",
         "uuid": "77564515-64ad-42b0-b6b1-18b266ff4310",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 7
-      },
-      {
-        "slug": "complex-numbers",
-        "name": "Complex Numbers",
-        "uuid": "5860e836-932b-4eb6-9482-c1ca8bbbce02",
         "practices": [],
         "prerequisites": [],
         "difficulty": 7

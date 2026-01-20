@@ -1,0 +1,15 @@
+name = "parallel-letter-frequency"
+version = "0.1.0"
+defaultTargets = ["ParallelLetterFrequencyTest"]
+testDriver = "ParallelLetterFrequencyTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "ParallelLetterFrequency"
+
+[[lean_exe]]
+name = "ParallelLetterFrequencyTest"
+root = "ParallelLetterFrequencyTest"

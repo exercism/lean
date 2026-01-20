@@ -394,6 +394,14 @@
         "difficulty": 6
       },
       {
+        "slug": "parallel-letter-frequency",
+        "name": "Parallel Letter Frequency",
+        "uuid": "67c85ebf-e5da-4f05-ae86-5a988c2ae499",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 6
+      },
+      {
         "slug": "change",
         "name": "Change",
         "uuid": "77564515-64ad-42b0-b6b1-18b266ff4310",

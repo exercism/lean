@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "oxe-i"
+  ],
+  "files": {
+    "solution": [
+      "ParallelLetterFrequency.lean"
+    ],
+    "test": [
+      "ParallelLetterFrequencyTest.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ]
+  },
+  "blurb": "Count the frequency of letters in texts using parallel computation."
+}

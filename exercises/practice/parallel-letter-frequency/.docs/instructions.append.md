@@ -32,7 +32,7 @@ This makes them particularly well suited for sharing between tasks.
 
 ## Measuring execution speed
 
-The tests for this exercise measure execution time of each task in nanoseconds, using `IO.monoNanosNow`.
-You can experiment with different approaches and check their impact on runtime speed.
+The execution time of each test is measured in nanoseconds using `IO.monoNanosNow` and shown alongside the results.
+You can experiment with different approaches and check their impact on runtime performance.
 
 [tasks]: https://lean-lang.org/doc/reference/latest/IO/Tasks-and-Threads/#Task

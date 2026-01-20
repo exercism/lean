@@ -5,11 +5,6 @@ structure ComplexNumber where
   imag : Float
   deriving Repr
 
-/- define equality between two complex numbers -/
-instance : BEq ComplexNumber where
-  beq x y := Float.abs (x.real - y.real) <= 0.001 &&
-             Float.abs (x.imag - y.imag) <= 0.001
-
 /- define how a complex number should be constructed out of a literal number -/
 instance {n : Nat} : OfNat ComplexNumber n where
   ofNat := { real := n.toFloat, imag := 0.0 }

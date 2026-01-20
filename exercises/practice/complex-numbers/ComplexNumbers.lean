@@ -5,10 +5,6 @@ structure ComplexNumber where
   imag : Float
   deriving Repr
 
-/- define equality between two complex numbers -/
-instance : BEq ComplexNumber where
-  beq x y := sorry
-
 /- define how a complex number should be constructed out of a literal number -/
 instance {n : Nat} : OfNat ComplexNumber n where
   ofNat := sorry

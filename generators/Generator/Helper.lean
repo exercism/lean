@@ -20,7 +20,7 @@ def getOk {α β} (except : Except α β) [Inhabited β] : β := except.toOption
 
 def errorToOption (expected : Json) : Option String :=
   match expected.getObjVal? "error" with
-  | .error _ => some s!"{expected}"
+  | .error _ => some s!"({expected})"
   | .ok _    => none
 
 def toExcept (expected : Json) : Except String Json :=

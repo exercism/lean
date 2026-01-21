@@ -1,0 +1,15 @@
+name = "wordy"
+version = "0.1.0"
+defaultTargets = ["WordyTest"]
+testDriver = "WordyTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Wordy"
+
+[[lean_exe]]
+name = "WordyTest"
+root = "WordyTest"

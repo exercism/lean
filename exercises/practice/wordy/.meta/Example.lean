@@ -32,7 +32,7 @@ def answer (question : String) : Option Int :=
   normalizedQuestion.dropPrefix? "What is "      -- (some rest) if prefix was there, none otherwise. The type of "rest" is Substring
   >>= (·.splitOn " " |> (pure ·))                -- splits rest on words and lifts it to an Option to allow chaining
   >>= (·.map (·.toString) |> (pure ·))           -- converts each word (a Substring) into a String, and lifts the list to an Option
-  >>= (·.foldlM Expression.parseStream? .bottom) -- monadic folds the list. It short circuits on none, otherwise it extracts the result from some
+  >>= (·.foldlM Expression.parseStream? .bottom) -- monadic folds the list. Short circuits on none, otherwise extracts result from some
   >>= Expression.toInt?                          -- if parse was successful, extracts value from Expression and lifts it to Option
 
 end Wordy

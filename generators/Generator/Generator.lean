@@ -1,5 +1,6 @@
 import Generator.GameOfLifeGenerator
 import Generator.WordyGenerator
+import Generator.GameOfLifeGenerator
 import Generator.ParallelLetterFrequencyGenerator
 import Generator.ComplexNumbersGenerator
 import Generator.AllergiesGenerator
@@ -37,6 +38,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
   Std.HashMap.ofList [
     ("GameOfLife", (GameOfLifeGenerator.genIntro, GameOfLifeGenerator.genTestCase, GameOfLifeGenerator.genEnd)),
     ("Wordy", (WordyGenerator.genIntro, WordyGenerator.genTestCase, WordyGenerator.genEnd)),
+    ("GameOfLife", (GameOfLifeGenerator.genIntro, GameOfLifeGenerator.genTestCase, GameOfLifeGenerator.genEnd)),
     ("ParallelLetterFrequency", (ParallelLetterFrequencyGenerator.genIntro, ParallelLetterFrequencyGenerator.genTestCase, ParallelLetterFrequencyGenerator.genEnd)),
     ("ComplexNumbers", (ComplexNumbersGenerator.genIntro, ComplexNumbersGenerator.genTestCase, ComplexNumbersGenerator.genEnd)),
     ("Allergies", (AllergiesGenerator.genIntro, AllergiesGenerator.genTestCase, AllergiesGenerator.genEnd)),

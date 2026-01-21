@@ -410,14 +410,6 @@
         "difficulty": 6
       },
       {
-        "slug": "wordy",
-        "name": "Wordy",
-        "uuid": "62357838-23b1-4e65-8bb4-2b64c0abc3c3",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 6
-      },
-      {
         "slug": "change",
         "name": "Change",
         "uuid": "77564515-64ad-42b0-b6b1-18b266ff4310",
@@ -437,6 +429,14 @@
         "slug": "say",
         "name": "Say",
         "uuid": "07970f36-23e8-4ef1-9e34-4a5554d65bd7",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 7
+      },
+      {
+        "slug": "wordy",
+        "name": "Wordy",
+        "uuid": "62357838-23b1-4e65-8bb4-2b64c0abc3c3",
         "practices": [],
         "prerequisites": [],
         "difficulty": 7

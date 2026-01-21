@@ -1,6 +1,3 @@
-import Std
-open Std
-
 namespace GameOfLife
 
 def countNeighbors (x : Nat) (y : Nat) (matrix : Array (Array Bool)) : Nat :=

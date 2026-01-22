@@ -1,0 +1,15 @@
+name = "forth"
+version = "0.1.0"
+defaultTargets = ["ForthTest"]
+testDriver = "ForthTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Forth"
+
+[[lean_exe]]
+name = "ForthTest"
+root = "ForthTest"

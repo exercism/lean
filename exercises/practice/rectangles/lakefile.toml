@@ -1,0 +1,15 @@
+name = "rectangles"
+version = "0.1.0"
+defaultTargets = ["RectanglesTest"]
+testDriver = "RectanglesTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Rectangles"
+
+[[lean_exe]]
+name = "RectanglesTest"
+root = "RectanglesTest"

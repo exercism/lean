@@ -10,13 +10,11 @@ structure State where
   stack : Stack
   opMap : OpMap
 
-def applyUnary (op : Int -> Except String Stack) (stack : Stack) : Except String Stack :=
-  match stack with
+def applyUnary (op : Int -> Except String Stack) : Op
   | [] => .error "empty stack"
   | x :: xs => op x >>= fun rs => .ok (rs ++ xs)
 
-def applyBinary (op : Int -> Int -> Except String Stack) (stack : Stack) : Except String Stack :=
-  match stack with
+def applyBinary (op : Int -> Int -> Except String Stack) : Op
   | [] => .error "empty stack"
   | _ :: [] => .error "only one value on the stack"
   | x1 :: x2 :: xs => op x2 x1 >>= fun rs => .ok (rs ++ xs)
@@ -26,16 +24,16 @@ def parseExpression (state : State) (expression : String) : Except String State 
   | some value => .ok { state with stack := (value :: state.stack) } -- if number, adds it to the stack
   | none => match state.opMap.get? expression with
             | some op => op state.stack >>= (.ok { state with stack := · }) -- applies op, gets the resulting stack and replaces state stack with it
-            | none => .error "undefined operation"                         
+            | none => .error "undefined operation"
 
-def checkOp (op : String) (opMap : OpMap) : Except String Op :=
-  match opMap.get? op with
-  | some op => .ok op  -- if op is a key already in map, return its op -> this allows for indirect ops that reference previously defined user-ops
-  | none => .ok (fun stack => parseExpression { stack := stack, opMap := opMap } op >>= fun state => .ok state.stack) -- otherwise, an op is nothing more than an expression to parse
+def checkOp (expression : String) (opMap : OpMap) : Op :=
+  match opMap.get? expression with
+  | some op => op  -- if expression is a key already in map, return its op -> this allows for indirect ops that reference other ops
+  | none => fun stack => parseExpression { stack := stack, opMap := opMap } expression >>= fun state => .ok state.stack -- otherwise, an op is nothing more than an expression to parse
 
-def addUserOp (pattern : String) (state : State) : Except String Op :=
-  let exceptOps := pattern.splitOn " " |> (·.mapM (checkOp · state.opMap))
-  exceptOps >>= fun ops => .ok (ops.foldlM (fun acc op => op acc))
+def addUserOp (pattern : String) (state : State) : Op :=
+  let ops := pattern.splitOn " " |> (·.map (checkOp · state.opMap))
+  ops.foldlM (fun acc op => op acc)
 
 def parseInstruction (state : State) (instruction : String) : Except String State :=
   let expressions := instruction.toLower.splitOn " "
@@ -45,8 +43,9 @@ def parseInstruction (state : State) (instruction : String) : Except String Stat
     match key.toInt? with
     | some _ => .error "illegal operation"  -- number can't be an user-defined op
     | none =>
-      let userOp := String.intercalate " " xs.dropLast -- drops ; at the end
-      addUserOp userOp state >>= fun op => .ok { state with opMap := state.opMap.insert key op } -- adds op to map, possibly replacing previous op with same key
+      let userOp := String.intercalate " " xs.dropLast -- drops ';' at the end
+      let op := addUserOp userOp state
+      .ok { state with opMap := state.opMap.insert key op } -- adds op to map, possibly replacing previous op with same key
   | _ => expressions.foldlM parseExpression state -- parses expressions, short-circuiting on error
 
 def evaluate (instructions : List String) : Except String Stack :=
@@ -66,6 +65,6 @@ def evaluate (instructions : List String) : Except String Stack :=
   }
 
   instructions.foldlM parseInstruction initial -- monadic fold, short-circuits on error
-  >>= fun state => .ok state.stack.reverse     -- if successful, returns stack reversed lifted to Except
+  >>= fun state => .ok state.stack.reverse     -- if successful, returns reversed stack, lifted to Except
 
 end Forth

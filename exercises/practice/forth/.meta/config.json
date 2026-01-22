@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "oxe-i"
+  ],
+  "files": {
+    "solution": [
+      "Forth.lean"
+    ],
+    "test": [
+      "ForthTest.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ]
+  },
+  "blurb": "Implement an evaluator for a very simple subset of Forth."
+}

@@ -6,6 +6,7 @@ import Generator.AllergiesGenerator
 import Generator.ProteinTranslationGenerator
 import Generator.PerfectNumbersGenerator
 import Generator.GrepGenerator
+import Generator.RectanglesGenerator
 import Generator.SeriesGenerator
 import Generator.SpaceAgeGenerator
 import Generator.PrimeFactorsGenerator
@@ -43,6 +44,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("ProteinTranslation", (ProteinTranslationGenerator.genIntro, ProteinTranslationGenerator.genTestCase, ProteinTranslationGenerator.genEnd)),
     ("PerfectNumbers", (PerfectNumbersGenerator.genIntro, PerfectNumbersGenerator.genTestCase, PerfectNumbersGenerator.genEnd)),
     ("Grep", (GrepGenerator.genIntro, GrepGenerator.genTestCase, GrepGenerator.genEnd)),
+    ("Rectangles", (RectanglesGenerator.genIntro, RectanglesGenerator.genTestCase, RectanglesGenerator.genEnd)),
     ("Series", (SeriesGenerator.genIntro, SeriesGenerator.genTestCase, SeriesGenerator.genEnd)),
     ("SpaceAge", (SpaceAgeGenerator.genIntro, SpaceAgeGenerator.genTestCase, SpaceAgeGenerator.genEnd)),
     ("PrimeFactors", (PrimeFactorsGenerator.genIntro, PrimeFactorsGenerator.genTestCase, PrimeFactorsGenerator.genEnd)),

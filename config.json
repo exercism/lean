@@ -426,6 +426,14 @@
         "difficulty": 7
       },
       {
+        "slug": "rectangles",
+        "name": "Rectangles",
+        "uuid": "23e385c2-25f7-423a-ae27-4ea7327accbe",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 7
+      },
+      {
         "slug": "say",
         "name": "Say",
         "uuid": "07970f36-23e8-4ef1-9e34-4a5554d65bd7",

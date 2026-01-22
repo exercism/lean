@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "keiravillekode"
+  ],
+  "files": {
+    "solution": [
+      "Rectangles.lean"
+    ],
+    "test": [
+      "RectanglesTest.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ]
+  },
+  "blurb": "Count the rectangles in an ASCII diagram."
+}

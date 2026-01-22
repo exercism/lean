@@ -1,14 +1,19 @@
 # About
 
-<!-- TODO: write document
+Lean is a general-purpose, dependently typed, strict, pure functional programming language with an integrated proof assistant.
+It is used to write programs together with machine-checked correctness guarantees and is widely applied in the formal verification of software and mathematics.
 
-  This document contains a short introduction to the language.
+**Dependently typed** means that types can depend on values.
+This allows specifications and constraints to be encoded directly in the type system, making invalid states effectively _unrepresentable_.
+Lean is based on the propositions-as-types principle, where logical propositions are represented as types and proofs are programs inhabiting those types.
+Every value of a type that encodes a specification must be constructed in a way that _proves_ it is valid.
 
-  The introduction should be relatively brief and touch upon what
-  makes the language interesting (and possibly unique). The goal
-  is to help students decide if they want to join this track.
+**Strict evaluation** means that function arguments are evaluated eagerly, giving a deterministic evaluation order.
+This simplifies reasoning about program behavior and performance.
+Lean supports laziness, but only explicitly.
 
-  The contents of this document are displayed on the track page,
-  provided the student has not joined the track.
+**Purely functional** means that functions do not mutate state or have hidden side effects.
+A pure function always returns the same value for the same input, effects must be made explicit and controlled.
 
-  See https://exercism.org/docs/building/tracks/docs for more information. -->
+Lean is compiled ahead of time to native code.
+Combined with a runtime system featuring non-tracing garbage collection and efficient in-place updates, this allows Lean programs to run faster than interpreted languages, competitively with other functional languages, and in some cases close to C or Rust.

@@ -18,10 +18,17 @@ def toLiteral (string : String) : String :=
 
 def getOk {α β} (except : Except α β) [Inhabited β] : β := except.toOption |> (·.get!)
 
+def intLiteral (n : Int) : String :=
+  if n < 0 then s!"({n})"
+  else s!"{n}"
+
 def errorToOption (expected : Json) : Option String :=
   match expected.getObjVal? "error" with
-  | .error _ => some s!"{expected}"
   | .ok _    => none
+  | .error _ =>
+      match expected.getInt? with
+      | .error _ => some s!"{expected}"
+      | .ok n => intLiteral n
 
 def toExcept (expected : Json) : Except String Json :=
   match expected.getObjVal? "error" with
@@ -47,10 +54,6 @@ def getKeyValues (json : Json) : List (String × String) :=
 def insertAllInputs (input : Json) : String :=
   let values := getKeyValues input
   values.map (fun (_,val) => s!"{val}") |> (String.intercalate " " .)
-
-def intLiteral (n : Int) : String :=
-  if n < 0 then s!"({n})"
-  else s!"{n}"
 
 def toFloat (value : Json) : Float :=
   value.getNum? |> (getOk .) |> (·.toFloat)

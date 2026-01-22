@@ -1,0 +1,15 @@
+name = "connect"
+version = "0.1.0"
+defaultTargets = ["ConnectTest"]
+testDriver = "ConnectTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Connect"
+
+[[lean_exe]]
+name = "ConnectTest"
+root = "ConnectTest"

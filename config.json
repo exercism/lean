@@ -490,6 +490,14 @@
         "difficulty": 8
       },
       {
+        "slug": "connect",
+        "name": "Connect",
+        "uuid": "f01a772e-2d3c-4996-9a8d-404d04fd280b",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 8
+      },
+      {
         "slug": "grep",
         "name": "Grep",
         "uuid": "f5f84a44-4e65-4598-811a-31766f68567c",

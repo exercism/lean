@@ -18,6 +18,7 @@ import Generator.AllYourBaseGenerator
 import Generator.SayGenerator
 import Generator.AcronymGenerator
 import Generator.BinarySearchGenerator
+import Generator.ConnectGenerator
 import Generator.CryptoSquareGenerator
 import Generator.PythagoreanTripletGenerator
 import Generator.PhoneNumberGenerator
@@ -60,6 +61,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("Say", (SayGenerator.genIntro, SayGenerator.genTestCase, SayGenerator.genEnd)),
     ("Acronym", (AcronymGenerator.genIntro, AcronymGenerator.genTestCase, AcronymGenerator.genEnd)),
     ("BinarySearch", (BinarySearchGenerator.genIntro, BinarySearchGenerator.genTestCase, BinarySearchGenerator.genEnd)),
+    ("Connect", (ConnectGenerator.genIntro, ConnectGenerator.genTestCase, ConnectGenerator.genEnd)),
     ("CryptoSquare", (CryptoSquareGenerator.genIntro, CryptoSquareGenerator.genTestCase, CryptoSquareGenerator.genEnd)),
     ("PythagoreanTriplet", (PythagoreanTripletGenerator.genIntro, PythagoreanTripletGenerator.genTestCase, PythagoreanTripletGenerator.genEnd)),
     ("PhoneNumber", (PhoneNumberGenerator.genIntro, PhoneNumberGenerator.genTestCase, PhoneNumberGenerator.genEnd)),

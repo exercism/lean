@@ -186,14 +186,6 @@
         "difficulty": 2
       },
       {
-        "slug": "wordy",
-        "name": "Wordy",
-        "uuid": "62357838-23b1-4e65-8bb4-2b64c0abc3c3",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 2
-      },
-      {
         "slug": "allergies",
         "name": "Allergies",
         "uuid": "a5c2feb2-392c-411c-8c57-206a912ad0f2",

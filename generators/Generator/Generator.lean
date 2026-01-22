@@ -1,3 +1,4 @@
+import Generator.TransposeGenerator
 import Generator.GameOfLifeGenerator
 import Generator.WordyGenerator
 import Generator.ParallelLetterFrequencyGenerator
@@ -36,6 +37,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("Transpose", (TransposeGenerator.genIntro, TransposeGenerator.genTestCase, TransposeGenerator.genEnd)),
     ("GameOfLife", (GameOfLifeGenerator.genIntro, GameOfLifeGenerator.genTestCase, GameOfLifeGenerator.genEnd)),
     ("Wordy", (WordyGenerator.genIntro, WordyGenerator.genTestCase, WordyGenerator.genEnd)),
     ("ParallelLetterFrequency", (ParallelLetterFrequencyGenerator.genIntro, ParallelLetterFrequencyGenerator.genTestCase, ParallelLetterFrequencyGenerator.genEnd)),

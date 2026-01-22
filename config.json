@@ -378,6 +378,14 @@
         "difficulty": 5
       },
       {
+        "slug": "transpose",
+        "name": "Transpose",
+        "uuid": "d6227270-629b-4db3-9698-e332dbf42ef2",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "affine-cipher",
         "name": "Affine Cipher",
         "uuid": "66f25c42-5f5c-4f99-9286-d20242b92889",

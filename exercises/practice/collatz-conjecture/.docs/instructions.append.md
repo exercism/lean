@@ -14,6 +14,12 @@ In order to construct a value for a Subtype, it is necessary to prove its validi
 There are a number of lemmas and theorems in Lean that may serve as a starting point for this proof.
 For example, `Nat.zero_lt_succ` is a lemma that asserts that for any natural number `n`: `0 < n + 1`.
 
+~~~~exercism/advanced
+A good reference for theorem proving in Lean can be found in [the core documentation][theorem-proving].
+
+[theorem-proving]: https://lean-lang.org/theorem_proving_in_lean4/
+~~~~
+
 ## Proof of termination
 
 In Lean, recursive functions must prove their termination.

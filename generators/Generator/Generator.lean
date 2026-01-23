@@ -1,3 +1,4 @@
+import Generator.CollatzConjectureGenerator
 import Generator.TransposeGenerator
 import Generator.GameOfLifeGenerator
 import Generator.WordyGenerator
@@ -37,6 +38,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("CollatzConjecture", (CollatzConjectureGenerator.genIntro, CollatzConjectureGenerator.genTestCase, CollatzConjectureGenerator.genEnd)),
     ("Transpose", (TransposeGenerator.genIntro, TransposeGenerator.genTestCase, TransposeGenerator.genEnd)),
     ("GameOfLife", (GameOfLifeGenerator.genIntro, GameOfLifeGenerator.genTestCase, GameOfLifeGenerator.genEnd)),
     ("Wordy", (WordyGenerator.genIntro, WordyGenerator.genTestCase, WordyGenerator.genEnd)),

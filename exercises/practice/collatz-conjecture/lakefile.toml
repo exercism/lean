@@ -1,0 +1,15 @@
+name = "collatz-conjecture"
+version = "0.1.0"
+defaultTargets = ["CollatzConjectureTest"]
+testDriver = "CollatzConjectureTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "CollatzConjecture"
+
+[[lean_exe]]
+name = "CollatzConjectureTest"
+root = "CollatzConjectureTest"

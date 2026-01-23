@@ -274,6 +274,14 @@
         "difficulty": 3
       },
       {
+        "slug": "collatz-conjecture",
+        "name": "Collatz Conjecture",
+        "uuid": "c2b904bb-1afa-4584-82da-6ff73c00ed93",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "isbn-verifier",
         "name": "ISBN Verifier",
         "uuid": "49804a1c-35e4-4645-9ee5-932e2c7e5e01",

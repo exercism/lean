@@ -16,4 +16,4 @@ Lean supports laziness, but only explicitly.
 A pure function always returns the same value for the same input, effects must be made explicit and controlled.
 
 Lean is compiled ahead of time to native code.
-Combined with a runtime system featuring non-tracing garbage collection and efficient in-place updates, this allows Lean programs to run faster than interpreted languages, competitively with other functional languages, and in some cases close to C or Rust.
+Its runtime system features non-tracing garbage collection and efficient in-place updates for unshared data.

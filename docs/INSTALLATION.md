@@ -1,15 +1,15 @@
 # Installation
 
-<!-- TODO: write document
+You can install Lean by following the [installation instructions][install] on the official website.
 
-  This document should describe what the student needs to install
-  to allow working on the track on their local system using the CLI.
+The recommended way to install Lean is through **Visual Studio Code** and the **Lean 4 VS Code** extension.
+This extension automatically installs all required dependencies.
+It also includes syntax highlighting, code completion, version management, links to learning resources and documentation, and many other useful tools.
 
-  You can include the installation instructions in this document, but
-  usually it is better to link to a resource with the official installation
-  instructions, to prevent the instructions from becoming outdated.
+There are also alternative methods for [manual installation][manual-install], with support for some other editors.
 
-  The contents of this document are displayed on the track's documentation
-  page at `https://exercism.org/docs/tracks/<track>/installation`.
+You can also try out the language on the official [web playground][playground] without installing anything.
 
-  See https://exercism.org/docs/building/tracks/docs for more information. -->
+[install]: https://lean-lang.org/install/
+[manual-install]: https://lean-lang.org/install/manual/
+[playground]: https://live.lean-lang.org/

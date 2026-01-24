@@ -1,13 +1,13 @@
 # Resources
 
-<!-- TODO: write document
+* The [official site][lean-lang] is the main repository for content about the language.
+* The [Reservoir][reservoir] indexes, builds and tests packages within the Lean and Lake ecosystem.
+  It is the place to go for third-party packages.
+* [Lean Community][community] is a collaborative, open-source network around the Lean ecosystem.
+  It is responsible for _mathlib_, the main community-driven mathematics library for Lean 4.
+* [Lean 4 Zulip Chat][zulip-chat] is the main chat for the Lean Community.
 
-  This document should link to useful resources.
-
-  Feel free to link to any good resources you know, whether they
-  be websites, videos, mailing lists, etc.
-
-  The contents of this document are displayed on the track's documentation
-  page at `https://exercism.org/docs/tracks/<track>/resources`.
-
-  See https://exercism.org/docs/building/tracks/docs for more information. -->
+[lean-lang]: https://lean-lang.org/
+[reservoir]: https://reservoir.lean-lang.org/
+[community]: https://leanprover-community.github.io/index.html
+[zulip-chat]: https://leanprover.zulipchat.com/

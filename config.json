@@ -362,6 +362,14 @@
         "difficulty": 4
       },
       {
+        "slug": "clock",
+        "name": "Clock",
+        "uuid": "61d2ab80-3027-44f3-847c-92ea767e94b6",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "game-of-life",
         "name": "Conway's Game of Life",
         "uuid": "1d922ccc-9ba5-4ea9-9ebf-ffb46527ce29",

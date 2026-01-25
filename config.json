@@ -90,14 +90,6 @@
         "difficulty": 2
       },
       {
-        "slug": "clock",
-        "name": "Clock",
-        "uuid": "61d2ab80-3027-44f3-847c-92ea767e94b6",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 6
-      },
-      {
         "slug": "darts",
         "name": "Darts",
         "uuid": "1c8d6d26-be14-4d55-9ae0-0029411a626f",
@@ -368,6 +360,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 4
+      },
+      {
+        "slug": "clock",
+        "name": "Clock",
+        "uuid": "61d2ab80-3027-44f3-847c-92ea767e94b6",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
       },
       {
         "slug": "game-of-life",

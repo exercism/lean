@@ -114,6 +114,14 @@
         "difficulty": 2
       },
       {
+        "slug": "etl",
+        "name": "ETL",
+        "uuid": "bffce41d-cab5-4860-94c6-648ac4b377b0",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "grains",
         "name": "Grains",
         "uuid": "350aa663-603a-45a1-a4a3-d9d48e0d572c",

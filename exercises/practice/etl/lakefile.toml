@@ -1,0 +1,15 @@
+name = "etl"
+version = "0.1.0"
+defaultTargets = ["EtlTest"]
+testDriver = "EtlTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Etl"
+
+[[lean_exe]]
+name = "EtlTest"
+root = "EtlTest"

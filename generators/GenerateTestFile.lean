@@ -19,10 +19,28 @@ def strip (string : String) (char : Char) : String :=
 def pascalCase  (input : String) : String :=
   input.splitOn "-" |> List.map String.capitalize |> String.join
 
+def setDirectory : IO Unit := do
+  IO.Process.setCurrentDir ".."
+
+def fetchConfiglet : IO Unit := do
+  let _ ← IO.Process.run {
+    cmd := "bin/fetch-configlet"
+  }
+
+def addPracticeExercise (exercise : String) : IO Unit := do
+  let child ← IO.Process.spawn {
+    cmd := "bin/add-practice-exercise",
+    args := #[exercise]
+    stdin  := .inherit
+    stdout := .inherit
+    stderr := .inherit
+  }
+  let _ <- child.wait
+
 def getPath (exercise : String) : IO String := do
   let info ← IO.Process.run {
-    cmd := "../bin/configlet"
-    args := #["info", "-o", "-v", "d", "-t", ".."]
+    cmd := "bin/configlet",
+    args := #["info", "-o", "-v", "d"]
   }
   let dirPrefix := "Using cached 'problem-specifications' dir: "
   let directory := info.splitOn "\n" |>
@@ -32,7 +50,7 @@ def getPath (exercise : String) : IO String := do
   return s!"{directory}/exercises/{exercise}"
 
 def getToml (exercise : String) : IO (Except String String) := do
-  let path := s!"../exercises/practice/{exercise}/.meta/tests.toml"
+  let path := s!"exercises/practice/{exercise}/.meta/tests.toml"
   try
     let toml <- IO.FS.readFile path
     return .ok toml
@@ -79,7 +97,7 @@ def getCanonicalCases (canonical : TreeMap.Raw String Json) (tests : TreeMap Str
 
 def readExtraCases (exercise : String) : IO (Except String Json) := do
   try
-    let json <- IO.FS.readFile (s!"../exercises/practice/{exercise}/.meta/extra.json")
+    let json <- IO.FS.readFile (s!"exercises/practice/{exercise}/.meta/extra.json")
     return Json.parse json
   catch _ =>
     return .error "No extra cases found."
@@ -167,7 +185,7 @@ def generateTestFile (exercise : String) : IO Unit := do
       let array := getOk json.getArr?
       match genTestFileContent pascalExercise empty array with
       | .error msg => throw <| IO.userError msg
-      | .ok testContent => IO.FS.writeFile s!"../exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+      | .ok testContent => IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
   | .ok toml =>
     let tests := getIncludes toml
     let canonicalData <- readCanonicalData exercise
@@ -182,7 +200,7 @@ def generateTestFile (exercise : String) : IO Unit := do
         let array := getOk json.getArr?
         match genTestFileContent pascalExercise empty array with
         | .error msg => throw <| IO.userError msg
-        | .ok testContent => IO.FS.writeFile s!"../exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+        | .ok testContent => IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
     | .ok maybeMap =>
       match getCanonicalCases maybeMap tests with
       | .error msg => throw <| IO.userError msg
@@ -192,15 +210,15 @@ def generateTestFile (exercise : String) : IO Unit := do
           match genTestFileContent pascalExercise cases #[] with
           | .error msg => throw <| IO.userError msg
           | .ok testContent =>
-            IO.FS.writeFile s!"../exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+            IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
         | .ok json =>
           let array := getOk json.getArr?
           match genTestFileContent pascalExercise cases array with
           | .error msg => throw <| IO.userError msg
-          | .ok testContent => IO.FS.writeFile s!"../exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+          | .ok testContent => IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
 
 def addImport (pascalExercise : String) : IO Unit := do
-  let path := s!"./Generator/Generator.lean"
+  let path := s!"generators/Generator/Generator.lean"
   try
     let crtContent <- IO.FS.readFile path
     let lines := crtContent.splitOn "Std.HashMap.ofList [\n"
@@ -221,6 +239,10 @@ def kebabCase (pascal : String) : String :=
   ) ("", true) |> Prod.fst
 
 def regenerateTestFiles : IO Unit := do
+  let _ ← IO.Process.run {
+    cmd := "bin/configlet"
+    args := #["sync", "-u", "--yes", "--docs", "--filepaths", "--metadata", "--tests", "include"]
+  }
   for (pascal, _) in Generator.dispatch do
     let kebab := kebabCase pascal
     generateTestFile kebab
@@ -266,16 +288,18 @@ def main : IO UInt32 := do
 
 end {pascalExercise}Generator
 "
-  let path := s!"./Generator/Generator/{pascalExercise}Generator.lean"
+  let path := s!"generators/Generator/Generator/{pascalExercise}Generator.lean"
   IO.FS.writeFile path (content.trim ++ "\n")
   match Generator.dispatch.get? pascalExercise with
   | none => addImport pascalExercise
   | some _ => return
 
 def main (args : List String) : IO Unit := do
+  setDirectory
   match args with
   | "-g" :: exercise :: _
   | "--generate" :: exercise :: _ =>
+    addPracticeExercise exercise
     generateTestFile exercise.trim
   | "-s" :: exercise :: _
   | "--stub" :: exercise :: _ =>

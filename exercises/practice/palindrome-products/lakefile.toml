@@ -1,0 +1,15 @@
+name = "palindrome-products"
+version = "0.1.0"
+defaultTargets = ["PalindromeProductsTest"]
+testDriver = "PalindromeProductsTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "PalindromeProducts"
+
+[[lean_exe]]
+name = "PalindromeProductsTest"
+root = "PalindromeProductsTest"

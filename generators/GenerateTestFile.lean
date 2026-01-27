@@ -16,14 +16,11 @@ def getOk {α β} (except : Except α β) [Inhabited β] : β := except.toOption
 def strip (string : String) (char : Char) : String :=
   String.dropWhile string (·==char) |> (String.dropRightWhile · (·==char))
 
-def stripWhiteSpace (string : String) : String :=
-  String.dropWhile string (·.isWhitespace) |> (String.dropRightWhile . (·.isWhitespace))
-
 def pascalCase  (input : String) : String :=
   input.splitOn "-" |> List.map String.capitalize |> String.join
 
 def getPath (exercise : String) : IO String := do
-  let info <- IO.Process.run {
+  let info ← IO.Process.run {
     cmd := "../bin/configlet"
     args := #["info", "-o", "-v", "d", "-t", ".."]
   }
@@ -119,29 +116,29 @@ def genTestFileContent (pascalExercise : String) (cases : OrderedMap) (extra : A
     let extraTests := getExtraTests genTestCase pascalExercise extra
     let ending := genEnd pascalExercise
     let testContent := intro ++ canonicalTests ++ extraTests ++ ending
-    .ok (stripWhiteSpace testContent ++ "\n")
+    .ok (testContent.trim ++ "\n")
 
 def getIncludes (toml : String) : TreeMap String String :=
   let cases := toml.splitOn "\n\n"
-            |> List.map (·.splitOn "\n" |> List.map stripWhiteSpace)
+            |> List.map (·.splitOn "\n" |> List.map String.trim)
   let includes := cases.filter (fun xs =>
-    let hasInclude := xs.find? (stripWhiteSpace . |> (·.startsWith "include"))
+    let hasInclude := xs.find? (·.trim |> (·.startsWith "include"))
     match hasInclude with
     | none => true
     | some string =>
-      let words := string.splitOn " " |> List.map stripWhiteSpace |> String.join
+      let words := string.splitOn " " |> List.map String.trim |> String.join
       words != "include=false"
   )
   includes.foldr (fun xs acc =>
     match xs with
     | uuid :: descriptionLine :: _ =>
       let formattedUUID := uuid.stripPrefix "[" |> (·.stripSuffix "]")
-      let description := stripWhiteSpace descriptionLine
+      let description := descriptionLine.trim
                         |> (·.stripPrefix "description")
-                        |> (·.dropWhile (·.isWhitespace))
+                        |> (·.trimLeft)
                         |> (·.stripPrefix "=")
-                        |> (·.dropWhile (·.isWhitespace))
-                        |> (strip . '"')
+                        |> (·.trimLeft)
+                        |> (strip · '"')
       acc.insert formattedUUID description
     | _ => acc
   ) Std.TreeMap.empty
@@ -214,6 +211,20 @@ def addImport (pascalExercise : String) : IO Unit := do
   catch _ =>
     return
 
+def kebabCase (pascal : String) : String :=
+  pascal.foldl (fun (acc, start) ch =>
+    if start then
+      (acc.push ch.toLower, false)
+    else if ch.isUpper then
+      (acc ++ s!"-{ch.toLower}", false)
+    else (acc.push ch, false)
+  ) ("", true) |> Prod.fst
+
+def regenerateTestFiles : IO Unit := do
+  for (pascal, _) in Generator.dispatch do
+    let kebab := kebabCase pascal
+    generateTestFile kebab
+
 def generateStub (exercise : String) : IO Unit := do
   let pascalExercise := pascalCase exercise
   let content :=
@@ -256,20 +267,21 @@ def main : IO UInt32 := do
 end {pascalExercise}Generator
 "
   let path := s!"./Generator/Generator/{pascalExercise}Generator.lean"
-  IO.FS.writeFile path (stripWhiteSpace content ++ "\n")
+  IO.FS.writeFile path (content.trim ++ "\n")
   match Generator.dispatch.get? pascalExercise with
   | none => addImport pascalExercise
   | some _ => return
 
 def main (args : List String) : IO Unit := do
   match args with
-  | "-g" :: exercise :: _ =>
-    generateTestFile (stripWhiteSpace exercise)
+  | "-g" :: exercise :: _
   | "--generate" :: exercise :: _ =>
-    generateTestFile (stripWhiteSpace exercise)
-  | "-s" :: exercise :: _ =>
-    generateStub (stripWhiteSpace exercise)
+    generateTestFile exercise.trim
+  | "-s" :: exercise :: _
   | "--stub" :: exercise :: _ =>
-    generateStub (stripWhiteSpace exercise)
+    generateStub exercise.trim
+  | "-r" :: _
+  | "--regenerate" :: _ =>
+    regenerateTestFiles
   | _ =>
     showUsage

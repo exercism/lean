@@ -29,6 +29,10 @@ def anagramTests : TestSuite :=
       return assertEqual [] (Anagram.findAnagrams "go" ["goGoGO"]))
   |>.addTest "anagrams must use all letters exactly once" (do
       return assertEqual [] (Anagram.findAnagrams "tapper" ["patter"]))
+  |>.addTest "words are not anagrams of themselves" (do
+      return assertEqual [] (Anagram.findAnagrams "BANANA" ["BANANA"]))
+  |>.addTest "words are not anagrams of themselves even if letter case is partially different" (do
+      return assertEqual [] (Anagram.findAnagrams "BANANA" ["Banana"]))
   |>.addTest "words are not anagrams of themselves even if letter case is completely different" (do
       return assertEqual [] (Anagram.findAnagrams "BANANA" ["banana"]))
   |>.addTest "words other than themselves can be anagrams" (do

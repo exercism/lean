@@ -50,4 +50,3 @@ def triangleTests : TestSuite :=
 
   def main : IO UInt32 := do
     runTestSuitesWithExitCode [triangleTests]
-  

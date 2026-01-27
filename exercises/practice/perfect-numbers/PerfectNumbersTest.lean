@@ -17,6 +17,8 @@ def perfectNumbersTests : TestSuite :=
       return assertEqual PerfectNumbers.Classification.abundant (PerfectNumbers.classify ⟨30, (by decide)⟩))
   |>.addTest "Abundant numbers -> Large abundant number is classified correctly" (do
       return assertEqual PerfectNumbers.Classification.abundant (PerfectNumbers.classify ⟨33550335, (by decide)⟩))
+  |>.addTest "Abundant numbers -> Perfect square abundant number is classified correctly" (do
+      return assertEqual PerfectNumbers.Classification.abundant (PerfectNumbers.classify ⟨196, (by decide)⟩))
   |>.addTest "Deficient numbers -> Smallest prime deficient number is classified correctly" (do
       return assertEqual PerfectNumbers.Classification.deficient (PerfectNumbers.classify ⟨2, (by decide)⟩))
   |>.addTest "Deficient numbers -> Smallest non-prime deficient number is classified correctly" (do

@@ -306,6 +306,7 @@ def main (args : List String) : IO Unit := do
     generateStub exercise.trim
   | "-r" :: _
   | "--regenerate" :: _ =>
+    fetchConfiglet
     regenerateTestFiles
   | _ =>
     showUsage

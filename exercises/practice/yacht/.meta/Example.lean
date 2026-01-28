@@ -20,7 +20,7 @@ def score (dice : Throw) : Category -> Nat
   | .fives          => 5 * dice.count ⟨5, by decide⟩
   | .sixes          => 6 * dice.count ⟨6, by decide⟩
   | .yacht          => if dice.all (λ x => dice[0] == x) then 50 else 0
-  | .choice         => dice.foldl (· + ·.val) 0
+  | .choice         => dice.foldl (λ acc ⟨d, _⟩ => acc + d) 0
   | .littleStraight => if sortedDice dice == [1, 2, 3, 4, 5] then 30 else 0
   | .bigStraight    => if sortedDice dice == [2, 3, 4, 5, 6] then 30 else 0
   | .fourOfAKind    => (do

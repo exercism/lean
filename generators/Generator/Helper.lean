@@ -13,6 +13,11 @@ s!"instance \{α β} [BEq α] [BEq β] : BEq (Except α β)  where
     | .error e1, .error e2 => e1 == e2
     | _, _ => false"
 
+def toCamel (string : String) : String :=
+  (string.splitOn " ").map String.capitalize
+    |> String.join
+    |> String.decapitalize
+
 def toLiteral (string : String) : String :=
   string.toList.filter (·!='"') |> (·.asString)
 

@@ -194,6 +194,14 @@
         "difficulty": 2
       },
       {
+        "slug": "yacht",
+        "name": "Yacht",
+        "uuid": "ffc5678e-12da-4a69-996d-93ab1ede6dbc",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "allergies",
         "name": "Allergies",
         "uuid": "a5c2feb2-392c-411c-8c57-206a912ad0f2",

@@ -24,15 +24,17 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let description := case.get! "description"
               |> (·.compress)
   let funName := getFunName (case.get! "property")
-  let call := s!"({exercise}.{funName} {min} {max})"
+  let call := s!"({exercise}.{funName} {min} {max} (by decide))"
   match expected.getObjVal? "error" with
   | .error _ =>
     let expectedValue := expected.getObjValD "value"
     let expectedFactors := expected.getObjValD "factors"
-                            |> (·.compress) |> (·.drop 1) |> (·.dropRight 1)
+                            |> (getOk ·.getArr?)
+                            |> (·.map (s!"{·}".dropRight 1 |> (· ++ ", by decide⟩") |> (·.drop 1) |> ("⟨" ++ ·)))
+                            |> (·.toList) |> (String.intercalate ", ")
     let result := if expectedValue.isNull
-                  then s!".empty"
-                  else s!"(.valid {expectedValue} [{toStruct expectedFactors}])"
+                  then s!"none"
+                  else s!"(some ⟨{expectedValue}, [{toStruct expectedFactors}]⟩)"
     s!"
     |>.addTest {description} (do
         return assertEqual {result} {call})"

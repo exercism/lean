@@ -540,35 +540,35 @@
       }
     ]
   },
-    "key_features": [
+  "key_features": [
     {
       "title": "Purely functional",
-      "content": "Pure functions always produce the same output for the same input, so are more predictable and easier to reason about.",
+      "content": "Deterministic functions make code predictable, composable and easier to understand.",
       "icon": "functional"
     },
     {
       "title": "Dependently typed",
-      "content": "Types can depend on values, allowing for specifications to be written directly in the language. This makes types self-documenting and many invalid states unrepresentable.",
+      "content": "Encoding rules directly in types makes them self-documenting and invalid states unrepresentable.",
       "icon": "safe"
     },
     {
-      "title": "Programming and proving in one language",
-      "content": "Lean uses a single language for executable programs and formal proofs, allowing specifications, implementations, and correctness proofs to coexist.",
+      "title": "Programs and proofs",
+      "content": "Write programs and prove them correct in the same language. Specification is code.",
       "icon": "scientific"
     },
     {
-      "title": "Correctness beyond testing",
-      "content": "Lean supports formal verification of program behavior, allowing developers to prove properties that cannot be established through testing alone.",
+      "title": "Proved correctness",
+      "content": "Go beyond testing by mathematically proving critical properties of your code.",
       "icon": "immutable"
     },
     {
       "title": "Type classes",
-      "content": "Categorizing types into classes provides lightweight, extensible abstraction and ad-hoc polymorphism.",
+      "content": "Categorizing types into classes provides lightweight, extensible abstraction.",
       "icon": "expressive"
     },
     {
       "title": "Strong metaprogramming",
-      "content": "A powerful macro and elaborator framework lets users extend the language and define new syntax.",
+      "content": "A powerful macro and elaborator framework lets you extend the language to fit your domain.",
       "icon": "extensible"
     }
   ],

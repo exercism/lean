@@ -1,3 +1,4 @@
+import Generator.CamiciaGenerator
 import Generator.YachtGenerator
 import Generator.PalindromeProductsGenerator
 import Generator.EtlGenerator
@@ -43,6 +44,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("Camicia", (CamiciaGenerator.genIntro, CamiciaGenerator.genTestCase, CamiciaGenerator.genEnd)),
     ("Yacht", (YachtGenerator.genIntro, YachtGenerator.genTestCase, YachtGenerator.genEnd)),
     ("PalindromeProducts", (PalindromeProductsGenerator.genIntro, PalindromeProductsGenerator.genTestCase, PalindromeProductsGenerator.genEnd)),
     ("Etl", (EtlGenerator.genIntro, EtlGenerator.genTestCase, EtlGenerator.genEnd)),

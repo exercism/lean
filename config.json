@@ -426,6 +426,14 @@
         "difficulty": 6
       },
       {
+        "slug": "camicia",
+        "name": "Camicia",
+        "uuid": "38e10910-8c63-4925-a8db-2fd182b5ccc4",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 6
+      },
+      {
         "slug": "complex-numbers",
         "name": "Complex Numbers",
         "uuid": "5860e836-932b-4eb6-9482-c1ca8bbbce02",

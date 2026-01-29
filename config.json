@@ -122,14 +122,6 @@
         "difficulty": 2
       },
       {
-        "slug": "gigasecond",
-        "name": "Gigasecond",
-        "uuid": "093a5dd4-a0ab-4e22-a9f8-0411b27d710c",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 2
-      },
-      {
         "slug": "grains",
         "name": "Grains",
         "uuid": "350aa663-603a-45a1-a4a3-d9d48e0d572c",
@@ -229,6 +221,14 @@
         "slug": "flatten-array",
         "name": "Flatten Array",
         "uuid": "758ddbdc-a11a-4fe0-a0aa-f47d25a7e126",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
+        "slug": "gigasecond",
+        "name": "Gigasecond",
+        "uuid": "093a5dd4-a0ab-4e22-a9f8-0411b27d710c",
         "practices": [],
         "prerequisites": [],
         "difficulty": 3

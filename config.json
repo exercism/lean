@@ -12,7 +12,8 @@
   "version": 3,
   "online_editor": {
     "indent_style": "space",
-    "indent_size": 2
+    "indent_size": 2,
+    "highlightjs_language": "haskell"
   },
   "test_runner": {
     "average_run_time": 6
@@ -539,6 +540,38 @@
       }
     ]
   },
+  "key_features": [
+    {
+      "title": "Purely functional",
+      "content": "Deterministic functions make code predictable, composable and easier to understand.",
+      "icon": "functional"
+    },
+    {
+      "title": "Dependently typed",
+      "content": "Encoding rules directly in types makes them self-documenting and invalid states unrepresentable.",
+      "icon": "safe"
+    },
+    {
+      "title": "Programs and proofs",
+      "content": "Write programs and prove them correct in the same language. Specification is code.",
+      "icon": "scientific"
+    },
+    {
+      "title": "Proved correctness",
+      "content": "Go beyond testing by mathematically proving critical properties of your code.",
+      "icon": "immutable"
+    },
+    {
+      "title": "Type classes",
+      "content": "Categorizing types into classes provides lightweight, extensible abstraction.",
+      "icon": "expressive"
+    },
+    {
+      "title": "Strong metaprogramming",
+      "content": "A powerful macro and elaborator framework lets you extend the language to fit your domain.",
+      "icon": "extensible"
+    }
+  ],
   "tags": [
     "paradigm/declarative",
     "paradigm/functional",

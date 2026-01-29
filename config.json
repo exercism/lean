@@ -227,6 +227,14 @@
         "difficulty": 3
       },
       {
+        "slug": "gigasecond",
+        "name": "Gigasecond",
+        "uuid": "093a5dd4-a0ab-4e22-a9f8-0411b27d710c",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "line-up",
         "name": "Line Up",
         "uuid": "d6972b96-7abb-47d8-a342-d874b297c471",

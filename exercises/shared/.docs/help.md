@@ -1,6 +1,14 @@
 # Help
 
-- [Lean 4 Documentation](https://lean-lang.org/documentation/)
-- [Lean 4 Zulip Chat](https://leanprover.zulipchat.com/) - The main community chat
-- [Functional Programming in Lean](https://lean-lang.org/functional_programming_in_lean/) - An introductory book
-- [Theorem Proving in Lean 4](https://lean-lang.org/theorem_proving_in_lean4/) - For theorem proving
+## Getting Started
+
+Please refer to the [installation][installation] and [learning][learning] help pages.
+
+## Feedback, Issues, Pull Requests
+
+If you have feedback about an exercise, or want to help implementing a new one, head over [the forum page][forum] and post about it. 
+We'll do our best to help you!
+
+[installation]: https://exercism.org/docs/tracks/lean/installation
+[learning]: https://exercism.org/docs/tracks/lean/learning
+[forum]: https://forum.exercism.org/c/programming/lean/761

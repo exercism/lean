@@ -12,7 +12,8 @@
   "version": 3,
   "online_editor": {
     "indent_style": "space",
-    "indent_size": 2
+    "indent_size": 2,
+    "highlightjs_language": "haskell"
   },
   "test_runner": {
     "average_run_time": 6
@@ -539,6 +540,38 @@
       }
     ]
   },
+    "key_features": [
+    {
+      "title": "Purely functional",
+      "content": "Pure functions always produce the same output for the same input, so are more predictable and easier to reason about.",
+      "icon": "functional"
+    },
+    {
+      "title": "Dependently typed",
+      "content": "Types can depend on values, allowing for specifications to be written directly in the language. This makes types self-documenting and many invalid states unrepresentable.",
+      "icon": "safe"
+    },
+    {
+      "title": "Programming and proving in one language",
+      "content": "Lean uses a single language for executable programs and formal proofs, allowing specifications, implementations, and correctness proofs to coexist.",
+      "icon": "scientific"
+    },
+    {
+      "title": "Correctness beyond testing",
+      "content": "Lean supports formal verification of program behavior, allowing developers to prove properties that cannot be established through testing alone.",
+      "icon": "immutable"
+    },
+    {
+      "title": "Type classes",
+      "content": "Categorizing types into classes provides lightweight, extensible abstraction and ad-hoc polymorphism.",
+      "icon": "expressive"
+    },
+    {
+      "title": "Strong metaprogramming",
+      "content": "A powerful macro and elaborator framework lets users extend the language and define new syntax.",
+      "icon": "extensible"
+    }
+  ],
   "tags": [
     "paradigm/declarative",
     "paradigm/functional",

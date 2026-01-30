@@ -82,7 +82,7 @@ def exprational (r : RationalNumber) (n : Int) : RationalNumber :=
       let den := r.num ^ exponent
       if neg_den: den < 0
       then
-        reduceHelper (-num) (-den) (by simp [neg_den]) -- negDen states that den < 0, so simp knows that (-den) > 0
+        reduceHelper (-num) (-den) (by simp [neg_den]) -- neg_den states that den < 0, so simp knows that (-den) > 0
       else
         have den_pos: den > 0 := by
           have h: den ≠ 0 := by

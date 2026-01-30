@@ -539,6 +539,14 @@
         "difficulty": 8
       },
       {
+        "slug": "rational-numbers",
+        "name": "Rational Numbers",
+        "uuid": "df8ab360-c305-4f4c-bfc6-2fb06e3fe2fa",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 8
+      },
+      {
         "slug": "forth",
         "name": "Forth",
         "uuid": "a9f94a1f-2ac6-4792-b6e7-d2ea0d65549c",

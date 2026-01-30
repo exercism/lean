@@ -1,3 +1,4 @@
+import Generator.RationalNumbersGenerator
 import Generator.GigasecondGenerator
 import Generator.CamiciaGenerator
 import Generator.YachtGenerator
@@ -45,6 +46,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("RationalNumbers", (RationalNumbersGenerator.genIntro, RationalNumbersGenerator.genTestCase, RationalNumbersGenerator.genEnd)),
     ("Gigasecond", (GigasecondGenerator.genIntro, GigasecondGenerator.genTestCase, GigasecondGenerator.genEnd)),
     ("Camicia", (CamiciaGenerator.genIntro, CamiciaGenerator.genTestCase, CamiciaGenerator.genEnd)),
     ("Yacht", (YachtGenerator.genIntro, YachtGenerator.genTestCase, YachtGenerator.genEnd)),

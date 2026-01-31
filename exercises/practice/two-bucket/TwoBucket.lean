@@ -13,7 +13,7 @@ structure Result where
   other  : Volume
   deriving BEq, Repr
 
-def measure (one two : Capacity) (goal : Volume) (start : BucketId) : Option Result :=
+def measure (first second : Capacity) (goal : Volume) (start : BucketId) : Option Result :=
   sorry
 
 end TwoBucket

@@ -1,3 +1,4 @@
+import Generator.TwoBucketGenerator
 import Generator.SecretHandshakeGenerator
 import Generator.RationalNumbersGenerator
 import Generator.GigasecondGenerator
@@ -47,6 +48,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("TwoBucket", (TwoBucketGenerator.genIntro, TwoBucketGenerator.genTestCase, TwoBucketGenerator.genEnd)),
     ("SecretHandshake", (SecretHandshakeGenerator.genIntro, SecretHandshakeGenerator.genTestCase, SecretHandshakeGenerator.genEnd)),
     ("RationalNumbers", (RationalNumbersGenerator.genIntro, RationalNumbersGenerator.genTestCase, RationalNumbersGenerator.genEnd)),
     ("Gigasecond", (GigasecondGenerator.genIntro, GigasecondGenerator.genTestCase, GigasecondGenerator.genEnd)),

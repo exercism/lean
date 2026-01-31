@@ -515,6 +515,14 @@
         "difficulty": 7
       },
       {
+        "slug": "two-bucket",
+        "name": "Two Bucket",
+        "uuid": "eb1cb76f-360f-49b6-9267-ac4962f5cd04",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 7
+      },
+      {
         "slug": "wordy",
         "name": "Wordy",
         "uuid": "62357838-23b1-4e65-8bb4-2b64c0abc3c3",

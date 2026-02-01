@@ -20,7 +20,4 @@ datetime("uuuu-MM-ddTHH:mm:ss.sssssssss")
 
 Note that the nanosecond part (`.sssssssss`) is optional, but the rest is not.
 
-A new macro, `adjusteddatetime`, is defined that accepts either a date-only literal `"YYYY-MM-DD"` or a full datetime literal `"YYYY-MM-DDTHH:mm:ss"`. 
-For a date-only literal, `"T00:00:00"` is appended, and in both cases the macro calls `datetime`.
-
 [time]: https://lean-lang.org/doc/api/Std/Time.html

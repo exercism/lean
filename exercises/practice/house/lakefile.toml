@@ -1,0 +1,15 @@
+name = "house"
+version = "0.1.0"
+defaultTargets = ["HouseTest"]
+testDriver = "HouseTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "House"
+
+[[lean_exe]]
+name = "HouseTest"
+root = "HouseTest"

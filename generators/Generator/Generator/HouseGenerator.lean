@@ -25,7 +25,7 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
                     |> getOk
                     |>.map (λ ln => s!"{ln}")
                     |>.toList
-                    |> (s!"(String.intercalate \"\\n\" {·})")
+                    |> (s!"(String.intercalate \"\\n\\n\" {·})")
   let description := case.get! "description"
               |> (·.compress)
   let funName := getFunName (case.get! "property")

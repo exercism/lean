@@ -43,6 +43,6 @@ def allVerses : List String := protagonists.mapIdx (λ i p =>
 def recite (startVerse endVerse : VerseIndex) : String :=
   let start := startVerse.val
   let length := endVerse.val - start + 1
-  String.intercalate "\n" (allVerses.drop (start - 1) |>.take length)
+  String.intercalate "\n\n" (allVerses.drop (start - 1) |>.take length)
 
 end House

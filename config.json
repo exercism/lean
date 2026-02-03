@@ -507,6 +507,14 @@
         "difficulty": 6
       },
       {
+        "slug": "rail-fence-cipher",
+        "name": "Rail Fence Cipher",
+        "uuid": "f0f8afa4-a9d9-46f4-b0e1-94a8db2e7bad",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 6
+      },
+      {
         "slug": "change",
         "name": "Change",
         "uuid": "77564515-64ad-42b0-b6b1-18b266ff4310",

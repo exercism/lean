@@ -427,6 +427,14 @@
         "difficulty": 5
       },
       {
+        "slug": "relative-distance",
+        "name": "Relative Distance",
+        "uuid": "22989b73-3cde-4473-b8b1-a96632769843",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "transpose",
         "name": "Transpose",
         "uuid": "d6227270-629b-4db3-9698-e332dbf42ef2",

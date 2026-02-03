@@ -1,3 +1,4 @@
+import Generator.RelativeDistanceGenerator
 import Generator.HouseGenerator
 import Generator.TwoBucketGenerator
 import Generator.SecretHandshakeGenerator
@@ -49,6 +50,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("RelativeDistance", (RelativeDistanceGenerator.genIntro, RelativeDistanceGenerator.genTestCase, RelativeDistanceGenerator.genEnd)),
     ("House", (HouseGenerator.genIntro, HouseGenerator.genTestCase, HouseGenerator.genEnd)),
     ("TwoBucket", (TwoBucketGenerator.genIntro, TwoBucketGenerator.genTestCase, TwoBucketGenerator.genEnd)),
     ("SecretHandshake", (SecretHandshakeGenerator.genIntro, SecretHandshakeGenerator.genTestCase, SecretHandshakeGenerator.genEnd)),

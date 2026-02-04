@@ -7,8 +7,7 @@ inductive Classification where
 def find (needle haystack : List Nat) (needleLen : Nat) : Nat -> Bool
   | 0        => false
   | n + 1    =>
-    if haystack.take needleLen == needle then true
-    else find needle (haystack.drop 1) needleLen n
+    haystack.take needleLen == needle || find needle (haystack.drop 1) needleLen n
 
 def sublist (listOne listTwo : List Nat) : Classification :=
   let len1 := listOne.length

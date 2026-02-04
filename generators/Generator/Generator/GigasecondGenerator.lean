@@ -9,13 +9,10 @@ open Helper
 namespace GigasecondGenerator
 
 def genIntro (exercise : String) : String := s!"import LeanTest
-import Std
-import Lean
 import {exercise}
+import Std.Time
 
 open LeanTest
-open Lean
-open Std.Time
 
 def {exercise.decapitalize}Tests : TestSuite :=
   (TestSuite.empty \"{exercise}\")"
@@ -52,7 +49,7 @@ def parseInput : List Char → Option DateTimeValues
   | _ => none
 
 def toPlainDateTime (values : DateTimeValues) : String :=
-  s!"PlainDateTime.mk (PlainDate.mk {values.year} {values.month} {values.day} (by decide)) (PlainTime.mk {values.hour} {values.minute} {values.second} 0)"
+  s!"Std.Time.PlainDateTime.mk (Std.Time.PlainDate.mk {values.year} {values.month} {values.day} (by decide)) (Std.Time.PlainTime.mk {values.hour} {values.minute} {values.second} 0)"
 
 def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let input := String.toList <| toLiteral <| insertAllInputs <| case.get! "input"

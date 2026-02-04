@@ -1,0 +1,15 @@
+name = "sublist"
+version = "0.1.0"
+defaultTargets = ["SublistTest"]
+testDriver = "SublistTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Sublist"
+
+[[lean_exe]]
+name = "SublistTest"
+root = "SublistTest"

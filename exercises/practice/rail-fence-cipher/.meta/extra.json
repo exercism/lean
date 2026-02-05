@@ -1,0 +1,20 @@
+[
+  {
+    "description": "encode with one rail",
+    "property": "encode",
+    "input": {
+      "msg": "ABC",
+      "rails": 1
+    },
+    "expected": "ABC"
+  },
+  {
+    "description": "decode with one rail",
+    "property": "decode",
+    "input": {
+      "msg": "ABC",
+      "rails": 1
+    },
+    "expected": "ABC"
+  }
+]

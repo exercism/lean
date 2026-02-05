@@ -1,0 +1,15 @@
+name = "rail-fence-cipher"
+version = "0.1.0"
+defaultTargets = ["RailFenceCipherTest"]
+testDriver = "RailFenceCipherTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "RailFenceCipher"
+
+[[lean_exe]]
+name = "RailFenceCipherTest"
+root = "RailFenceCipherTest"

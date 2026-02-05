@@ -41,7 +41,7 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let description := case.get! "description"
               |> (·.compress)
   let funName := getFunName (case.get! "property")
-  let call := s!"({exercise}.{funName} ⟨{inputBase}, (by decide)⟩ {digits} ⟨{outputBase}, (by decide)⟩)"
+  let call := s!"({exercise}.{funName} ⟨{inputBase}, by decide⟩ {digits} ⟨{outputBase}, by decide⟩)"
   s!"
   |>.addTest {description} (do
       return assertEqual {expected} {call})"

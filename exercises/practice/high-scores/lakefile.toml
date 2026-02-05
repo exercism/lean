@@ -1,0 +1,15 @@
+name = "high-scores"
+version = "0.1.0"
+defaultTargets = ["HighScoresTest"]
+testDriver = "HighScoresTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "HighScores"
+
+[[lean_exe]]
+name = "HighScoresTest"
+root = "HighScoresTest"

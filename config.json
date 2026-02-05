@@ -300,6 +300,14 @@
         "difficulty": 3
       },
       {
+        "slug": "sublist",
+        "name": "Sublist",
+        "uuid": "e30dc3a1-c0a8-4c93-b198-2929e4ebf022",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "atbash-cipher",
         "name": "Atbash Cipher",
         "uuid": "3deecf01-a0b9-45c4-a153-523e7601c87b",

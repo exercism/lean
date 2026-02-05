@@ -7,7 +7,7 @@ Both are very important data structures in Lean.
 
 Like most functional languages, [Lists][list] are a fundamental data structure in Lean.
 
-A list has two constructors, one for the empty list (`[]`) and another for a List containing one element (the `head`) and another list (the `tail`).
+A List has two constructors, one for the empty list (`[]`) and another for a list containing one element (the `head`) and another list (the `tail`).
 It is possible to prepend elements to a list using `::`, thus creating a new list:
 
 ```lean
@@ -43,7 +43,7 @@ As long as there is never more than one reference to an array (that is, it is us
 
 Lean also supports [do-notation][do-notation], an embedded language for writing code in an imperative style.
 
-Inside a `do` block, it is possible to declare mutable local variables using the `mut` keyword, which can be reassigned.
+Inside a `do` block, it is possible to declare mutable local variables, which can be reassigned, using the `mut` keyword.
 When used with data structures such as arrays, this allows Lean's runtime system to perform in-place destructive updates under the hood, whenever it is safe to do so.
 
 Do-notation can only be used inside a monad.

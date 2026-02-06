@@ -1,5 +1,5 @@
 import Std
-import Lean
+import Lean.Data.Json
 import Generator
 
 open Lean
@@ -250,7 +250,7 @@ def regenerateTestFiles : IO Unit := do
 def generateStub (exercise : String) : IO Unit := do
   let pascalExercise := pascalCase exercise
   let content :=
-s!"import Lean
+s!"import Lean.Data.Json
 import Std
 import Helper
 

@@ -1,0 +1,15 @@
+name = "diamond"
+version = "0.1.0"
+defaultTargets = ["DiamondTest"]
+testDriver = "DiamondTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Diamond"
+
+[[lean_exe]]
+name = "DiamondTest"
+root = "DiamondTest"

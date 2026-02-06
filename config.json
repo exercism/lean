@@ -99,14 +99,6 @@
         "difficulty": 2
       },
       {
-        "slug": "diamond",
-        "name": "Diamond",
-        "uuid": "6e39ef52-ecfe-4ce4-8ed9-4c66bb613fe3",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 2
-      },
-      {
         "slug": "difference-of-squares",
         "name": "Difference of Squares",
         "uuid": "474e19d5-739e-43ad-9dca-b97e9104c179",
@@ -335,6 +327,14 @@
         "slug": "collatz-conjecture",
         "name": "Collatz Conjecture",
         "uuid": "c2b904bb-1afa-4584-82da-6ff73c00ed93",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
+        "slug": "diamond",
+        "name": "Diamond",
+        "uuid": "6e39ef52-ecfe-4ce4-8ed9-4c66bb613fe3",
         "practices": [],
         "prerequisites": [],
         "difficulty": 4

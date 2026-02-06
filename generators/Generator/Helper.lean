@@ -1,5 +1,5 @@
 import Std
-import Lean
+import Lean.Data.Json
 
 open Std
 open Lean
@@ -12,6 +12,8 @@ s!"instance \{α β} [BEq α] [BEq β] : BEq (Except α β)  where
     | .ok a, .ok b => a == b
     | .error e1, .error e2 => e1 == e2
     | _, _ => false"
+
+def indent : String := "      "
 
 def toCamel (string : String) : String :=
   (string.splitOn " ").map String.capitalize
@@ -46,15 +48,7 @@ def exceptToString {α β} [ToString α] [ToString β] (except : Except α β) :
   | .error msg => s!"(.error {msg})"
 
 def getKeyValues (json : Json) : List (String × String) :=
-  let map := getOk json.getObj?
-  let list := map.toList
-  let string := json.compress
-  let sorted := list.mergeSort (fun (k1, _) (k2, _) =>
-                  let pos1 := string.toSlice.find? k1 |> (Option.get! ·)
-                  let pos2 := string.toSlice.find? k2 |> (Option.get! ·)
-                  pos1 < pos2
-                )
-  sorted.map (fun (k, v) => (k, v.compress))
+  getOk json.getObj? |>.toList |>.map (λ (a, b) => (a, b.compress))
 
 def insertAllInputs (input : Json) : String :=
   let values := getKeyValues input
@@ -68,5 +62,37 @@ def getFunName (property : Json) : String :=
 
 def toStruct (string : String) : String :=
   string.replace "[" "⟨" |> (·.replace "]" "⟩")
+
+def serializeContent
+  (json : Json)
+  (serializer : Json → String)
+    : List String :=
+  json.getArr?
+      |> getOk
+      |>.map serializer
+      |>.toList
+
+def serializeList
+  (json : Json)
+  (serializer : Json → String := fun j => s!"{j}")
+  (separator : String := s!",\n{indent}  ")
+    : String :=
+    let contents := serializeContent json serializer
+    match contents with
+    | [] => "[]"
+    | xs =>
+      let joined := String.intercalate separator xs
+      s!"[\n{indent}  {joined}\n{indent}]"
+
+def serializeObjectAsList
+  (json : Json)
+  (serializer : String → Json → String := fun k v => s!"[{k}, {v}]")
+  (separator : String := s!",\n{indent}  ")
+    : String :=
+    let joined := getOk json.getObj?
+      |>.toList
+      |>.map (Function.uncurry serializer)
+      |> String.intercalate separator
+    s!"[\n{indent}  {joined}\n{indent}]"
 
 end Helper

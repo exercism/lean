@@ -1,4 +1,4 @@
-import Lean
+import Lean.Data.Json
 import Std
 import Helper
 
@@ -20,11 +20,7 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let input := case.get! "input"
   let startVerse := input.getObjValD "startVerse" |> (s!"⟨{·}, by decide⟩")
   let endVerse := input.getObjValD "endVerse" |> (s!"⟨{·}, by decide⟩")
-  let expected := case.get! "expected"
-                    |>.getArr?
-                    |> getOk
-                    |>.map (λ ln => s!"{ln}")
-                    |>.toList
+  let expected := serializeList (case.get! "expected")
                     |> (s!"(String.intercalate \"\\n\\n\" {·})")
   let description := case.get! "description"
               |> (·.compress)

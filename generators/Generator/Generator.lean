@@ -1,3 +1,4 @@
+import Generator.DominoesGenerator
 import Generator.HighScoresGenerator
 import Generator.SublistGenerator
 import Generator.RelativeDistanceGenerator
@@ -44,7 +45,7 @@ import Generator.TriangleGenerator
 import Generator.AnagramGenerator
 
 import Std
-import Lean
+import Lean.Data.Json
 
 namespace Generator
 
@@ -54,6 +55,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("Dominoes", (DominoesGenerator.genIntro, DominoesGenerator.genTestCase, DominoesGenerator.genEnd)),
     ("HighScores", (HighScoresGenerator.genIntro, HighScoresGenerator.genTestCase, HighScoresGenerator.genEnd)),
     ("Sublist", (SublistGenerator.genIntro, SublistGenerator.genTestCase, SublistGenerator.genEnd)),
     ("RelativeDistance", (RelativeDistanceGenerator.genIntro, RelativeDistanceGenerator.genTestCase, RelativeDistanceGenerator.genEnd)),

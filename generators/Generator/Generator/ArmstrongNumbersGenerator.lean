@@ -18,14 +18,17 @@ def {exercise.decapitalize}Tests : TestSuite :=
 
 def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let input := case.get! "input"
-  let expected := case.get! "expected"
+  let expected := case.get! "expected" |>.getBool? |> getOk
   let description := case.get! "description"
               |> (·.compress)
   let funName := getFunName (case.get! "property")
   let call := s!"({exercise}.{funName} {insertAllInputs input})"
+  let assert := match expected with
+                | true => s!"assertTrue {call}"
+                | false => s!"assertFalse {call}"
   s!"
   |>.addTest {description} (do
-      return assertEqual {expected} {call})"
+      return {assert})"
 
 def genEnd (exercise : String) : String :=
   s!"

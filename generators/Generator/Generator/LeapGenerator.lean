@@ -1,8 +1,10 @@
 import Lean.Data.Json
 import Std
+import Helper
 
 open Lean
 open Std
+open Helper
 
 namespace LeapGenerator
 
@@ -18,15 +20,19 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let description := case.get! "description"
               |> (·.compress)
   let year := case.get! "input" |> (·.getObjVal? "year") |> Except.toOption |> Option.get!
-  let expected := case.get! "expected"
+  let expected := case.get! "expected" |>.getBool? |> getOk
   let funName := case.get! "property"
               |> (·.compress)
               |> String.toList
               |> (·.filter (·!='"'))
               |> List.asString
+  let call := s!"({exercise}.{funName} {year})"
+  let assert := match expected with
+                | true => s!"assertTrue {call}"
+                | false => s!"assertFalse {call}"
   s!"
   |>.addTest {description} (do
-      return assertEqual {expected} ({exercise}.{funName} {year}))"
+      return {assert})"
 
 def genEnd (exercise : String) : String :=
   s!"

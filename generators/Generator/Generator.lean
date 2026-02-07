@@ -41,6 +41,7 @@ import Generator.RomanNumeralsGenerator
 import Generator.ArmstrongNumbersGenerator
 import Generator.GrainsGenerator
 import Generator.LeapGenerator
+import Generator.FlattenArrayGenerator
 import Generator.ForthGenerator
 import Generator.TriangleGenerator
 import Generator.AnagramGenerator
@@ -99,6 +100,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("ArmstrongNumbers", (ArmstrongNumbersGenerator.genIntro, ArmstrongNumbersGenerator.genTestCase, ArmstrongNumbersGenerator.genEnd)),
     ("Grains", (GrainsGenerator.genIntro, GrainsGenerator.genTestCase, GrainsGenerator.genEnd)),
     ("Leap", (LeapGenerator.genIntro, LeapGenerator.genTestCase, LeapGenerator.genEnd)),
+    ("FlattenArray", (FlattenArrayGenerator.genIntro, FlattenArrayGenerator.genTestCase, FlattenArrayGenerator.genEnd)),
     ("Forth", (ForthGenerator.genIntro, ForthGenerator.genTestCase, ForthGenerator.genEnd)),
     ("Triangle", (TriangleGenerator.genIntro, TriangleGenerator.genTestCase, TriangleGenerator.genEnd)),
     ("Anagram", (AnagramGenerator.genIntro, AnagramGenerator.genTestCase, AnagramGenerator.genEnd))

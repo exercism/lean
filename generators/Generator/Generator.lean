@@ -8,6 +8,7 @@ import Generator.SecretHandshakeGenerator
 import Generator.RationalNumbersGenerator
 import Generator.GigasecondGenerator
 import Generator.CamiciaGenerator
+import Generator.ChangeGenerator
 import Generator.YachtGenerator
 import Generator.PalindromeProductsGenerator
 import Generator.EtlGenerator
@@ -66,6 +67,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("RationalNumbers", (RationalNumbersGenerator.genIntro, RationalNumbersGenerator.genTestCase, RationalNumbersGenerator.genEnd)),
     ("Gigasecond", (GigasecondGenerator.genIntro, GigasecondGenerator.genTestCase, GigasecondGenerator.genEnd)),
     ("Camicia", (CamiciaGenerator.genIntro, CamiciaGenerator.genTestCase, CamiciaGenerator.genEnd)),
+    ("Change", (ChangeGenerator.genIntro, ChangeGenerator.genTestCase, ChangeGenerator.genEnd)),
     ("Yacht", (YachtGenerator.genIntro, YachtGenerator.genTestCase, YachtGenerator.genEnd)),
     ("PalindromeProducts", (PalindromeProductsGenerator.genIntro, PalindromeProductsGenerator.genTestCase, PalindromeProductsGenerator.genEnd)),
     ("Etl", (EtlGenerator.genIntro, EtlGenerator.genTestCase, EtlGenerator.genEnd)),

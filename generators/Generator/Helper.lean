@@ -13,6 +13,13 @@ s!"instance \{α β} [BEq α] [BEq β] : BEq (Except α β)  where
     | .error e1, .error e2 => e1 == e2
     | _, _ => false"
 
+def concatAsserts : String :=
+s!"instance : HAppend AssertionResult AssertionResult AssertionResult where
+    hAppend
+        | .success, .success => .success
+        | .failure msg, _    => .failure msg
+        | _, .failure msg    => .failure msg"
+
 def indent : String := "      "
 
 def toCamel (string : String) : String :=

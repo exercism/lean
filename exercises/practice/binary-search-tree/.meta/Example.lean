@@ -5,15 +5,15 @@ inductive Tree (α : Type) [BEq α] [Repr α] [Ord α] [Inhabited α] where
   | node : α → Tree α → Tree α → Tree α
   deriving Inhabited
 
-partial def Tree.data! {α} [BEq α] [Repr α] [Ord α] [Inhabited α] : Tree α → α
+def Tree.data! {α} [BEq α] [Repr α] [Ord α] [Inhabited α] : Tree α → α
   | .nil        => panic! "empty tree"
   | .node x _ _ => x
 
-partial def Tree.left! {α} [BEq α] [Repr α] [Ord α] [Inhabited α] : Tree α → Tree α
+def Tree.left! {α} [BEq α] [Repr α] [Ord α] [Inhabited α] : Tree α → Tree α
   | .nil        => panic! "empty tree"
   | .node _ l _ => l
 
-partial def Tree.right! {α} [BEq α] [Repr α] [Ord α] [Inhabited α] : Tree α → Tree α
+def Tree.right! {α} [BEq α] [Repr α] [Ord α] [Inhabited α] : Tree α → Tree α
   | .nil        => panic! "empty tree"
   | .node _ _ r => r
 

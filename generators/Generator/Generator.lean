@@ -1,3 +1,4 @@
+import Generator.BookStoreGenerator
 import Generator.DominoesGenerator
 import Generator.HighScoresGenerator
 import Generator.SublistGenerator
@@ -56,6 +57,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("BookStore", (BookStoreGenerator.genIntro, BookStoreGenerator.genTestCase, BookStoreGenerator.genEnd)),
     ("Dominoes", (DominoesGenerator.genIntro, DominoesGenerator.genTestCase, DominoesGenerator.genEnd)),
     ("HighScores", (HighScoresGenerator.genIntro, HighScoresGenerator.genTestCase, HighScoresGenerator.genEnd)),
     ("Sublist", (SublistGenerator.genIntro, SublistGenerator.genTestCase, SublistGenerator.genEnd)),

@@ -1,0 +1,15 @@
+name = "book-store"
+version = "0.1.0"
+defaultTargets = ["BookStoreTest"]
+testDriver = "BookStoreTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "BookStore"
+
+[[lean_exe]]
+name = "BookStoreTest"
+root = "BookStoreTest"

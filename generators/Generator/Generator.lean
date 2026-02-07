@@ -3,6 +3,7 @@ import Generator.HighScoresGenerator
 import Generator.SublistGenerator
 import Generator.RelativeDistanceGenerator
 import Generator.HouseGenerator
+import Generator.TwelveDaysGenerator
 import Generator.TwoBucketGenerator
 import Generator.SecretHandshakeGenerator
 import Generator.RationalNumbersGenerator
@@ -61,6 +62,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("Sublist", (SublistGenerator.genIntro, SublistGenerator.genTestCase, SublistGenerator.genEnd)),
     ("RelativeDistance", (RelativeDistanceGenerator.genIntro, RelativeDistanceGenerator.genTestCase, RelativeDistanceGenerator.genEnd)),
     ("House", (HouseGenerator.genIntro, HouseGenerator.genTestCase, HouseGenerator.genEnd)),
+    ("TwelveDays", (TwelveDaysGenerator.genIntro, TwelveDaysGenerator.genTestCase, TwelveDaysGenerator.genEnd)),
     ("TwoBucket", (TwoBucketGenerator.genIntro, TwoBucketGenerator.genTestCase, TwoBucketGenerator.genEnd)),
     ("SecretHandshake", (SecretHandshakeGenerator.genIntro, SecretHandshakeGenerator.genTestCase, SecretHandshakeGenerator.genEnd)),
     ("RationalNumbers", (RationalNumbersGenerator.genIntro, RationalNumbersGenerator.genTestCase, RationalNumbersGenerator.genEnd)),

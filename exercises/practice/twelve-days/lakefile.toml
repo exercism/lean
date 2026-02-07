@@ -1,0 +1,15 @@
+name = "twelve-days"
+version = "0.1.0"
+defaultTargets = ["TwelveDaysTest"]
+testDriver = "TwelveDaysTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "TwelveDays"
+
+[[lean_exe]]
+name = "TwelveDaysTest"
+root = "TwelveDaysTest"

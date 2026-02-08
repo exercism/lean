@@ -16,21 +16,19 @@ open LeanTest
 def {exercise.decapitalize}Tests : TestSuite :=
   (TestSuite.empty \"{exercise}\")"
 
+def serializeRow (json : Json) : String :=
+  s!"#{json.compress |>.replace "0" "false" |>.replace "1" "true" |>.replace "," ", "}"
+
 def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
-  let input := getKeyValues (case.get! "input")
-            |> (·.map (fun (_, v) => v.replace "," ", " |> (·.replace "0" "false") |> (·.replace "1" "true")))
-            |> (String.intercalate " " ·)
-            |> (·.replace "[" "#[")
-  let expected := toLiteral (case.get! "expected" |> (·.compress))
-               |> (·.replace "," ", " |> (·.replace "0" "false") |> (·.replace "1" "true"))
-               |> (·.replace "[" "#[")
+  let input := case.get! "input" |>.getObjValD "matrix"
+  let expected := case.get! "expected"
   let description := case.get! "description"
               |> (·.compress)
   let funName := getFunName (case.get! "property")
-  let call := s!"({exercise}.{funName} {input})"
+  let call := s!"({exercise}.{funName} #{serializeList input serializeRow})"
   s!"
   |>.addTest {description} (do
-      return assertEqual {expected} {call})"
+      return assertEqual #{serializeList expected serializeRow} {call})"
 
 def genEnd (exercise : String) : String :=
   s!"

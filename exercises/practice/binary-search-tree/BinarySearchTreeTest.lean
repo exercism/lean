@@ -36,6 +36,7 @@ def binarySearchTreeTests : TestSuite :=
         4, 5
       ]
       return assertEqual 4 tree.data!
+          ++ assertEqual 5 tree.right!.data!
     )
     |>.addTest "can create complex tree" (do
       let tree := BinarySearchTree.buildTree [

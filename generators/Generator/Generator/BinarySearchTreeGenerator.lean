@@ -31,8 +31,8 @@ partial def recursiveAsserts (obj : Json) (parent : String) : String :=
     let data := toLiteral $ s!"{obj.getObjValD "data"}"
     s!"assertEqual {data} {parent ++ ".data!"}
     "
-      ++ if left.isEmpty then "" else s!"{identation}++ {left}"
-      ++ if right.isEmpty then "" else s!"{identation}++ {right}"
+      ++ (if left.isEmpty then "" else s!"{identation}++ {left}")
+      ++ (if right.isEmpty then "" else s!"{identation}++ {right}")
 
 def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let input := case.get! "input" |>.getObjValD "treeData"

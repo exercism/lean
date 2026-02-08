@@ -240,8 +240,7 @@
         "uuid": "093a5dd4-a0ab-4e22-a9f8-0411b27d710c",
         "practices": [],
         "prerequisites": [],
-        "difficulty": 3,
-        "status": "wip"
+        "difficulty": 3
       },
       {
         "slug": "line-up",

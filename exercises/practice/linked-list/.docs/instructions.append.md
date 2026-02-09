@@ -25,3 +25,6 @@ Instances of this data structure are updated by mutation.
 
 To support this, all functions are wrapped inside `IO`, which is the most general effectful monad in Lean.
 Functions in `IO` can interact with `stdin` and `stdout`, open and write to files, spawn threads, and produce many other kinds of effects.
+For more information, you can check the [reference][reference].
+
+[reference]: https://lean-lang.org/doc/reference/latest/IO/#io

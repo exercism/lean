@@ -1,29 +1,29 @@
 namespace LinkedList
 
-variable {α : Type} [BEq α]
+variable {α σ : Type} [BEq α]
 
-structure LinkedList (α : Type) where
+structure LinkedList (σ α : Type) where
   -- You should define a data structure LinkedList to represent your doubly-linked list here.
 
-def LinkedList.empty : IO (LinkedList α) :=
+def LinkedList.empty : ST σ (LinkedList σ α) :=
   sorry
 
-def LinkedList.count (list : LinkedList α) : IO Nat :=
+def LinkedList.count (list : LinkedList σ α) : ST σ Nat :=
   sorry
 
-def LinkedList.push (value : α) (list : LinkedList α) : IO Unit :=
+def LinkedList.push (value : α) (list : LinkedList σ α) : ST σ Unit :=
   sorry
 
-def LinkedList.unshift (value : α) (list : LinkedList α) : IO Unit :=
+def LinkedList.unshift (value : α) (list : LinkedList σ α) : ST σ Unit :=
   sorry
 
-def LinkedList.pop (list : LinkedList α) : IO (Option α) :=
+def LinkedList.pop (list : LinkedList σ α) : ST σ (Option α) :=
   sorry
 
-def LinkedList.shift (list : LinkedList α) : IO (Option α) :=
+def LinkedList.shift (list : LinkedList σ α) : ST σ (Option α) :=
   sorry
 
-def LinkedList.delete (value : α) (list : LinkedList α) : IO Unit :=
+def LinkedList.delete (value : α) (list : LinkedList σ α) : ST σ Unit :=
   sorry
 
 end LinkedList

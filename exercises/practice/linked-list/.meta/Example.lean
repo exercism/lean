@@ -3,7 +3,7 @@ open Std
 
 namespace LinkedList
 
-variable {α : Type} [BEq α] [Inhabited α]
+variable {α σ : Type} [BEq α] [Inhabited α]
 
 structure Node (α : Type) where
   prev  : Option Nat
@@ -11,23 +11,23 @@ structure Node (α : Type) where
   next  : Option Nat
   deriving Inhabited
 
-structure LinkedList α where
-  nodes  : IO.Ref (Array (Node α))
-  free   : IO.Ref (Array Nat)
-  head   : IO.Ref (Option Nat)
-  tail   : IO.Ref (Option Nat)
-  length : IO.Ref Nat
+structure LinkedList σ α where
+  nodes  : ST.Ref σ (Array (Node α))
+  free   : ST.Ref σ (Array Nat)
+  head   : ST.Ref σ (Option Nat)
+  tail   : ST.Ref σ (Option Nat)
+  length : ST.Ref σ Nat
 
-def LinkedList.empty : IO (LinkedList α) := do
+def LinkedList.empty : ST σ (LinkedList σ α) := do
   return {
-    nodes  := ← IO.mkRef #[],
-    free   := ← IO.mkRef #[],
-    head   := ← IO.mkRef none,
-    tail   := ← IO.mkRef none,
-    length := ← IO.mkRef 0
+    nodes  := ← ST.mkRef #[],
+    free   := ← ST.mkRef #[],
+    head   := ← ST.mkRef none,
+    tail   := ← ST.mkRef none,
+    length := ← ST.mkRef 0
   }
 
-private def buildNode (value : α) (list : LinkedList α) : IO Nat := do
+private def buildNode (value : α) (list : LinkedList σ α) : ST σ Nat := do
   let node : Node α := { prev := none, value := value, next := none}
   match (← list.free.get).back? with
   | none =>
@@ -39,28 +39,28 @@ private def buildNode (value : α) (list : LinkedList α) : IO Nat := do
     list.free.modify (·.pop)
     return id
 
-private def LinkedList.unlinkPrev (node : Node α) (list : LinkedList α) : IO Unit := do
+private def LinkedList.unlinkPrev (node : Node α) (list : LinkedList σ α) : ST σ Unit := do
   match node.prev with
   | some p =>
     list.nodes.modify (·.modify p (λ pn => { pn with next := node.next }))
   | none =>
     list.head.set node.next
 
-private def LinkedList.unlinkNext (node : Node α) (list : LinkedList α) : IO Unit := do
+private def LinkedList.unlinkNext (node : Node α) (list : LinkedList σ α) : ST σ Unit := do
   match node.next with
   | some n =>
     list.nodes.modify (·.modify n (λ np => { np with prev := node.prev }))
   | none =>
     list.tail.set node.prev
 
-private def LinkedList.unlink (node : Node α) (list : LinkedList α) : IO Unit := do
+private def LinkedList.unlink (node : Node α) (list : LinkedList σ α) : ST σ Unit := do
   list.unlinkPrev node
   list.unlinkNext node
 
-def LinkedList.count (list : LinkedList α) : IO Nat :=
+def LinkedList.count (list : LinkedList σ α) : ST σ Nat :=
   list.length.get
 
-def LinkedList.push (value : α) (list : LinkedList α) : IO Unit := do
+def LinkedList.push (value : α) (list : LinkedList σ α) : ST σ Unit := do
   let id ← buildNode value list
   match ← list.tail.get with
   | none =>
@@ -75,7 +75,7 @@ def LinkedList.push (value : α) (list : LinkedList α) : IO Unit := do
     list.tail.set (some id)
     list.length.modify (· + 1)
 
-def LinkedList.unshift (value : α) (list : LinkedList α) : IO Unit := do
+def LinkedList.unshift (value : α) (list : LinkedList σ α) : ST σ Unit := do
   let id ← buildNode value list
   match ← list.head.get with
   | none =>
@@ -90,7 +90,7 @@ def LinkedList.unshift (value : α) (list : LinkedList α) : IO Unit := do
     list.head.set (some id)
     list.length.modify (· + 1)
 
-def LinkedList.pop (list : LinkedList α) : IO (Option α) := do
+def LinkedList.pop (list : LinkedList σ α) : ST σ (Option α) := do
   match (← list.length.get) with
   | 0 => return none
   | n + 1 =>
@@ -101,7 +101,7 @@ def LinkedList.pop (list : LinkedList α) : IO (Option α) := do
     list.free.modify (·.push id)
     return node.value
 
-def LinkedList.shift (list : LinkedList α) : IO (Option α) := do
+def LinkedList.shift (list : LinkedList σ α) : ST σ (Option α) := do
   match (← list.length.get) with
   | 0 => return none
   | n + 1 =>
@@ -112,7 +112,7 @@ def LinkedList.shift (list : LinkedList α) : IO (Option α) := do
     list.free.modify (·.push id)
     return node.value
 
-def LinkedList.delete (value : α) (list : LinkedList α) : IO Unit := do
+def LinkedList.delete (value : α) (list : LinkedList σ α) : ST σ Unit := do
   let mut crtId ← list.head.get
   while crtId.isSome do
     let id := crtId.get!

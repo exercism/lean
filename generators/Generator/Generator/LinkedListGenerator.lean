@@ -10,8 +10,10 @@ namespace LinkedListGenerator
 
 def genIntro (exercise : String) : String := s!"import LeanTest
 import {exercise}
+import Std
 
 open LeanTest
+open Std
 
 {concatAsserts}
 
@@ -40,7 +42,7 @@ def iterateOperations (operations : Array Json) : String := Id.run do
             acc := acc.push s!"asserts := asserts.push (assertEqual none result)"
           else
             acc := acc.push s!"asserts := asserts.push (assertEqual (some {expected}) result)"
-  return String.intercalate s!"\n{indent}" acc.toList
+  return String.intercalate s!"\n{indent}  " acc.toList
 
 def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let operations := case.get! "input" |>.getObjValD "operations" |>.getArr? |> getOk
@@ -48,10 +50,11 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
               |> (·.compress)
   s!"
   |>.addTest {description} (do
-      let list : {exercise}.{exercise} Int ← {exercise}.{exercise}.empty
-      let mut asserts : Array AssertionResult := #[]
-      {iterateOperations operations}
-      return (asserts.foldl (· ++ ·) .success))"
+      return runST fun _ => do
+        let list : {exercise}.{exercise} _ Int ← {exercise}.{exercise}.empty
+        let mut asserts : Array AssertionResult := #[]
+        {iterateOperations operations}
+        return (asserts.foldl (· ++ ·) .success))"
 
 def genEnd (exercise : String) : String :=
   s!"

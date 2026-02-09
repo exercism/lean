@@ -23,8 +23,8 @@ Notable examples of "pure" monads are `Option`, `Except` and `Id`.
 In this exercise, you are going to define a stateful data structure called `LinkedList`.
 Instances of this data structure are updated by mutation.
 
-To support this, all functions are wrapped inside `IO`, which is the most general effectful monad in Lean.
-Functions in `IO` can interact with `stdin` and `stdout`, open and write to files, spawn threads, and produce many other kinds of effects.
+To support this, all functions are wrapped inside the `ST` monad.
+In this monad, mutable state is the only side effect, and mutable references cannot escape.
 For more information, you can check the [reference][reference].
 
-[reference]: https://lean-lang.org/doc/reference/latest/IO/#io
+[reference]: https://lean-lang.org/doc/reference/latest/IO/Mutable-References/#mutable-st-references

@@ -643,6 +643,14 @@
         "difficulty": 8
       },
       {
+        "slug": "linked-list",
+        "name": "Linked List",
+        "uuid": "55d105a8-0f79-47b3-8599-53136584aa60",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 8
+      },
+      {
         "slug": "rational-numbers",
         "name": "Rational Numbers",
         "uuid": "df8ab360-c305-4f4c-bfc6-2fb06e3fe2fa",

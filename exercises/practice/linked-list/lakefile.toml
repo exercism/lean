@@ -1,0 +1,15 @@
+name = "linked-list"
+version = "0.1.0"
+defaultTargets = ["LinkedListTest"]
+testDriver = "LinkedListTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "LinkedList"
+
+[[lean_exe]]
+name = "LinkedListTest"
+root = "LinkedListTest"

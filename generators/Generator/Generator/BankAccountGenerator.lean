@@ -71,9 +71,6 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let operations := case.get! "input"
                       |>.getObjValD "operations"
                       |> toList
-                      |>.filter (λ j =>
-                        let literal := toLiteral s!"{j}"
-                        literal != "balance")
   let description := case.get! "description"
               |> (·.compress)
   let expected := case.get! "expected"

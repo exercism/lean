@@ -619,6 +619,14 @@
         "difficulty": 8
       },
       {
+        "slug": "bank-account",
+        "name": "Bank Account",
+        "uuid": "73c36249-5649-4cb0-b176-dae77d52f3ca",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 8
+      },
+      {
         "slug": "connect",
         "name": "Connect",
         "uuid": "f01a772e-2d3c-4996-9a8d-404d04fd280b",

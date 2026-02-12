@@ -1,0 +1,15 @@
+name = "bank-account"
+version = "0.1.0"
+defaultTargets = ["BankAccountTest"]
+testDriver = "BankAccountTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "BankAccount"
+
+[[lean_exe]]
+name = "BankAccountTest"
+root = "BankAccountTest"

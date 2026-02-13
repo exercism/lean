@@ -1,0 +1,28 @@
+[
+  {
+    "description": "Left leaning tree of two",
+    "property": "treeFromTraversals",
+    "input": {
+      "preorder": ["b", "a"],
+      "inorder": ["a", "b"]
+    },
+    "expected": {
+      "v": "b",
+      "l": { "v": "a", "l": {}, "r": {} },
+      "r": {}
+    }
+  },
+  {
+    "description": "Right leaning tree of two",
+    "property": "treeFromTraversals",
+    "input": {
+      "preorder": ["a", "b"],
+      "inorder": ["a", "b"]
+    },
+    "expected": {
+      "v": "a",
+      "l": {},
+      "r": { "v": "b", "l": {}, "r": {} }
+    }
+  }
+]

@@ -1,0 +1,15 @@
+name = "satellite"
+version = "0.1.0"
+defaultTargets = ["SatelliteTest"]
+testDriver = "SatelliteTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Satellite"
+
+[[lean_exe]]
+name = "SatelliteTest"
+root = "SatelliteTest"

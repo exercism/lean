@@ -1,0 +1,17 @@
+[
+    {
+      "description": "Measure using large buckets",
+      "property": "measure",
+      "input": {
+        "bucketOne": 619,
+        "bucketTwo": 409,
+        "goal": 199,
+        "startBucket": "one"
+      },
+      "expected": {
+        "moves": 2048,
+        "goalBucket": "one",
+        "otherBucket": 409
+      }
+    }
+]

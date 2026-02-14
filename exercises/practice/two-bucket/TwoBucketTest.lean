@@ -27,6 +27,8 @@ def twoBucketTests : TestSuite :=
       return assertEqual (some ⟨10, .two, 0⟩) (TwoBucket.measure 6 15 9 .one))
   |>.addTest "Goal larger than both buckets is impossible" (do
       return assertEqual none (TwoBucket.measure 5 7 8 .one))
+  |>.addTest "Measure using large buckets" (do
+      return assertEqual (some ⟨2048, .one, 409⟩) (TwoBucket.measure 619 409 199 .one))
 
 def main : IO UInt32 := do
   runTestSuitesWithExitCode [twoBucketTests]

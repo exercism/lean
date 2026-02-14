@@ -1,0 +1,10 @@
+[
+  {
+    "description": "very big prime",
+    "property": "prime",
+    "input": {
+      "number": 65537
+    },
+    "expected": 821647
+  }
+]

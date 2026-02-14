@@ -4,6 +4,8 @@ import Generator.BinarySearchTreeGenerator
 import Generator.BookStoreGenerator
 import Generator.DominoesGenerator
 import Generator.HighScoresGenerator
+import Generator.IsogramGenerator
+import Generator.PangramGenerator
 import Generator.SublistGenerator
 import Generator.RelativeDistanceGenerator
 import Generator.HouseGenerator
@@ -77,6 +79,8 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("BookStore", (BookStoreGenerator.genIntro, BookStoreGenerator.genTestCase, BookStoreGenerator.genEnd)),
     ("Dominoes", (DominoesGenerator.genIntro, DominoesGenerator.genTestCase, DominoesGenerator.genEnd)),
     ("HighScores", (HighScoresGenerator.genIntro, HighScoresGenerator.genTestCase, HighScoresGenerator.genEnd)),
+    ("Isogram", (IsogramGenerator.genIntro, IsogramGenerator.genTestCase, IsogramGenerator.genEnd)),
+    ("Pangram", (PangramGenerator.genIntro, PangramGenerator.genTestCase, PangramGenerator.genEnd)),
     ("Sublist", (SublistGenerator.genIntro, SublistGenerator.genTestCase, SublistGenerator.genEnd)),
     ("RelativeDistance", (RelativeDistanceGenerator.genIntro, RelativeDistanceGenerator.genTestCase, RelativeDistanceGenerator.genEnd)),
     ("House", (HouseGenerator.genIntro, HouseGenerator.genTestCase, HouseGenerator.genEnd)),

@@ -1,0 +1,40 @@
+import Lean.Data.Json
+import Std
+import Helper
+
+open Lean
+open Std
+open Helper
+
+namespace AffineCipherGenerator
+
+def genIntro (exercise : String) : String := s!"import LeanTest
+import {exercise}
+
+open LeanTest
+
+def {exercise.decapitalize}Tests : TestSuite :=
+  (TestSuite.empty \"{exercise}\")"
+
+def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
+  let input := case.get! "input"
+  let phrase := input.getObjValD "phrase"
+  let a := input.getObjValD "key" |> (·.getObjValD "a")
+  let b := input.getObjValD "key" |> (·.getObjValD "b")
+  let expected := case.get! "expected" |> errorToOption
+  let description := case.get! "description"
+              |> (·.compress)
+  let funName := getFunName (case.get! "property")
+  let call := s!"({exercise}.{funName} {phrase} {a} {b})"
+  s!"
+  |>.addTest {description} (do
+      return assertEqual {expected}\n          {call})"
+
+def genEnd (exercise : String) : String :=
+  s!"
+
+def main : IO UInt32 := do
+  runTestSuitesWithExitCode [{exercise.decapitalize}Tests]
+"
+
+end AffineCipherGenerator

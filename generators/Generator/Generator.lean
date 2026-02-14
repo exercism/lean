@@ -7,6 +7,9 @@ import Generator.DominoesGenerator
 import Generator.HighScoresGenerator
 import Generator.IsogramGenerator
 import Generator.PangramGenerator
+import Generator.ScrabbleScoreGenerator
+import Generator.SquareRootGenerator
+import Generator.SumOfMultiplesGenerator
 import Generator.SublistGenerator
 import Generator.RelativeDistanceGenerator
 import Generator.HouseGenerator
@@ -86,6 +89,9 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("HighScores", (HighScoresGenerator.genIntro, HighScoresGenerator.genTestCase, HighScoresGenerator.genEnd)),
     ("Isogram", (IsogramGenerator.genIntro, IsogramGenerator.genTestCase, IsogramGenerator.genEnd)),
     ("Pangram", (PangramGenerator.genIntro, PangramGenerator.genTestCase, PangramGenerator.genEnd)),
+    ("ScrabbleScore", (ScrabbleScoreGenerator.genIntro, ScrabbleScoreGenerator.genTestCase, ScrabbleScoreGenerator.genEnd)),
+    ("SquareRoot", (SquareRootGenerator.genIntro, SquareRootGenerator.genTestCase, SquareRootGenerator.genEnd)),
+    ("SumOfMultiples", (SumOfMultiplesGenerator.genIntro, SumOfMultiplesGenerator.genTestCase, SumOfMultiplesGenerator.genEnd)),
     ("Sublist", (SublistGenerator.genIntro, SublistGenerator.genTestCase, SublistGenerator.genEnd)),
     ("RelativeDistance", (RelativeDistanceGenerator.genIntro, RelativeDistanceGenerator.genTestCase, RelativeDistanceGenerator.genEnd)),
     ("House", (HouseGenerator.genIntro, HouseGenerator.genTestCase, HouseGenerator.genEnd)),

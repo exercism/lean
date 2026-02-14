@@ -1,3 +1,4 @@
+import Generator.DndCharacterGenerator
 import Generator.BankAccountGenerator
 import Generator.LinkedListGenerator
 import Generator.BinarySearchTreeGenerator
@@ -73,6 +74,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("DndCharacter", (DndCharacterGenerator.genIntro, DndCharacterGenerator.genTestCase, DndCharacterGenerator.genEnd)),
     ("BankAccount", (BankAccountGenerator.genIntro, BankAccountGenerator.genTestCase, BankAccountGenerator.genEnd)),
     ("LinkedList", (LinkedListGenerator.genIntro, LinkedListGenerator.genTestCase, LinkedListGenerator.genEnd)),
     ("BinarySearchTree", (BinarySearchTreeGenerator.genIntro, BinarySearchTreeGenerator.genTestCase, BinarySearchTreeGenerator.genEnd)),

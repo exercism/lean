@@ -35,6 +35,8 @@ import Generator.RnaTranscriptionGenerator
 import Generator.RunLengthEncodingGenerator
 import Generator.TransposeGenerator
 import Generator.GameOfLifeGenerator
+import Generator.LargestSeriesProductGenerator
+import Generator.MatrixGenerator
 import Generator.WordyGenerator
 import Generator.ParallelLetterFrequencyGenerator
 import Generator.ComplexNumbersGenerator
@@ -120,6 +122,8 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("RunLengthEncoding", (RunLengthEncodingGenerator.genIntro, RunLengthEncodingGenerator.genTestCase, RunLengthEncodingGenerator.genEnd)),
     ("Transpose", (TransposeGenerator.genIntro, TransposeGenerator.genTestCase, TransposeGenerator.genEnd)),
     ("GameOfLife", (GameOfLifeGenerator.genIntro, GameOfLifeGenerator.genTestCase, GameOfLifeGenerator.genEnd)),
+    ("LargestSeriesProduct", (LargestSeriesProductGenerator.genIntro, LargestSeriesProductGenerator.genTestCase, LargestSeriesProductGenerator.genEnd)),
+    ("Matrix", (MatrixGenerator.genIntro, MatrixGenerator.genTestCase, MatrixGenerator.genEnd)),
     ("Wordy", (WordyGenerator.genIntro, WordyGenerator.genTestCase, WordyGenerator.genEnd)),
     ("ParallelLetterFrequency", (ParallelLetterFrequencyGenerator.genIntro, ParallelLetterFrequencyGenerator.genTestCase, ParallelLetterFrequencyGenerator.genEnd)),
     ("ComplexNumbers", (ComplexNumbersGenerator.genIntro, ComplexNumbersGenerator.genTestCase, ComplexNumbersGenerator.genEnd)),

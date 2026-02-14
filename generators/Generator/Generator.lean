@@ -24,6 +24,8 @@ import Generator.HammingGenerator
 import Generator.LineUpGenerator
 import Generator.TwoFerGenerator
 import Generator.YachtGenerator
+import Generator.DifferenceOfSquaresGenerator
+import Generator.KnapsackGenerator
 import Generator.PalindromeProductsGenerator
 import Generator.EliudsEggsGenerator
 import Generator.EtlGenerator
@@ -109,6 +111,8 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("LineUp", (LineUpGenerator.genIntro, LineUpGenerator.genTestCase, LineUpGenerator.genEnd)),
     ("TwoFer", (TwoFerGenerator.genIntro, TwoFerGenerator.genTestCase, TwoFerGenerator.genEnd)),
     ("Yacht", (YachtGenerator.genIntro, YachtGenerator.genTestCase, YachtGenerator.genEnd)),
+    ("DifferenceOfSquares", (DifferenceOfSquaresGenerator.genIntro, DifferenceOfSquaresGenerator.genTestCase, DifferenceOfSquaresGenerator.genEnd)),
+    ("Knapsack", (KnapsackGenerator.genIntro, KnapsackGenerator.genTestCase, KnapsackGenerator.genEnd)),
     ("PalindromeProducts", (PalindromeProductsGenerator.genIntro, PalindromeProductsGenerator.genTestCase, PalindromeProductsGenerator.genEnd)),
     ("EliudsEggs", (EliudsEggsGenerator.genIntro, EliudsEggsGenerator.genTestCase, EliudsEggsGenerator.genEnd)),
     ("Etl", (EtlGenerator.genIntro, EtlGenerator.genTestCase, EtlGenerator.genEnd)),

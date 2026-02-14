@@ -13,6 +13,8 @@ def eliudsEggsTests : TestSuite :=
       return assertEqual 4 (EliudsEggs.eggCount 89))
   |>.addTest "13 eggs" (do
       return assertEqual 13 (EliudsEggs.eggCount 2000000000))
+  |>.addTest "25 eggs" (do
+      return assertEqual 25 (EliudsEggs.eggCount 6005004003002001))
 
 def main : IO UInt32 := do
   runTestSuitesWithExitCode [eliudsEggsTests]

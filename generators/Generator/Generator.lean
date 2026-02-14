@@ -16,6 +16,7 @@ import Generator.CamiciaGenerator
 import Generator.ChangeGenerator
 import Generator.YachtGenerator
 import Generator.PalindromeProductsGenerator
+import Generator.EliudsEggsGenerator
 import Generator.EtlGenerator
 import Generator.ClockGenerator
 import Generator.CollatzConjectureGenerator
@@ -87,6 +88,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("Change", (ChangeGenerator.genIntro, ChangeGenerator.genTestCase, ChangeGenerator.genEnd)),
     ("Yacht", (YachtGenerator.genIntro, YachtGenerator.genTestCase, YachtGenerator.genEnd)),
     ("PalindromeProducts", (PalindromeProductsGenerator.genIntro, PalindromeProductsGenerator.genTestCase, PalindromeProductsGenerator.genEnd)),
+    ("EliudsEggs", (EliudsEggsGenerator.genIntro, EliudsEggsGenerator.genTestCase, EliudsEggsGenerator.genEnd)),
     ("Etl", (EtlGenerator.genIntro, EtlGenerator.genTestCase, EtlGenerator.genEnd)),
     ("Clock", (ClockGenerator.genIntro, ClockGenerator.genTestCase, ClockGenerator.genEnd)),
     ("CollatzConjecture", (CollatzConjectureGenerator.genIntro, CollatzConjectureGenerator.genTestCase, CollatzConjectureGenerator.genEnd)),

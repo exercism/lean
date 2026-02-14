@@ -25,6 +25,8 @@ def rotationalCipherTests : TestSuite :=
       return assertEqual "Gzo'n zvo, Bmviyhv!" (RotationalCipher.rotate 21 "Let's eat, Grandma!"))
   |>.addTest "rotate all letters" (do
       return assertEqual "Gur dhvpx oebja sbk whzcf bire gur ynml qbt." (RotationalCipher.rotate 13 "The quick brown fox jumps over the lazy dog."))
+  |>.addTest "rotate boundary characters" (do
+      return assertEqual "/09:@NZAM[`nzam{" (RotationalCipher.rotate 13 "/09:@AMNZ[`amnz{"))
 
 def main : IO UInt32 := do
   runTestSuitesWithExitCode [rotationalCipherTests]

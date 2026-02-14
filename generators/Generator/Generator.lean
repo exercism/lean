@@ -27,6 +27,7 @@ import Generator.ParallelLetterFrequencyGenerator
 import Generator.ComplexNumbersGenerator
 import Generator.AllergiesGenerator
 import Generator.AtbashCipherGenerator
+import Generator.RotationalCipherGenerator
 import Generator.ProteinTranslationGenerator
 import Generator.PerfectNumbersGenerator
 import Generator.GrepGenerator
@@ -92,6 +93,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("ComplexNumbers", (ComplexNumbersGenerator.genIntro, ComplexNumbersGenerator.genTestCase, ComplexNumbersGenerator.genEnd)),
     ("Allergies", (AllergiesGenerator.genIntro, AllergiesGenerator.genTestCase, AllergiesGenerator.genEnd)),
     ("AtbashCipher", (AtbashCipherGenerator.genIntro, AtbashCipherGenerator.genTestCase, AtbashCipherGenerator.genEnd)),
+    ("RotationalCipher", (RotationalCipherGenerator.genIntro, RotationalCipherGenerator.genTestCase, RotationalCipherGenerator.genEnd)),
     ("ProteinTranslation", (ProteinTranslationGenerator.genIntro, ProteinTranslationGenerator.genTestCase, ProteinTranslationGenerator.genEnd)),
     ("PerfectNumbers", (PerfectNumbersGenerator.genIntro, PerfectNumbersGenerator.genTestCase, PerfectNumbersGenerator.genEnd)),
     ("Grep", (GrepGenerator.genIntro, GrepGenerator.genTestCase, GrepGenerator.genEnd)),

@@ -1,0 +1,10 @@
+[
+  {
+    "description": "25 eggs",
+    "property": "eggCount",
+    "input": {
+      "number": 6005004003002001
+    },
+    "expected": 25
+  }
+]

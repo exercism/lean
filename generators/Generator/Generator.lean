@@ -52,6 +52,9 @@ import Generator.FlattenArrayGenerator
 import Generator.ForthGenerator
 import Generator.TriangleGenerator
 import Generator.AnagramGenerator
+import Generator.BobGenerator
+import Generator.MatchingBracketsGenerator
+import Generator.ReverseStringGenerator
 
 import Std
 import Lean.Data.Json
@@ -117,7 +120,10 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("FlattenArray", (FlattenArrayGenerator.genIntro, FlattenArrayGenerator.genTestCase, FlattenArrayGenerator.genEnd)),
     ("Forth", (ForthGenerator.genIntro, ForthGenerator.genTestCase, ForthGenerator.genEnd)),
     ("Triangle", (TriangleGenerator.genIntro, TriangleGenerator.genTestCase, TriangleGenerator.genEnd)),
-    ("Anagram", (AnagramGenerator.genIntro, AnagramGenerator.genTestCase, AnagramGenerator.genEnd))
+    ("Anagram", (AnagramGenerator.genIntro, AnagramGenerator.genTestCase, AnagramGenerator.genEnd)),
+    ("Bob", (BobGenerator.genIntro, BobGenerator.genTestCase, BobGenerator.genEnd)),
+    ("MatchingBrackets", (MatchingBracketsGenerator.genIntro, MatchingBracketsGenerator.genTestCase, MatchingBracketsGenerator.genEnd)),
+    ("ReverseString", (ReverseStringGenerator.genIntro, ReverseStringGenerator.genTestCase, ReverseStringGenerator.genEnd))
   ]
 
 end Generator

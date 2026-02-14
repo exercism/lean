@@ -20,6 +20,9 @@ import Generator.RationalNumbersGenerator
 import Generator.GigasecondGenerator
 import Generator.CamiciaGenerator
 import Generator.ChangeGenerator
+import Generator.HammingGenerator
+import Generator.LineUpGenerator
+import Generator.TwoFerGenerator
 import Generator.YachtGenerator
 import Generator.PalindromeProductsGenerator
 import Generator.EliudsEggsGenerator
@@ -102,6 +105,9 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("Gigasecond", (GigasecondGenerator.genIntro, GigasecondGenerator.genTestCase, GigasecondGenerator.genEnd)),
     ("Camicia", (CamiciaGenerator.genIntro, CamiciaGenerator.genTestCase, CamiciaGenerator.genEnd)),
     ("Change", (ChangeGenerator.genIntro, ChangeGenerator.genTestCase, ChangeGenerator.genEnd)),
+    ("Hamming", (HammingGenerator.genIntro, HammingGenerator.genTestCase, HammingGenerator.genEnd)),
+    ("LineUp", (LineUpGenerator.genIntro, LineUpGenerator.genTestCase, LineUpGenerator.genEnd)),
+    ("TwoFer", (TwoFerGenerator.genIntro, TwoFerGenerator.genTestCase, TwoFerGenerator.genEnd)),
     ("Yacht", (YachtGenerator.genIntro, YachtGenerator.genTestCase, YachtGenerator.genEnd)),
     ("PalindromeProducts", (PalindromeProductsGenerator.genIntro, PalindromeProductsGenerator.genTestCase, PalindromeProductsGenerator.genEnd)),
     ("EliudsEggs", (EliudsEggsGenerator.genIntro, EliudsEggsGenerator.genTestCase, EliudsEggsGenerator.genEnd)),

@@ -20,6 +20,9 @@ import Generator.EtlGenerator
 import Generator.ClockGenerator
 import Generator.CollatzConjectureGenerator
 import Generator.DiamondGenerator
+import Generator.RaindropsGenerator
+import Generator.RnaTranscriptionGenerator
+import Generator.RunLengthEncodingGenerator
 import Generator.TransposeGenerator
 import Generator.GameOfLifeGenerator
 import Generator.WordyGenerator
@@ -85,6 +88,9 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("Clock", (ClockGenerator.genIntro, ClockGenerator.genTestCase, ClockGenerator.genEnd)),
     ("CollatzConjecture", (CollatzConjectureGenerator.genIntro, CollatzConjectureGenerator.genTestCase, CollatzConjectureGenerator.genEnd)),
     ("Diamond", (DiamondGenerator.genIntro, DiamondGenerator.genTestCase, DiamondGenerator.genEnd)),
+    ("Raindrops", (RaindropsGenerator.genIntro, RaindropsGenerator.genTestCase, RaindropsGenerator.genEnd)),
+    ("RnaTranscription", (RnaTranscriptionGenerator.genIntro, RnaTranscriptionGenerator.genTestCase, RnaTranscriptionGenerator.genEnd)),
+    ("RunLengthEncoding", (RunLengthEncodingGenerator.genIntro, RunLengthEncodingGenerator.genTestCase, RunLengthEncodingGenerator.genEnd)),
     ("Transpose", (TransposeGenerator.genIntro, TransposeGenerator.genTestCase, TransposeGenerator.genEnd)),
     ("GameOfLife", (GameOfLifeGenerator.genIntro, GameOfLifeGenerator.genTestCase, GameOfLifeGenerator.genEnd)),
     ("Wordy", (WordyGenerator.genIntro, WordyGenerator.genTestCase, WordyGenerator.genEnd)),

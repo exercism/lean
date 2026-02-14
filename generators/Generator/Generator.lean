@@ -36,6 +36,8 @@ import Generator.SeriesGenerator
 import Generator.SpaceAgeGenerator
 import Generator.PrimeFactorsGenerator
 import Generator.AllYourBaseGenerator
+import Generator.IsbnVerifierGenerator
+import Generator.LuhnGenerator
 import Generator.SayGenerator
 import Generator.AcronymGenerator
 import Generator.BinarySearchGenerator
@@ -105,6 +107,8 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("SpaceAge", (SpaceAgeGenerator.genIntro, SpaceAgeGenerator.genTestCase, SpaceAgeGenerator.genEnd)),
     ("PrimeFactors", (PrimeFactorsGenerator.genIntro, PrimeFactorsGenerator.genTestCase, PrimeFactorsGenerator.genEnd)),
     ("AllYourBase", (AllYourBaseGenerator.genIntro, AllYourBaseGenerator.genTestCase, AllYourBaseGenerator.genEnd)),
+    ("IsbnVerifier", (IsbnVerifierGenerator.genIntro, IsbnVerifierGenerator.genTestCase, IsbnVerifierGenerator.genEnd)),
+    ("Luhn", (LuhnGenerator.genIntro, LuhnGenerator.genTestCase, LuhnGenerator.genEnd)),
     ("Say", (SayGenerator.genIntro, SayGenerator.genTestCase, SayGenerator.genEnd)),
     ("Acronym", (AcronymGenerator.genIntro, AcronymGenerator.genTestCase, AcronymGenerator.genEnd)),
     ("BinarySearch", (BinarySearchGenerator.genIntro, BinarySearchGenerator.genTestCase, BinarySearchGenerator.genEnd)),

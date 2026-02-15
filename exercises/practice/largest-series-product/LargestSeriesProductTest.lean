@@ -4,7 +4,7 @@ import LargestSeriesProduct
 open LeanTest
 
 def largestSeriesProductTests : TestSuite :=
-  (TestSuite.empty "largestSeriesProduct")
+  (TestSuite.empty "LargestSeriesProduct")
   |>.addTest "finds the largest product if span equals length" (do
       return assertEqual (some 18) (LargestSeriesProduct.largestProduct 2 "29"))
   |>.addTest "can find the largest product of 2 with numbers in order" (do

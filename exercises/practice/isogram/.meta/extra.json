@@ -1,0 +1,10 @@
+[
+  {
+    "description": "26 letter name",
+    "property": "isIsogram",
+    "input": {
+      "phrase": "Mamungkukumpurangkuntjunya"
+    },
+    "expected": false
+  }
+]

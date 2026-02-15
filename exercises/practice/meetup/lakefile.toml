@@ -1,0 +1,15 @@
+name = "meetup"
+version = "0.1.0"
+defaultTargets = ["MeetupTest"]
+testDriver = "MeetupTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Meetup"
+
+[[lean_exe]]
+name = "MeetupTest"
+root = "MeetupTest"

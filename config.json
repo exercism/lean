@@ -467,6 +467,14 @@
         "difficulty": 5
       },
       {
+        "slug": "meetup",
+        "name": "Meetup",
+        "uuid": "c88786b1-d953-49c0-b4ce-dac5137087bf",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "nth-prime",
         "name": "Nth Prime",
         "uuid": "5ff6afa5-aaca-4cdb-84cf-844f4ef64591",

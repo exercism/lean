@@ -33,6 +33,8 @@ def isogramTests : TestSuite :=
       return assertFalse (Isogram.isIsogram "angola"))
   |>.addTest "word with duplicated character and with two hyphens" (do
       return assertFalse (Isogram.isIsogram "up-to-date"))
+  |>.addTest "26 letter name" (do
+      return assertFalse (Isogram.isIsogram "Mamungkukumpurangkuntjunya"))
 
 def main : IO UInt32 := do
   runTestSuitesWithExitCode [isogramTests]

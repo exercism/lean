@@ -25,36 +25,34 @@ def leapYear (year : Nat) : Bool :=
   (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0))
 
 def daysInMonth (month : Month) (year : Nat) : Nat :=
-  match month.val with
-  | 1 => 31
-  | 2 => if leapYear year then 29 else 28
-  | 3 => 31
-  | 4 => 30
-  | 5 => 31
-  | 6 => 30
-  | 7 => 31
-  | 8 => 31
-  | 9 => 30
-  | 10 => 31
-  | 11 => 30
-  | 12 => 31
-  | _ => panic "impossible month"
+  match month with
+  | ⟨1, _⟩ => 31
+  | ⟨2, _⟩ => if leapYear year then 29 else 28
+  | ⟨3, _⟩ => 31
+  | ⟨4, _⟩ => 30
+  | ⟨5, _⟩ => 31
+  | ⟨6, _⟩ => 30
+  | ⟨7, _⟩ => 31
+  | ⟨8, _⟩ => 31
+  | ⟨9, _⟩ => 30
+  | ⟨10, _⟩ => 31
+  | ⟨11, _⟩ => 30
+  | ⟨12, _⟩ => 31
 
 def monthOffset (month : Month) : Nat :=
-  match month.val with
-  | 1 => 307  -- offset from the end of February
-  | 2 => 338
-  | 3 => 1
-  | 4 => 32
-  | 5 => 62
-  | 6 => 93
-  | 7 => 123
-  | 8 => 154
-  | 9 => 185
-  | 10 => 215
-  | 11 => 246
-  | 12 => 276
-  | _ => panic "impossible month"
+  match month with
+  | ⟨1, _⟩ => 307  -- offset from the end of February
+  | ⟨2, _⟩ => 338
+  | ⟨3, _⟩ => 1
+  | ⟨4, _⟩ => 32
+  | ⟨5, _⟩ => 62
+  | ⟨6, _⟩ => 93
+  | ⟨7, _⟩ => 123
+  | ⟨8, _⟩ => 154
+  | ⟨9, _⟩ => 185
+  | ⟨10, _⟩ => 215
+  | ⟨11, _⟩ => 246
+  | ⟨12, _⟩ => 276
 
 def weekConcludes (month : Month) (week : Week) (year : Nat) : Nat :=
   match week with

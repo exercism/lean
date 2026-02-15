@@ -33,6 +33,8 @@ def atbashCipherTests : TestSuite :=
       return assertEqual "exercism" (AtbashCipher.decode "vc vix    r hn"))
   |>.addTest "decode -> decode with no spaces" (do
       return assertEqual "anobstacleisoftenasteppingstone" (AtbashCipher.decode "zmlyhgzxovrhlugvmzhgvkkrmthglmv"))
+  |>.addTest "encode boundary characters" (do
+      return assertEqual "09znm aznma" (AtbashCipher.encode "/09:@AMNZ[`amnz{"))
 
 def main : IO UInt32 := do
   runTestSuitesWithExitCode [atbashCipherTests]

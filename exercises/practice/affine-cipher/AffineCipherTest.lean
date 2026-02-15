@@ -53,6 +53,9 @@ def affineCipherTests : TestSuite :=
   |>.addTest "decode -> decode with a not coprime to m" (do
       return assertEqual none
           (AffineCipher.decode "Test" 13 5))
+  |>.addTest "encode boundary characters" (do
+      return assertEqual (some ("09maz nmazn"))
+          (AffineCipher.encode "/09:@AMNZ[`amnz{" 25 12))
 
 def main : IO UInt32 := do
   runTestSuitesWithExitCode [affineCipherTests]

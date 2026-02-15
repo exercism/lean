@@ -12,6 +12,7 @@ import Generator.SquareRootGenerator
 import Generator.SumOfMultiplesGenerator
 import Generator.SublistGenerator
 import Generator.AffineCipherGenerator
+import Generator.MeetupGenerator
 import Generator.NthPrimeGenerator
 import Generator.RelativeDistanceGenerator
 import Generator.HouseGenerator
@@ -103,6 +104,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("SumOfMultiples", (SumOfMultiplesGenerator.genIntro, SumOfMultiplesGenerator.genTestCase, SumOfMultiplesGenerator.genEnd)),
     ("Sublist", (SublistGenerator.genIntro, SublistGenerator.genTestCase, SublistGenerator.genEnd)),
     ("AffineCipher", (AffineCipherGenerator.genIntro, AffineCipherGenerator.genTestCase, AffineCipherGenerator.genEnd)),
+    ("Meetup", (MeetupGenerator.genIntro, MeetupGenerator.genTestCase, MeetupGenerator.genEnd)),
     ("NthPrime", (NthPrimeGenerator.genIntro, NthPrimeGenerator.genTestCase, NthPrimeGenerator.genEnd)),
     ("RelativeDistance", (RelativeDistanceGenerator.genIntro, RelativeDistanceGenerator.genTestCase, RelativeDistanceGenerator.genEnd)),
     ("House", (HouseGenerator.genIntro, HouseGenerator.genTestCase, HouseGenerator.genEnd)),

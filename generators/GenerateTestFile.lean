@@ -27,10 +27,14 @@ def fetchConfiglet : IO Unit := do
     cmd := "bin/fetch-configlet"
   }
 
-def addPracticeExercise (exercise : String) : IO Unit := do
+def addPracticeExercise (exercise : String) (as : List String) : IO Unit := do
+  let args := match as with
+  | [] => #[exercise]
+  | a :: [] => #["-a", a, exercise]
+  | a :: d :: _ => #["-a", a, "-d", d, exercise]
   let child ← IO.Process.spawn {
     cmd := "bin/add-practice-exercise",
-    args := #[exercise]
+    args := args
     stdin  := .inherit
     stdout := .inherit
     stderr := .inherit
@@ -163,14 +167,21 @@ def getIncludes (toml : String) : TreeMap String String :=
 
 def showUsage : IO Unit :=
   let usageMsg := s!"Usage is:
-    lake exe generator [Options] <exercise-slug>
+    lake exe generator [Options] <exercise-slug> [Extra-Options]
 
     Options:
       -s / --stub :
         Generates a stub Generator for the exercise in ./generators/Generator/Generator/
 
       -g / --generate :
-        Generates a test file for the exercise in ./exercises/practice/<exercise-slug>/"
+        Generates a test file for the exercise in ./exercises/practice/<exercise-slug>/
+
+      -a / --add :
+        Adds a practice exercise and then generates a test file, if there is a Generator for it.
+        Other than the exercise slug, the author and the difficulty of the new exercise may be passed as extra options.
+
+      -r / --regenerate :
+        Regenerates all test files with a Generator, syncing all docs and test data with canonical-data."
   IO.println usageMsg
 
 def generateTestFile (exercise : String) : IO Unit := do
@@ -297,9 +308,12 @@ end {pascalExercise}Generator
 def main (args : List String) : IO Unit := do
   setDirectory
   match args with
+  | "-a" :: exercise :: as
+  | "--add" :: exercise :: as =>
+    addPracticeExercise exercise as
+    generateTestFile exercise.trim
   | "-g" :: exercise :: _
   | "--generate" :: exercise :: _ =>
-    addPracticeExercise exercise
     generateTestFile exercise.trim
   | "-s" :: exercise :: _
   | "--stub" :: exercise :: _ =>

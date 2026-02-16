@@ -30,7 +30,7 @@ def extractProperties (json : Json) : Array (String × Array String) :=
     |> Std.TreeMap.Raw.toArray
     |> Array.map (λ (k, v) => (s!"\"{k}\"", v))
 
-partial def getResult (json : Json) : String :=
+partial def getResult (json : Json) (separator : String) : String :=
   let propertiesMap := extractProperties json
   let properties := if propertiesMap.isEmpty then "{}"
                     else s!"{propertiesMap}" |> (".ofArray " ++ ·)
@@ -38,8 +38,8 @@ partial def getResult (json : Json) : String :=
   if children.isEmpty then
     s!"⟨{properties}, #[]⟩"
   else
-    let right := String.intercalate ", " (children.toList.map (getResult ·))
-    s!"⟨{properties}, #[{right}]⟩"
+    let right := String.intercalate ("," ++ separator ++ "  ") (children.toList.map (getResult · (separator ++ "  ")))
+    s!"⟨{properties}, #[{separator}  {right}{separator}]⟩"
 
 def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let input := case.get! "input"
@@ -48,9 +48,10 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
               |> (·.compress)
   let funName := getFunName (case.get! "property")
   let call := s!"({exercise}.{funName} {insertAllInputs input})"
+  let separator := "\n      "
   let result := match expected.getObjVal? "error" with
                 | .ok error => s!"(.error {error})"
-                | .error _  => s!"(.ok {getResult expected})"
+                | .error _  => s!"(.ok {getResult expected separator})"
   s!"
   |>.addTest {description} (do
       return assertEqual {result} {call})"

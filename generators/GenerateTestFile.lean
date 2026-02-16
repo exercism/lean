@@ -54,9 +54,7 @@ def getPath (exercise : String) : IO String := do
       List.head!
     return s!"{directory}/exercises/{exercise}"
   catch _ =>
-    let _ ← IO.Process.run {
-      cmd := "bin/fetch-configlet"
-    }
+    fetchConfiglet
     let info ← IO.Process.run {
       cmd := "bin/configlet",
       args := #["info", "-o", "-v", "d"]

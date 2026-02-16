@@ -28,7 +28,7 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let call := s!"({exercise}.{funName} {coins} {target})"
   s!"
   |>.addTest {description} (do
-      return assertEqual {exceptToString (toExcept expected)} {call})".replace "[" "#["
+      return assertEqual {exceptToString (toExcept expected)}\n          {call})".replace "[" "#["
 
 def genEnd (exercise : String) : String :=
   s!"

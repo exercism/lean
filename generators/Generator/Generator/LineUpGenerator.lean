@@ -25,7 +25,7 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let call := s!"({exercise}.{funName} {insertAllInputs input})"
   s!"
   |>.addTest {description} (do
-      return assertEqual {expected} {call})"
+      return assertEqual {expected}\n          {call})"
 
 def genEnd (exercise : String) : String :=
   s!"

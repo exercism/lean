@@ -38,7 +38,7 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let call := s!"({exercise}.{funName} (.ofList {legacyKeys}))"
   s!"
   |>.addTest {description} (do
-      return assertEqual (.ofList {expectedKeys}) {call})"
+      return assertEqual (.ofList {expectedKeys})\n          {call})"
 
 def genEnd (exercise : String) : String :=
   s!"

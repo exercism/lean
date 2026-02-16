@@ -1,0 +1,42 @@
+[
+    {
+      "description": "complex child trees",
+      "property": "parse",
+      "input": {
+        "encoded": "(;FF[4](;B[aa];W[ab])(;B[dd];W[ee]))"
+      },
+      "expected": {
+        "properties": {
+          "FF": ["4"]
+        },
+        "children": [
+          {
+            "properties": {
+              "B": ["aa"]
+            },
+            "children": [
+              {
+                "properties": {
+                  "W": ["ab"]
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "properties": {
+              "B": ["dd"]
+            },
+            "children": [
+              {
+                "properties": {
+                  "W": ["ee"]
+                },
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+]

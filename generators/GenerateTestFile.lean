@@ -120,7 +120,7 @@ def checkExtraCases (exercise : String) : IO (Except String String) := do
     let json <- IO.FS.readFile (s!"exercises/practice/{exercise}/.meta/extra.json")
     return .ok json
   catch _ =>
-    return .error "No extra cases found"
+    return .error "No extra cases found."
 
 def readExtraCases (exercise : String) : IO (Except String Json) := do
   match ← checkExtraCases exercise with
@@ -213,7 +213,7 @@ def generateTestFile (exercise : String) : IO Unit := do
   let maybeToml ← getToml exercise
   let mut extra := #[]
   match ← readExtraCases exercise with
-  | .error msg  => IO.eprintln s!"{msg}. Checking canonical data."
+  | .error msg  => IO.eprintln s!"{msg} Checking canonical data."
   | .ok extraCases => extra := getOk extraCases.getArr?
   match maybeToml with
   | .error msg =>

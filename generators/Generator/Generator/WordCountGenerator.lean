@@ -23,7 +23,9 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let description := case.get! "description"
               |> (·.compress)
   let funName := getFunName (case.get! "property")
-  let call := s!"((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| {exercise}.{funName} {insertAllInputs input})"
+  let call := s!"$ {exercise}.{funName} {insertAllInputs input}
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2"
   s!"
   |>.addTest {description} (do
       return assertEqual {expected} {call})"

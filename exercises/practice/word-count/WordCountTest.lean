@@ -9,13 +9,17 @@ def wordCountTests : TestSuite :=
   |>.addTest "count one word" (do
       return assertEqual [
         ("word", 1)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords "word"))
+      ] $ WordCount.countWords "word"
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
   |>.addTest "count one of each word" (do
       return assertEqual [
         ("each", 1),
         ("of", 1),
         ("one", 1)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords "one of each"))
+      ] $ WordCount.countWords "one of each"
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
   |>.addTest "multiple occurrences of a word" (do
       return assertEqual [
         ("blue", 1),
@@ -23,19 +27,25 @@ def wordCountTests : TestSuite :=
         ("one", 1),
         ("red", 1),
         ("two", 1)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords "one fish two fish red fish blue fish"))
+      ] $ WordCount.countWords "one fish two fish red fish blue fish"
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
   |>.addTest "handles cramped lists" (do
       return assertEqual [
         ("one", 1),
         ("three", 1),
         ("two", 1)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords "one,two,three"))
+      ] $ WordCount.countWords "one,two,three"
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
   |>.addTest "handles expanded lists" (do
       return assertEqual [
         ("one", 1),
         ("three", 1),
         ("two", 1)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords "one,\ntwo,\nthree"))
+      ] $ WordCount.countWords "one,\ntwo,\nthree"
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
   |>.addTest "ignore punctuation" (do
       return assertEqual [
         ("as", 1),
@@ -43,18 +53,24 @@ def wordCountTests : TestSuite :=
         ("carpet", 1),
         ("java", 1),
         ("javascript", 1)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords "car: carpet as java: javascript!!&@$%^&"))
+      ] $ WordCount.countWords "car: carpet as java: javascript!!&@$%^&"
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
   |>.addTest "include numbers" (do
       return assertEqual [
         ("1", 1),
         ("2", 1),
         ("testing", 2)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords "testing, 1, 2 testing"))
+      ] $ WordCount.countWords "testing, 1, 2 testing"
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
   |>.addTest "normalize case" (do
       return assertEqual [
         ("go", 3),
         ("stop", 2)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords "go Go GO Stop stop"))
+      ] $ WordCount.countWords "go Go GO Stop stop"
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
   |>.addTest "with apostrophes" (do
       return assertEqual [
         ("cry", 1),
@@ -65,7 +81,9 @@ def wordCountTests : TestSuite :=
         ("laugh", 1),
         ("then", 1),
         ("you're", 1)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords "'First: don't laugh. Then: don't cry. You're getting it.'"))
+      ] $ WordCount.countWords "'First: don't laugh. Then: don't cry. You're getting it.'"
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
   |>.addTest "with quotations" (do
       return assertEqual [
         ("and", 1),
@@ -74,7 +92,9 @@ def wordCountTests : TestSuite :=
         ("joe", 1),
         ("large", 2),
         ("tell", 1)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords "Joe can't tell between 'large' and large."))
+      ] $ WordCount.countWords "Joe can't tell between 'large' and large."
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
   |>.addTest "substrings from the beginning" (do
       return assertEqual [
         ("a", 1),
@@ -85,23 +105,31 @@ def wordCountTests : TestSuite :=
         ("can't", 1),
         ("joe", 1),
         ("tell", 1)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords "Joe can't tell between app, apple and a."))
+      ] $ WordCount.countWords "Joe can't tell between app, apple and a."
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
   |>.addTest "multiple spaces not detected as a word" (do
       return assertEqual [
         ("multiple", 1),
         ("whitespaces", 1)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords " multiple   whitespaces"))
+      ] $ WordCount.countWords " multiple   whitespaces"
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
   |>.addTest "alternating word separators not detected as a word" (do
       return assertEqual [
         ("one", 1),
         ("three", 1),
         ("two", 1)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords ",\n,one,\n ,two \n 'three'"))
+      ] $ WordCount.countWords ",\n,one,\n ,two \n 'three'"
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
   |>.addTest "quotation for word with apostrophe" (do
       return assertEqual [
         ("can", 1),
         ("can't", 2)
-      ] ((·.mergeSort (λ (k1, _) (k2, _) => k1 ≤ k2)) <| Std.HashMap.toList <| WordCount.countWords "can, can't, 'can't'"))
+      ] $ WordCount.countWords "can, can't, 'can't'"
+        |>.toList
+        |>.mergeSort λ (k1, _) (k2, _) => k1 ≤ k2)
 
 def main : IO UInt32 := do
   runTestSuitesWithExitCode [wordCountTests]

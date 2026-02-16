@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "oxe-i"
+  ],
+  "files": {
+    "solution": [
+      "SgfParsing.lean"
+    ],
+    "test": [
+      "SgfParsingTest.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ]
+  },
+  "blurb": "Parsing a Smart Game Format string."
+}

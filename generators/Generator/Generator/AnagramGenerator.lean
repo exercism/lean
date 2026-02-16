@@ -1,8 +1,10 @@
 import Lean.Data.Json
 import Std
+import Helper
 
 open Lean
 open Std
+open Helper
 
 namespace AnagramGenerator
 
@@ -21,20 +23,17 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let expected := case.get! "expected"
   let description := case.get! "description"
               |> (·.compress)
-  let funName := case.get! "property"
-              |> (·.compress)
-              |> String.toList
-              |> (·.filter (·!='"'))
-              |> List.asString
+  let funName := getFunName (case.get! "property")
+  let call := s!"({exercise}.{funName} {subject} {serializeList candidates})"
   s!"
   |>.addTest {description} (do
-      return assertEqual {expected} ({exercise}.{funName} {subject} {candidates}))"
+      return assertEqual {serializeList expected} {call})"
 
 def genEnd (exercise : String) : String :=
   s!"
 
-  def main : IO UInt32 := do
-    runTestSuitesWithExitCode [{exercise.decapitalize}Tests]
-  "
+def main : IO UInt32 := do
+  runTestSuitesWithExitCode [{exercise.decapitalize}Tests]
+"
 
 end AnagramGenerator

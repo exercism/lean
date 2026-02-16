@@ -35,9 +35,14 @@ def sgfParsingTests : TestSuite :=
   |>.addTest "upper and lowercase property" (do
       return assertEqual (.error "property must be in uppercase") (SgfParsing.parse "(;Aa[b])"))
   |>.addTest "two nodes" (do
-      return assertEqual (.ok ⟨.ofArray #[("A", #["B"])], #[⟨.ofArray #[("B", #["C"])], #[]⟩]⟩) (SgfParsing.parse "(;A[B];B[C])"))
+      return assertEqual (.ok ⟨.ofArray #[("A", #["B"])], #[
+        ⟨.ofArray #[("B", #["C"])], #[]⟩
+      ]⟩) (SgfParsing.parse "(;A[B];B[C])"))
   |>.addTest "two child trees" (do
-      return assertEqual (.ok ⟨.ofArray #[("A", #["B"])], #[⟨.ofArray #[("B", #["C"])], #[]⟩, ⟨.ofArray #[("C", #["D"])], #[]⟩]⟩) (SgfParsing.parse "(;A[B](;B[C])(;C[D]))"))
+      return assertEqual (.ok ⟨.ofArray #[("A", #["B"])], #[
+        ⟨.ofArray #[("B", #["C"])], #[]⟩,
+        ⟨.ofArray #[("C", #["D"])], #[]⟩
+      ]⟩) (SgfParsing.parse "(;A[B](;B[C])(;C[D]))"))
   |>.addTest "multiple property values" (do
       return assertEqual (.ok ⟨.ofArray #[("A", #["b", "c", "d"])], #[]⟩) (SgfParsing.parse "(;A[b][c][d])"))
   |>.addTest "within property values, whitespace characters such as tab are converted to spaces" (do
@@ -49,11 +54,17 @@ def sgfParsingTests : TestSuite :=
   |>.addTest "escaped backslash in property value becomes just a backslash" (do
       return assertEqual (.ok ⟨.ofArray #[("A", #["\\"])], #[]⟩) (SgfParsing.parse "(;A[\\\\])"))
   |>.addTest "opening bracket within property value doesn't need to be escaped" (do
-      return assertEqual (.ok ⟨.ofArray #[("A", #["x[y]z", "foo"]), ("B", #["bar"])], #[⟨.ofArray #[("C", #["baz"])], #[]⟩]⟩) (SgfParsing.parse "(;A[x[y\\]z][foo]B[bar];C[baz])"))
+      return assertEqual (.ok ⟨.ofArray #[("A", #["x[y]z", "foo"]), ("B", #["bar"])], #[
+        ⟨.ofArray #[("C", #["baz"])], #[]⟩
+      ]⟩) (SgfParsing.parse "(;A[x[y\\]z][foo]B[bar];C[baz])"))
   |>.addTest "semicolon in property value doesn't need to be escaped" (do
-      return assertEqual (.ok ⟨.ofArray #[("A", #["a;b", "foo"]), ("B", #["bar"])], #[⟨.ofArray #[("C", #["baz"])], #[]⟩]⟩) (SgfParsing.parse "(;A[a;b][foo]B[bar];C[baz])"))
+      return assertEqual (.ok ⟨.ofArray #[("A", #["a;b", "foo"]), ("B", #["bar"])], #[
+        ⟨.ofArray #[("C", #["baz"])], #[]⟩
+      ]⟩) (SgfParsing.parse "(;A[a;b][foo]B[bar];C[baz])"))
   |>.addTest "parentheses in property value don't need to be escaped" (do
-      return assertEqual (.ok ⟨.ofArray #[("A", #["x(y)z", "foo"]), ("B", #["bar"])], #[⟨.ofArray #[("C", #["baz"])], #[]⟩]⟩) (SgfParsing.parse "(;A[x(y)z][foo]B[bar];C[baz])"))
+      return assertEqual (.ok ⟨.ofArray #[("A", #["x(y)z", "foo"]), ("B", #["bar"])], #[
+        ⟨.ofArray #[("C", #["baz"])], #[]⟩
+      ]⟩) (SgfParsing.parse "(;A[x(y)z][foo]B[bar];C[baz])"))
   |>.addTest "escaped tab in property value is converted to space" (do
       return assertEqual (.ok ⟨.ofArray #[("A", #["hello world"])], #[]⟩) (SgfParsing.parse "(;A[hello\\\u0009world])"))
   |>.addTest "escaped newline in property value is converted to nothing at all" (do
@@ -63,7 +74,14 @@ def sgfParsingTests : TestSuite :=
   |>.addTest "mixing various kinds of whitespace and escaped characters in property value" (do
       return assertEqual (.ok ⟨.ofArray #[("A", #["]b\ncd  e\\ ]"])], #[]⟩) (SgfParsing.parse "(;A[\\]b\nc\\\nd\u0009\u0009e\\\\ \\\n\\]])"))
   |>.addTest "complex child trees" (do
-      return assertEqual (.ok ⟨.ofArray #[("FF", #["4"])], #[⟨.ofArray #[("B", #["aa"])], #[⟨.ofArray #[("W", #["ab"])], #[]⟩]⟩, ⟨.ofArray #[("B", #["dd"])], #[⟨.ofArray #[("W", #["ee"])], #[]⟩]⟩]⟩) (SgfParsing.parse "(;FF[4](;B[aa];W[ab])(;B[dd];W[ee]))"))
+      return assertEqual (.ok ⟨.ofArray #[("FF", #["4"])], #[
+        ⟨.ofArray #[("B", #["aa"])], #[
+          ⟨.ofArray #[("W", #["ab"])], #[]⟩
+        ]⟩,
+        ⟨.ofArray #[("B", #["dd"])], #[
+          ⟨.ofArray #[("W", #["ee"])], #[]⟩
+        ]⟩
+      ]⟩) (SgfParsing.parse "(;FF[4](;B[aa];W[ab])(;B[dd];W[ee]))"))
 
 def main : IO UInt32 := do
   runTestSuitesWithExitCode [sgfParsingTests]

@@ -44,6 +44,7 @@ import Generator.GameOfLifeGenerator
 import Generator.LargestSeriesProductGenerator
 import Generator.MatrixGenerator
 import Generator.WordyGenerator
+import Generator.ZebraPuzzleGenerator
 import Generator.ParallelLetterFrequencyGenerator
 import Generator.ComplexNumbersGenerator
 import Generator.AllergiesGenerator
@@ -137,6 +138,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("LargestSeriesProduct", (LargestSeriesProductGenerator.genIntro, LargestSeriesProductGenerator.genTestCase, LargestSeriesProductGenerator.genEnd)),
     ("Matrix", (MatrixGenerator.genIntro, MatrixGenerator.genTestCase, MatrixGenerator.genEnd)),
     ("Wordy", (WordyGenerator.genIntro, WordyGenerator.genTestCase, WordyGenerator.genEnd)),
+    ("ZebraPuzzle", (ZebraPuzzleGenerator.genIntro, ZebraPuzzleGenerator.genTestCase, ZebraPuzzleGenerator.genEnd)),
     ("ParallelLetterFrequency", (ParallelLetterFrequencyGenerator.genIntro, ParallelLetterFrequencyGenerator.genTestCase, ParallelLetterFrequencyGenerator.genEnd)),
     ("ComplexNumbers", (ComplexNumbersGenerator.genIntro, ComplexNumbersGenerator.genTestCase, ComplexNumbersGenerator.genEnd)),
     ("Allergies", (AllergiesGenerator.genIntro, AllergiesGenerator.genTestCase, AllergiesGenerator.genEnd)),

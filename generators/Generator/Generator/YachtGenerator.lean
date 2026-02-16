@@ -21,7 +21,7 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let dice := input.getObjValD "dice"
                 |> (getOk ·.getArr?)
                 |> (Array.map (λ v => s!"⟨{getOk v.getInt?}, by decide⟩"))
-                |> ("⟨#[" ++ String.intercalate ", " ·.toList ++ "], by decide⟩")
+                |> ("⟨#[\n        " ++ String.intercalate ",\n        " ·.toList ++ "\n      ], by decide⟩")
   let category := "." ++ toCamel (toLiteral s!"{input.getObjValD "category"}")
   let expected := case.get! "expected"
   let description := case.get! "description"

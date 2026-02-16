@@ -127,7 +127,7 @@ def readExtraCases (exercise : String) : IO (Except String Json) := do
   | .error msg => return .error msg
   | .ok extra  =>
     match Json.parse extra with
-    | .error _ => throw <| IO.userError s!"Found extra cases, but they couldn't be parsed. Is it valid JSON?"
+    | .error _ => return .error "Found extra cases, but they couldn't be parsed. Is it valid JSON?"
     | .ok parsed => return .ok parsed
 
 def getExtraCases (extra : Except String Json) : TreeMap.Raw String Json :=

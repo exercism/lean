@@ -42,16 +42,30 @@ def addPracticeExercise (exercise : String) (as : List String) : IO Unit := do
   let _ <- child.wait
 
 def getPath (exercise : String) : IO String := do
-  let info ← IO.Process.run {
-    cmd := "bin/configlet",
-    args := #["info", "-o", "-v", "d"]
-  }
-  let dirPrefix := "Using cached 'problem-specifications' dir: "
-  let directory := info.splitOn "\n" |>
-    List.filter (·.startsWith dirPrefix) |>
-    List.map (·.stripPrefix dirPrefix) |>
-    List.head!
-  return s!"{directory}/exercises/{exercise}"
+  try
+    let info ← IO.Process.run {
+      cmd := "bin/configlet",
+      args := #["info", "-o", "-v", "d"]
+    }
+    let dirPrefix := "Using cached 'problem-specifications' dir: "
+    let directory := info.splitOn "\n" |>
+      List.filter (·.startsWith dirPrefix) |>
+      List.map (·.stripPrefix dirPrefix) |>
+      List.head!
+    return s!"{directory}/exercises/{exercise}"
+  catch _ =>
+    fetchConfiglet
+    let info ← IO.Process.run {
+      cmd := "bin/configlet",
+      args := #["info", "-o", "-v", "d"]
+    }
+    let dirPrefix := "Using cached 'problem-specifications' dir: "
+    let directory := info.splitOn "\n" |>
+      List.filter (·.startsWith dirPrefix) |>
+      List.map (·.stripPrefix dirPrefix) |>
+      List.head!
+    return s!"{directory}/exercises/{exercise}"
+
 
 def getToml (exercise : String) : IO (Except String String) := do
   let path := s!"exercises/practice/{exercise}/.meta/tests.toml"
@@ -59,7 +73,7 @@ def getToml (exercise : String) : IO (Except String String) := do
     let toml <- IO.FS.readFile path
     return .ok toml
   catch _ =>
-    return .error "No toml file."
+    return .error "No toml file"
 
 def readCanonicalData (exercise : String) : IO (Except String Json) := do
   let path <- getPath exercise
@@ -67,7 +81,7 @@ def readCanonicalData (exercise : String) : IO (Except String Json) := do
     let json <- IO.FS.readFile (path ++ "/canonical-data.json")
     return Json.parse json
   catch _ =>
-    return .error "No canonical data."
+    return .error "No canonical data"
 
 def processCanonicalCases (tests : TreeMap String String) (array : Array Json) : Except String OrderedMap := Id.run do
   let mut fullArray := #[]
@@ -94,17 +108,25 @@ def processCanonicalCases (tests : TreeMap String String) (array : Array Json) :
 
 def getCanonicalCases (canonical : TreeMap.Raw String Json) (tests : TreeMap String String) : Except String OrderedMap :=
   match canonical.get? "cases" with
-  | none => .error "No cases in canonical data."
+  | none => .error "No cases in canonical data"
   | some json =>
     let array := getOk json.getArr?
     processCanonicalCases tests array
 
-def readExtraCases (exercise : String) : IO (Except String Json) := do
+def checkExtraCases (exercise : String) : IO (Except String String) := do
   try
     let json <- IO.FS.readFile (s!"exercises/practice/{exercise}/.meta/extra.json")
-    return Json.parse json
+    return .ok json
   catch _ =>
     return .error "No extra cases found."
+
+def readExtraCases (exercise : String) : IO (Except String Json) := do
+  match ← checkExtraCases exercise with
+  | .error msg => return .error msg
+  | .ok extra  =>
+    match Json.parse extra with
+    | .error _ => return .error "Found extra cases, but they couldn't be parsed. Is it valid JSON?"
+    | .ok parsed => return .ok parsed
 
 def getExtraCases (extra : Except String Json) : TreeMap.Raw String Json :=
   match extra with
@@ -186,45 +208,53 @@ def showUsage : IO Unit :=
 
 def generateTestFile (exercise : String) : IO Unit := do
   let pascalExercise := pascalCase exercise
-  let maybeToml <- getToml exercise
-  let extra <- readExtraCases exercise
+  let maybeToml ← getToml exercise
+  let mut extra := #[]
+  match ← readExtraCases exercise with
+  | .error msg  => IO.eprintln s!"{msg} Checking canonical data."
+  | .ok extraCases => extra := getOk extraCases.getArr?
   match maybeToml with
-  | .error _ =>
-    match extra with
-    | .error msg => throw <| IO.userError msg
-    | .ok json =>
-      let array := getOk json.getArr?
-      match genTestFileContent pascalExercise empty array with
+  | .error msg =>
+    if extra.isEmpty
+    then throw <| IO.userError s!"{msg} and no extra cases found."
+    else
+      IO.eprintln s!"{msg}. Trying to add extra cases."
+      match genTestFileContent pascalExercise empty extra with
       | .error msg => throw <| IO.userError msg
       | .ok testContent => IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
   | .ok toml =>
     let tests := getIncludes toml
-    let canonicalData <- readCanonicalData exercise
-    let data := match canonicalData with
-                | .error _ => Json.null
-                | .ok data => data
-    match data.getObj? with
-    | .error _ =>
-      match extra with
-      | .error msg => throw <| IO.userError msg
-      | .ok json =>
-        let array := getOk json.getArr?
-        match genTestFileContent pascalExercise empty array with
+    match ← readCanonicalData exercise with
+    | .error msg =>
+      if extra.isEmpty
+      then throw <| IO.userError s!"{msg} and no extra cases found."
+      else
+        IO.eprintln s!"{msg}. Trying to add extra cases."
+        match genTestFileContent pascalExercise empty extra with
         | .error msg => throw <| IO.userError msg
         | .ok testContent => IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
-    | .ok maybeMap =>
-      match getCanonicalCases maybeMap tests with
-      | .error msg => throw <| IO.userError msg
-      | .ok cases =>
-        match extra with
-        | .error _ =>
-          match genTestFileContent pascalExercise cases #[] with
+    | .ok canonicalData =>
+      match canonicalData.getObj? with
+      | .error _ =>
+        if extra.isEmpty
+        then throw <| IO.userError "Canonical data could not be parsed and no extra cases found."
+        else
+          IO.eprintln s!"Canonical data could not be parsed. Trying to add extra cases."
+          match genTestFileContent pascalExercise empty extra with
           | .error msg => throw <| IO.userError msg
-          | .ok testContent =>
-            IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
-        | .ok json =>
-          let array := getOk json.getArr?
-          match genTestFileContent pascalExercise cases array with
+          | .ok testContent => IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+      | .ok maybeMap =>
+        match getCanonicalCases maybeMap tests with
+        | .error msg =>
+          if extra.isEmpty
+          then throw <| IO.userError s!"{msg} and no extra cases found."
+          else
+            IO.eprintln s!"Parsing canonical data returned error: {msg}. Trying to add extra cases."
+            match genTestFileContent pascalExercise empty extra with
+            | .error msg => throw <| IO.userError msg
+            | .ok testContent => IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+        | .ok cases =>
+          match genTestFileContent pascalExercise cases extra with
           | .error msg => throw <| IO.userError msg
           | .ok testContent => IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
 
@@ -311,10 +341,13 @@ def main (args : List String) : IO Unit := do
   | "-a" :: exercise :: as
   | "--add" :: exercise :: as =>
     addPracticeExercise exercise as
+    IO.println "Exercise successfully added."
     generateTestFile exercise.trim
+    IO.println "Test cases successfully generated."
   | "-g" :: exercise :: _
   | "--generate" :: exercise :: _ =>
     generateTestFile exercise.trim
+    IO.println "Test cases successfully generated."
   | "-s" :: exercise :: _
   | "--stub" :: exercise :: _ =>
     generateStub exercise.trim
@@ -322,5 +355,6 @@ def main (args : List String) : IO Unit := do
   | "--regenerate" :: _ =>
     fetchConfiglet
     regenerateTestFiles
+    IO.println "Test cases successfully regenerated."
   | _ =>
     showUsage

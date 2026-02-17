@@ -13,32 +13,39 @@ import {exercise}
 import Std
 
 open LeanTest
-open Std
 
-instance : BEq (HashMap Char Nat) where
-  beq h1 h2 :=
-    h1.size == h2.size &&
-    h1.fold (fun acc k v =>
-      acc && match h2.get? k with
-      | some v' => v == v'
-      | none    => false
-    ) true
+def Std.HashMap.toSortedList (map : Std.HashMap Char Nat) :=
+  map.toArray.qsort (λ (k1, _) (k2, _) => k1 ≤ k2)
+
+instance : BEq (Std.HashMap Char Nat) where
+  beq a b := a.toSortedList == b.toSortedList
 
 def {exercise.decapitalize}Tests : TestSuite :=
   (TestSuite.empty \"{exercise}\")"
 
+def mapJsonArray (array : Json) : String :=
+  array.getArr?
+    |> getOk
+    |>.map (λ v => s!"'{toLiteral v.compress}'")
+    |>.toList
+    |> (s!"{·}")
+
+def serializeLegacy (key : String) (val : Json) : String :=
+  s!"({key}, {mapJsonArray val})"
+
+def serializeOutput (key : String) (val : Json) : String :=
+  s!"('{key}', {val})"
+
 def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
-  let input := case.get! "input" |> (·.getObjValD "legacy")
-  let legacyKeys := (getKeyValues input).map (λ (k, v) => (toLiteral k, v.replace "\"" "'"))
+  let input := case.get! "input" |>.getObjValD "legacy"
   let expected := case.get! "expected"
-  let expectedKeys := (getKeyValues expected).map (λ (k, v) => (s!"'{k}'", toLiteral v))
   let description := case.get! "description"
               |> (·.compress)
   let funName := getFunName (case.get! "property")
-  let call := s!"({exercise}.{funName} (.ofList {legacyKeys}))"
+  let call := s!"$ {exercise}.{funName} (.ofList {serializeObjectAsList input serializeLegacy})"
   s!"
   |>.addTest {description} (do
-      return assertEqual (.ofList {expectedKeys})\n          {call})"
+      return assertEqual (.ofList {serializeObjectAsList expected serializeOutput}) {call})"
 
 def genEnd (exercise : String) : String :=
   s!"

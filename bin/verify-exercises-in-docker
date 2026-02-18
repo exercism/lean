@@ -30,8 +30,8 @@ copy_example_or_examplar_to_solution() {
 }
 
 pull_docker_image() {
-    docker pull exercism/lean-test-runner ||
-        die $'Could not find the `exercism/lean-test-runner` Docker image.\nCheck the test runner docs at https://exercism.org/docs/building/tooling/test-runners for more information.'
+    docker pull "${image}" ||
+        die $'Could not find the `'"${image}"$'` Docker image.\nCheck the test runner docs at https://exercism.org/docs/building/tooling/test-runners for more information.'
 }
 
 run_tests() {
@@ -43,8 +43,9 @@ run_tests() {
         --read-only \
         --mount type=bind,src="${PWD}",dst=/solution \
         --mount type=bind,src="${PWD}",dst=/output \
-        --mount type=tmpfs,dst=/tmp \
-        exercism/lean-test-runner "${slug}" /solution /output
+        --tmpfs /tmp:exec \
+        "${image}" "${slug}" /solution /output
+    jq -re '.message // .status' "${PWD}/results.json"
     jq -e '.status == "pass"' "${PWD}/results.json" >/dev/null 2>&1
 }
 
@@ -83,7 +84,19 @@ verify_exercises() {
     ((count > 0)) || die 'no matching exercises found!'
 }
 
-pull_docker_image
+image=''
+while getopts :i: opt; do
+    case $opt in
+        i) image=$OPTARG ;;
+        ?) echo >&2 "Unknown option: -$OPTARG"; exit 1 ;;
+    esac
+done
+shift "$((OPTIND - 1))"
+
+if [[ -z "${image}" ]]; then
+    image="exercism/lean-test-runner"
+    pull_docker_image
+fi
 
 exercise_slug="${1:-*}"
 verify_exercises "${exercise_slug}"

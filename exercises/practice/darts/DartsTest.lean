@@ -26,7 +26,7 @@ def dartsTests : TestSuite :=
   |>.addTest "Just outside the middle circle" (do
       return assertEqual 1 (Darts.score (-3.6) (-3.6)))
   |>.addTest "Just within the outer circle" (do
-      return assertEqual 1 (Darts.score (-7.0) 7.0))
+      return assertEqual 1 (Darts.score (-7) 7))
   |>.addTest "Just outside the outer circle" (do
       return assertEqual 0 (Darts.score 7.1 (-7.1)))
   |>.addTest "Asymmetric position between the inner and middle circles" (do

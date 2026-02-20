@@ -59,15 +59,10 @@ Feel free to change it completely if you think it is the right thing to do.
 
 ## Using packages
 
-Lean projects using Lake may always import two additional packages:
-
-1. The core module `Lean`, which defines core elements of the language.
-2. The standard library `Std`, which contains additional data structures, IO and system APIs, and other basic utilities.
-
-Those modules may be imported and used in the same way:
+Lean projects using Lake may always import the standard library `Std`, which contains additional data structures, IO and system APIs, and other basic utilities.
+This import should be at the beggining of the file:
 
 ```lean
-import Lean
 import Std
 
 def someMap : Std.HashMap Int Nat := ...
@@ -86,5 +81,5 @@ def someSet : TreeSet String := ...
 
 External packages are not directly available and must be added as a dependency in `lakefile.toml`.
 
-While working locally, you can use any packages you like.
-The online test runner, however, has access to only the default packages `Lean` and `Std`.
+While working locally, you can use any package you like.
+The online test runner, however, has access to only the standard library `Std`.

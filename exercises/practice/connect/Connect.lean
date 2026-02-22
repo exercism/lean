@@ -1,6 +1,6 @@
 namespace Connect
 
 def winner (board : Array String) : Char :=
-  sorry
+  sorry --remove this line and implement the function
 
 end Connect

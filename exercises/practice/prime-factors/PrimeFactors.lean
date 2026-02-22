@@ -1,6 +1,6 @@
 namespace PrimeFactors
 
 def factors (value : Nat) : List Nat :=
-  sorry
+  sorry --remove this line and implement the function
 
 end PrimeFactors

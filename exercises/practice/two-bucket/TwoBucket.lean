@@ -14,6 +14,6 @@ structure Result where
   deriving BEq, Repr
 
 def measure (first second : Capacity) (goal : Volume) (start : BucketId) : Option Result :=
-  sorry
+  sorry --remove this line and implement the function
 
 end TwoBucket

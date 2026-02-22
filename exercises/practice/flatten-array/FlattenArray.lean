@@ -6,6 +6,6 @@ inductive Box (α : Type) : Type where
   | many (boxes : Array (Box α))
 
 def flatten (box : Box Int) : Array Int :=
-  sorry
+  sorry --remove this line and implement the function
 
 end FlattenArray

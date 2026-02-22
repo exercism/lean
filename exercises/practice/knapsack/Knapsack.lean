@@ -5,6 +5,6 @@ structure Item where
   value : Int
 
 def maximumValue (maximumWeight : Nat) (items : Array Item) : Int :=
-  sorry
+  sorry --remove this line and implement the function
 
 end Knapsack

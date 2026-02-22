@@ -8,6 +8,6 @@ structure SgfTree where
   deriving Repr
 
 def parse (encoded : String) : Except String SgfTree :=
-  sorry
+  sorry --remove this line and implement the function
 
 end SgfParsing

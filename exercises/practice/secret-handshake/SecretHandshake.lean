@@ -8,6 +8,6 @@ inductive Action where
   deriving BEq, Repr
 
 def commands (number : BitVec 5) : Array Action :=
-  sorry
+  sorry --remove this line and implement the function
 
 end SecretHandshake

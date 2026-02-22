@@ -22,6 +22,6 @@ inductive Week where
   deriving BEq, Repr
 
 def meetup (dayOfWeek : DayOfWeek) (month : Month) (week : Week) (year : Nat) : String :=
-  sorry
+  sorry --remove this line and implement the function
 
 end Meetup

@@ -1,6 +1,6 @@
 namespace Pangram
 
 def isPangram (sentence : String) : Bool :=
-  sorry
+  sorry --remove this line and implement the function
 
 end Pangram

@@ -10,6 +10,6 @@ abbrev Die   := { x : Nat // 1 ≤ x ∧ x ≤ 6 }
 abbrev Throw := Vector Die 5
 
 def score (dice : Throw) (category: Category) : Nat :=
-  sorry
+  sorry --remove this line and implement the function
 
 end Yacht

@@ -12,9 +12,9 @@ structure Result where
   deriving BEq, Repr
 
 def smallest (min max : Nat) (_ : min ≤ max) : Option Result :=
-  sorry
+  sorry --remove this line and implement the function
 
 def largest (min max : Nat) (_ : min ≤ max) : Option Result :=
-  sorry
+  sorry --remove this line and implement the function
 
 end PalindromeProducts

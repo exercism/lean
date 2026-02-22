@@ -1,6 +1,6 @@
 namespace IsbnVerifier
 
 def isValid (isbn : String) : Bool :=
-  sorry
+  sorry --remove this line and implement the function
 
 end IsbnVerifier

@@ -1,6 +1,6 @@
 namespace Grep
 
 def grep (args : List String) : IO Unit :=
-  sorry
+  sorry --remove this line and implement the function
 
 end Grep

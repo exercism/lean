@@ -7,6 +7,6 @@ def Positive := { x : Nat // x > 0 }
 -/
 
 def classify (number : Positive) : Classification :=
-  sorry
+  sorry --remove this line and implement the function
 
 end PerfectNumbers

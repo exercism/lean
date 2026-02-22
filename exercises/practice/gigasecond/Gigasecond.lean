@@ -3,6 +3,6 @@ import Std.Time
 namespace Gigasecond
 
 def add (moment : Std.Time.PlainDateTime) : Std.Time.PlainDateTime :=
-  sorry
+  sorry --remove this line and implement the function
 
 end Gigasecond

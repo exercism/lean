@@ -6,6 +6,6 @@ inductive Result where
   deriving BEq, Repr
 
 def findFewestCoins (coins : Array Nat) (target : Int) : Result :=
-  sorry
+  sorry --remove this line and implement the function
 
 end Change

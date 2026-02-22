@@ -11,6 +11,6 @@ inductive Protein where
   deriving BEq, Repr
 
 def proteins (strand : String) : Except String (Array Protein) :=
-  sorry
+  sorry --remove this line and implement the function
 
 end ProteinTranslation

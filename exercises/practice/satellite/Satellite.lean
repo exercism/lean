@@ -11,6 +11,6 @@ inductive Result where
   deriving BEq, Repr
 
 def treeFromTraversals (preorder inorder : List Char) : Result :=
-  sorry
+  sorry --remove this line and implement the function
 
 end Satellite

@@ -11,24 +11,24 @@ structure RationalNumber where
   deriving BEq, Repr
 
 def add (r1 r2 : RationalNumber) : RationalNumber :=
-  sorry
+  sorry --remove this line and implement the function
 
 def sub (r1 r2 : RationalNumber) : RationalNumber :=
-  sorry
+  sorry --remove this line and implement the function
 
 def mul (r1 r2 : RationalNumber) : RationalNumber :=
-  sorry
+  sorry --remove this line and implement the function
 
 def div (r1 r2 : RationalNumber) : RationalNumber :=
-  sorry
+  sorry --remove this line and implement the function
 
 def abs (r : RationalNumber) : RationalNumber :=
-  sorry
+  sorry --remove this line and implement the function
 
 def exprational (r : RationalNumber) (n : Int) : RationalNumber :=
-  sorry
+  sorry --remove this line and implement the function
 
 def expreal (x : Int) (r : RationalNumber) : Float :=
-  sorry
+  sorry --remove this line and implement the function
 
 end RationalNumbers

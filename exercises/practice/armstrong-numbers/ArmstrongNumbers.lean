@@ -1,6 +1,6 @@
 namespace ArmstrongNumbers
 
 def isArmstrongNumber (number : Nat) : Bool :=
-  sorry
+  sorry --remove this line and implement the function
 
 end ArmstrongNumbers

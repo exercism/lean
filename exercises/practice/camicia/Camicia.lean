@@ -16,6 +16,6 @@ structure Result where
   deriving BEq, Repr
 
 def simulateGame (playerA playerB : List Card) : Result :=
-  sorry
+  sorry --remove this line and implement the function
 
 end Camicia

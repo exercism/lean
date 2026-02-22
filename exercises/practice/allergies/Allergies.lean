@@ -12,9 +12,9 @@ inductive Allergen where
   deriving BEq, Repr
 
 def allergicTo (allergen : Allergen) (score : Nat) : Bool :=
-  sorry
+  sorry --remove this line and implement the function
 
 def list (score : Nat) : List Allergen :=
-  sorry
+  sorry --remove this line and implement the function
 
 end Allergies

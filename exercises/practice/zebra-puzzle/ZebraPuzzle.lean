@@ -9,9 +9,9 @@ inductive Nationality where
   deriving BEq, Inhabited, Repr
 
 def drinksWater : Nationality :=
-  sorry
+  sorry --remove this line and implement the function
 
 def ownsZebra : Nationality :=
-  sorry
+  sorry --remove this line and implement the function
 
 end ZebraPuzzle

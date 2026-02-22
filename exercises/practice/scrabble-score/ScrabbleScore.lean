@@ -1,6 +1,6 @@
 namespace ScrabbleScore
 
 def score (word : String) : Int :=
-  sorry
+  sorry --remove this line and implement the function
 
 end ScrabbleScore

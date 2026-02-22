@@ -5,6 +5,6 @@ inductive Classification where
   deriving BEq, Repr
 
 def sublist (listOne listTwo : List Nat) : Classification :=
-  sorry
+  sorry --remove this line and implement the function
 
 end Sublist

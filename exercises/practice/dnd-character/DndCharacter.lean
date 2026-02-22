@@ -10,12 +10,12 @@ structure Character where
   hitpoints    : Int
 
 def modifier (score : Nat) : Int :=
-  sorry
+  sorry --remove this line and implement the function
 
 def ability {α} [RandomGen α] (generator : α) : (Nat × α) :=
-  sorry
+  sorry --remove this line and implement the function
 
 def Character.new {α} [RandomGen α] (generator : α) : (Character × α) :=
-  sorry
+  sorry --remove this line and implement the function
 
 end DndCharacter

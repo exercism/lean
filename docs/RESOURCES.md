@@ -1,6 +1,7 @@
 # Resources
 
 * The [official site][lean-lang] is the main repository for content about the language.
+It has an online [playground][playground] where you can try out the language without installing anything.
 * The [Reservoir][reservoir] indexes, builds and tests packages within the Lean and Lake ecosystem.
   It is the place to go for third-party packages.
 * [Lean Community][community] is a collaborative, open-source network around the Lean ecosystem.
@@ -8,6 +9,7 @@
 * [Lean 4 Zulip Chat][zulip-chat] is the main chat for the Lean Community.
 
 [lean-lang]: https://lean-lang.org/
+[playground]: https://live.lean-lang.org/
 [reservoir]: https://reservoir.lean-lang.org/
 [community]: https://leanprover-community.github.io/index.html
 [zulip-chat]: https://leanprover.zulipchat.com/

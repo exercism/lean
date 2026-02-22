@@ -10,7 +10,7 @@ For a more in-depth look at theorem proving in Lean, the book [Theorem Proving i
 
 [The Lean Language Reference][lean-reference] is the authoritative source for detailed information about the language.
 
-Many additional resources for learning Lean are made available by the community in [this repository][community-resources].
+Many additional resources for learning Lean are made available by the [Lean Community][community-resources].
 
 [community-resources]: https://leanprover-community.github.io/learn.html
 [functional-programming]: https://lean-lang.org/functional_programming_in_lean/

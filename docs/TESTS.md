@@ -51,7 +51,7 @@ All of them are expected to be defined in the solution module, within a namespac
 Each argument and the return value for each function has some type.
 This might be one of the basic types in Lean (for example, `Nat`, `List Int` or `Option String`), or a user-defined type.
 
-You'll a find a file with the correct name already in place in the same folder as the test module.
+You will find a file with the correct name already in place in the same folder as the test module.
 This file should have a _stub_ with most initial informations, so that you can use it as a starting point for your solution.
 
 Just keep in mind that this stub is there just for you to get started. 
@@ -59,8 +59,8 @@ Feel free to change it completely if you think it is the right thing to do.
 
 ## Using packages
 
-Lean projects using Lake may always import the standard library `Std`, which contains additional data structures, IO and system APIs, and other basic utilities.
-This import should be at the beggining of the file:
+Lean projects using Lake may always import the standard library `Std`, which contains additional data structures, I/O and system APIs, and other basic utilities.
+This import should be at the beginning of the file:
 
 ```lean
 import Std
@@ -68,8 +68,10 @@ import Std
 def someMap : Std.HashMap Int Nat := ...
 ```
 
-Note that the module name is its namespace, so in this example the type `HashMap` was qualified with `Std`, the package where it is defined.
-It is possible to open a module, so that all its data structures and functions are available without this namespace qualification:
+In this example, the type `HashMap` is qualified with `Std`, the namespace where it is defined.
+All resources in the standard library are in the same namespace, `Std`.
+
+It is also possible to open a module so that all its data structures and functions are available without this namespace qualification:
 
 ```lean
 import Std

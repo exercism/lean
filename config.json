@@ -587,6 +587,14 @@
         "difficulty": 7
       },
       {
+        "slug": "custom-set",
+        "name": "Custom Set",
+        "uuid": "d643def0-b87f-44b9-ab31-787d94d4f6a0",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 7
+      },
+      {
         "slug": "pythagorean-triplet",
         "name": "Pythagorean Triplet",
         "uuid": "258987f4-9bd1-4781-b43c-434ead7920b8",

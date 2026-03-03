@@ -1,3 +1,4 @@
+import Generator.CustomSetGenerator
 import Generator.WordCountGenerator
 import Generator.SgfParsingGenerator
 import Generator.DndCharacterGenerator
@@ -95,6 +96,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("CustomSet", (CustomSetGenerator.genIntro, CustomSetGenerator.genTestCase, CustomSetGenerator.genEnd)),
     ("WordCount", (WordCountGenerator.genIntro, WordCountGenerator.genTestCase, WordCountGenerator.genEnd)),
     ("SgfParsing", (SgfParsingGenerator.genIntro, SgfParsingGenerator.genTestCase, SgfParsingGenerator.genEnd)),
     ("DndCharacter", (DndCharacterGenerator.genIntro, DndCharacterGenerator.genTestCase, DndCharacterGenerator.genEnd)),

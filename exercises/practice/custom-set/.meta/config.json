@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "oxe-i"
+  ],
+  "files": {
+    "solution": [
+      "CustomSet.lean"
+    ],
+    "test": [
+      "CustomSetTest.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ]
+  },
+  "blurb": "Create a custom set type."
+}

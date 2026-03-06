@@ -243,6 +243,14 @@
         "difficulty": 3
       },
       {
+        "slug": "kindergarten-garden",
+        "name": "Kindergarten Garden",
+        "uuid": "bd0410ff-0dfd-48e9-b155-489c55e6702b",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "line-up",
         "name": "Line Up",
         "uuid": "d6972b96-7abb-47d8-a342-d874b297c471",

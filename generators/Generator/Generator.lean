@@ -29,6 +29,7 @@ import Generator.GigasecondGenerator
 import Generator.CamiciaGenerator
 import Generator.ChangeGenerator
 import Generator.HammingGenerator
+import Generator.KindergartenGardenGenerator
 import Generator.LineUpGenerator
 import Generator.TwoFerGenerator
 import Generator.YachtGenerator
@@ -127,6 +128,7 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("Camicia", (CamiciaGenerator.genIntro, CamiciaGenerator.genTestCase, CamiciaGenerator.genEnd)),
     ("Change", (ChangeGenerator.genIntro, ChangeGenerator.genTestCase, ChangeGenerator.genEnd)),
     ("Hamming", (HammingGenerator.genIntro, HammingGenerator.genTestCase, HammingGenerator.genEnd)),
+    ("KindergartenGarden", (KindergartenGardenGenerator.genIntro, KindergartenGardenGenerator.genTestCase, KindergartenGardenGenerator.genEnd)),
     ("LineUp", (LineUpGenerator.genIntro, LineUpGenerator.genTestCase, LineUpGenerator.genEnd)),
     ("TwoFer", (TwoFerGenerator.genIntro, TwoFerGenerator.genTestCase, TwoFerGenerator.genEnd)),
     ("Yacht", (YachtGenerator.genIntro, YachtGenerator.genTestCase, YachtGenerator.genEnd)),

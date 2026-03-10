@@ -30,6 +30,7 @@ In this exercise, the termination of the function is precisely the `collatz conj
 
 Consider using one of the following options:
 
-1. Adding the `partial` keyword before the declaration of the function disables termination checking and allows for (potentially unsafe) recursive calls.
+1. Adding the `partial` keyword before the declaration of a function disables termination checking and allows for (potentially unsafe) recursive calls.
 2. Imperative constructs allowed in monadic code, such as `while`, are implemented using partial recursion under the hood, so they can be used whenever termination is not enforced.
    Using the `Id` monad is a convenient way to enable these constructs in otherwise pure-looking code, without introducing additional effects.
+3. Defining a helper with an extra parameter for the maximum number of recursive calls ensures termination.

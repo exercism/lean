@@ -41,7 +41,11 @@ In general, updating an array in a functional setting requires copying the entir
 Lean uses reference counting to mitigate this drawback.
 As long as there is never more than one reference to an array (that is, it is used _linearly_), no copy is made and updates can be performed destructively.
 
-Lean also supports [do-notation][do-notation], an embedded language for writing code in an imperative style.
+Many functions in the `Array` API perform destructive updates in case of unshared data, for example, `set` and `push`.
+
+### Do-Notation
+
+Lean supports [do-notation][do-notation], an embedded language for writing code in an imperative style.
 
 Inside a `do` block, it is possible to declare mutable local variables, which can be reassigned, using the `mut` keyword.
 When used with data structures such as arrays, this allows Lean's runtime system to perform in-place destructive updates under the hood, whenever it is safe to do so.
@@ -50,7 +54,7 @@ Do-notation can only be used inside a monad.
 A convenient way to write imperative-style code that remains pure and has no observable side effects is to use the [Identity monad][id]:
 
 ```lean
-def function (array : Array Nat) := Id.run do
+def sumArray (array : Array Nat) := Id.run do
     let mut sum := 0
     for element in array do
         sum := sum + element

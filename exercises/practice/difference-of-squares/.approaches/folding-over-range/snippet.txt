@@ -1,0 +1,6 @@
+def squareOfSum (number : Nat) : Nat :=
+    let sum := number.fold (init := 0) fun i _ acc => (i + 1) + acc
+    sum ^ 2
+
+def sumOfSquares (number : Nat) : Nat :=
+    number.fold (fun i _ acc => acc + (i + 1) ^ 2) 0

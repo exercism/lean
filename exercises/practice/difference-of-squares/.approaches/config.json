@@ -1,0 +1,35 @@
+{
+  "introduction": {
+    "authors": ["oxe-i"],
+    "contributors": []
+  },
+  "approaches": [
+    {
+      "uuid": "854dac53-adfd-46ad-8c64-46e401a46a37",
+      "slug": "recurse-numbers",
+      "title": "Recurse Over Numbers",
+      "blurb": "recurse over all numbers to sum them up.",
+      "authors": [
+        "oxe-i"
+      ]
+    },
+    {
+      "uuid": "3e4413e6-89cb-4e1e-8e83-89e84754dd0f",
+      "slug": "mathematical-formula",
+      "title": "Mathematical Formula",
+      "blurb": "calculate sums using known mathematical formulas.",
+      "authors": [
+        "oxe-i"
+      ]
+    },
+    {
+      "uuid": "0e48332a-1b9b-4322-b941-933d1c718d67",
+      "slug": "folding-over-range",
+      "title": "Folding Over Range",
+      "blurb": "use a fold to sum all numbers in a range.",
+      "authors": [
+        "oxe-i"
+      ]
+    }
+  ]
+}

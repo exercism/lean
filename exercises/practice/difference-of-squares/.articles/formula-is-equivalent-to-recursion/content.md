@@ -9,12 +9,12 @@ The exercise `difference-of-squares` is well positioned to showcase this feature
   However, its time complexity is `O(n)`, which makes it relatively slow.
   This approach is explored in [recurse-numbers][recurse-numbers].
 * On the other hand, there are mathematical formulas that may be used to solve the exercise.
-  They are `O(1)` but result in a less clear implementation that requires previous knowledge.
+  They run in `O(1)` time but lead to a less clear implementation that requires prior knowledge.
   This approach is explored in [mathematical-formula][mathematical-formula].
 
-In particular, whenever there is more than one way to solve a problem, proving that a particular algorithm is equivalent to a reference implementation offers a high degree of trust in its correctness.
+In particular, whenever there is more than one way to solve a problem, proving that a particular algorithm is equivalent to a reference implementation offers a high degree of confidence in its correctness.
 
-Since we are interested in clarity rather than performance, let us consider the direct recursive implementation, without tail recursion.
+Since we are interested in clarity rather than performance, we will consider the direct recursive implementation without tail recursion.
 It will be our specification:
 
 ```lean
@@ -42,18 +42,18 @@ def sumFirstNPositive' (n : Nat) : Nat :=
     n * (n + 1) / 2
 
 def squareOfSum' (number : Nat) : Nat :=
-    (sumFirstNPositive number) ^ 2
+    (sumFirstNPositive' number) ^ 2
 
 def sumOfSquares' (number : Nat) : Nat :=
     (number * (number + 1) * (2 * number + 1)) / 6
 
 def differenceOfSquares' (number : Nat) : Nat :=
-    (squareOfSum number) - (sumOfSquares number)
+    (squareOfSum' number) - (sumOfSquares' number)
 ```
 
 Note that we have added `'` at the end of those functions to differentiate them from our specification functions.
 
-Since `differenceOfSquares'` and `squareOfSum'` are equal to `differenceOfSquares` and `squareOfSum`, respectively, we need only to prove that `sumFirstNPositive'` is equivalent to `sumFirstNPositive` and that `sumOfSquares'` is equivalent to `sumOfSquares`.
+Since `differenceOfSquares` and `squareOfSum` are defined in terms of `sumFirstNPositive` and `sumOfSquares`, proving that the formula implementations of these two functions are equivalent is enough to show that the final result is also equivalent.
 
 Let us sketch a quick stub for both theorems:
 
@@ -82,8 +82,7 @@ This is a simple way to prove both theorems, with much of the heavy lifting done
 theorem sumFirstNPositive_eq_sumFirstNPositive' : sumFirstNPositive = sumFirstNPositive' := by
     funext n
     induction n with
-    | zero =>
-      simp [sumFirstNPositive, sumFirstNPositive']
+    | zero => rfl
     | succ x h =>
       simp [sumFirstNPositive, sumFirstNPositive', h]
       grind
@@ -91,18 +90,16 @@ theorem sumFirstNPositive_eq_sumFirstNPositive' : sumFirstNPositive = sumFirstNP
 theorem sumOfSquares_eq_sumOfSquares' : sumOfSquares = sumOfSquares' := by
     funext n
     induction n with
-    | zero =>
-      simp [sumOfSquares, sumOfSquares']
+    | zero => rfl
     | succ x h =>
       simp [sumOfSquares, sumOfSquares', h]
       grind
 ```
 
-Since our theorem proves equality of functions, we start by introducing a variable `n` which is to be applied to both functions.
-This is what `funext n` does.
-The functions will be equivalent if we can prove that, for any value of `n`, their result will be the same.
+Since the theorem states equality between two functions, we first apply _function extensionality_.
+The tactic `funext n` introduces an argument `n` and reduces the goal to proving that both functions return the same value for any `n`.
 
-Since `n` is a `Nat`, which is a nice inductive type, we pattern match on its constructors.
+Since `n` is a `Nat`, which is an inductive type, we proceed by [induction][induction].
 This is the role of `induction n with`.
 
 There are two possible constructors for a `Nat`: 
@@ -112,26 +109,27 @@ There are two possible constructors for a `Nat`:
 
 Once we prove the equivalence holds for `zero`, showing that if it holds for `x`, it also holds for `x + 1`, is enough to prove the equivalence for all `Nat` by induction.
 
-The proof for the case `zero` follows from the simplification of both functions.
+The proof for the case `zero` follows from the substitution of the argument for `0` in both functions.
 Both `sumFirstNPositive` and `sumOfSquares` are defined to return `0` if their argument is `0`.
 And substituting `0` in the formula for `sumFirstNPositive'` and `sumOfSquares'` will also result in `0`.
-So the equivalence is proved, in both theorems.
+So the equivalence is proved, in both theorems, by definitional equality.
+This is what the tactic `rfl` does.
 
 In the case of a successor, however, the proof is more involved.
 We leave most of the heavy lifting to `grind`, a powerful tactic that is able to automatically prove many properties involving inequalities, systems of linear equations and other situations.
 
 Note that both theorems use `simp`.
 This tactic tries to simplify a goal, i.e., what we are trying to prove, considering definitions and theorems already proven.
-We use it here to make the definitions of the functions known to the theorem, so that values may be substituted and compared.
+We use it here to unfold the definitions of the functions, so that values may be substituted and compared.
 
 It is also possible to prove both theorems from first principles and basic properties and theorems involving `Nat`.
 This is usually a manual task that involves much more work.
 
-The following is an overly verbose proof of `sumFirstNPositive'_eq_sumFirstNPositive` that does not use `grind` or `simp` and relies on basic `Nat` theorems, congruence of functions and sequential calculations of transitive equations:
+The following is a much more verbose proof of `sumFirstNPositive_eq_sumFirstNPositive'` that does not use `grind` or `simp` and relies on basic `Nat` theorems, congruence of functions and sequential calculations of transitive equations:
 
 ```lean
-theorem sumFirstNPositive'_eq_sumFirstNPositive (n : Nat) :
-  sumFirstNPositive n = sumFirstNPositive' n := by
+theorem sumFirstNPositive_eq_sumFirstNPositive' : sumFirstNPositive = sumFirstNPositive' := by
+    funext n
     induction n with
     | zero      => rfl
     | succ x h₁ =>
@@ -242,3 +240,4 @@ Many `List` and `Array` functions use this pattern.
 [recurse-numbers]: https://exercism.org/tracks/lean/exercises/difference-of-squares/approaches/recurse-numbers
 [mathematical-formula]: https://exercism.org/tracks/lean/exercises/difference-of-squares/approaches/mathematical-formula
 [tactics]: https://lean-lang.org/doc/reference/latest/Tactic-Proofs/#tactics
+[induction]: https://en.wikipedia.org/wiki/Mathematical_induction

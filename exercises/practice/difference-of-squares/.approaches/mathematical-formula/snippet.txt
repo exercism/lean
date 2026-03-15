@@ -1,0 +1,5 @@
+def squareOfSum (number : Nat) : Nat :=
+    (number * (number + 1) / 2) ^ 2
+
+def sumOfSquares (number : Nat) : Nat :=
+    (number * (number + 1) * (2 * number + 1)) / 6

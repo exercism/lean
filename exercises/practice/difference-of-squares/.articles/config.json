@@ -1,0 +1,13 @@
+{
+  "articles": [
+    {
+      "uuid": "14152e49-e077-4a8e-a1c2-5812ebb5bbdd",
+      "slug": "formula-is-equivalent-to-recursion",
+      "title": "Proving that the mathematical formula and the recursive approaches are equivalent",
+      "blurb": "proving that the mathematical formula and the recursive approaches are equivalent.",
+      "authors": [
+        "oxe-i"
+      ]
+    }
+  ]
+}

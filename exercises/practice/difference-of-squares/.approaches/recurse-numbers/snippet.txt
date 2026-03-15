@@ -1,0 +1,8 @@
+def sumN (n : Nat) (acc : Nat) : Nat :=
+    if n = 0 then acc else sumN (n - 1) (acc + n)
+
+def squareOfSum (number : Nat) : Nat :=
+    (sumN number 0) ^ 2
+
+def sumOfSquares (number : Nat) (acc := 0) : Nat :=
+    if n = 0 then acc else sumSquareN (n - 1) (acc + (n ^ 2))

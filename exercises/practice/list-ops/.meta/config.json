@@ -1,0 +1,18 @@
+{
+  "authors": [
+    "oxe-i"
+  ],
+  "files": {
+    "solution": [
+      "ListOps.lean"
+    ],
+    "test": [
+      "ListOpsTest.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ]
+  },
+  "blurb": "Implement basic list operations.",
+  "source": "https://github.com/exercism/problem-specifications/tree/main/exercises/list-ops"
+}

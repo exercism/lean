@@ -1,0 +1,135 @@
+{
+  "exercise": "zipper",
+  "comments": [
+    "Extra test cases for the Lean track to test polymorphic tree support."
+  ],
+  "cases": [
+    {
+      "description": "string tree: data is retained",
+      "property": "expectedValue",
+      "input": {
+        "initialTree": {
+          "value": "a",
+          "left": {
+            "value": "b",
+            "left": null,
+            "right": {
+              "value": "c",
+              "left": null,
+              "right": null
+            }
+          },
+          "right": {
+            "value": "d",
+            "left": null,
+            "right": null
+          }
+        },
+        "operations": [
+          {
+            "operation": "to_tree"
+          }
+        ]
+      },
+      "expected": {
+        "type": "tree",
+        "value": {
+          "value": "a",
+          "left": {
+            "value": "b",
+            "left": null,
+            "right": {
+              "value": "c",
+              "left": null,
+              "right": null
+            }
+          },
+          "right": {
+            "value": "d",
+            "left": null,
+            "right": null
+          }
+        }
+      }
+    },
+    {
+      "description": "string tree: left, right and value",
+      "property": "expectedValue",
+      "input": {
+        "initialTree": {
+          "value": "a",
+          "left": {
+            "value": "b",
+            "left": null,
+            "right": {
+              "value": "c",
+              "left": null,
+              "right": null
+            }
+          },
+          "right": {
+            "value": "d",
+            "left": null,
+            "right": null
+          }
+        },
+        "operations": [
+          { "operation": "left" },
+          { "operation": "right" },
+          { "operation": "value" }
+        ]
+      },
+      "expected": {
+        "type": "string",
+        "value": "c"
+      }
+    },
+    {
+      "description": "string tree: set_value",
+      "property": "expectedValue",
+      "input": {
+        "initialTree": {
+          "value": "a",
+          "left": {
+            "value": "b",
+            "left": null,
+            "right": {
+              "value": "c",
+              "left": null,
+              "right": null
+            }
+          },
+          "right": {
+            "value": "d",
+            "left": null,
+            "right": null
+          }
+        },
+        "operations": [
+          { "operation": "left" },
+          { "operation": "set_value", "item": "x" }
+        ]
+      },
+      "expected": {
+        "type": "tree",
+        "value": {
+          "value": "a",
+          "left": {
+            "value": "x",
+            "left": null,
+            "right": {
+              "value": "c",
+              "left": null,
+              "right": null
+            }
+          },
+          "right": {
+            "value": "d",
+            "left": null,
+            "right": null
+          }
+        }
+      }
+    }
+  ]
+}

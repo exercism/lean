@@ -3,10 +3,10 @@ namespace Zipper
 /-
   You should define:
 
-  1. A `BinTree` inductive type representing a binary tree where each node
-     has a value (Int), a left subtree, and a right subtree.
+  1. A `BinTree` type representing a binary tree where each node
+     has a value, a left subtree, and a right subtree.
 
-  2. A `Zipper` structure that allows navigating within a binary tree.
+  2. A `Zipper` type that allows navigating within a binary tree.
 
   3. The following functions:
      - `fromTree`  : Create a zipper focused on the root of a tree.

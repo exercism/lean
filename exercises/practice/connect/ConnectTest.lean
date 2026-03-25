@@ -38,6 +38,16 @@ def connectTests : TestSuite :=
                                                "  O X O .",
                                                "   X X O X",
                                                "    . O X ."]))
+  |>.addTest "X wins with left-hand dead end fork" (do
+      return assertEqual 'X' (Connect.winner #[". . X .",
+                                               " X X . .",
+                                               "  . X X X",
+                                               "   O O O O"]))
+  |>.addTest "X wins with right-hand dead end fork" (do
+      return assertEqual 'X' (Connect.winner #[". . X X",
+                                               " X X . .",
+                                               "  . X X .",
+                                               "   O O O O"]))
   |>.addTest "O wins crossing from top to bottom" (do
       return assertEqual 'O' (Connect.winner #[". O . .",
                                                " O X X X",

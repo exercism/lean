@@ -1,0 +1,18 @@
+{
+  "authors": [
+    "jojo8356"
+  ],
+  "files": {
+    "solution": [
+      "Zipper.lean"
+    ],
+    "test": [
+      "ZipperTest.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ]
+  },
+  "blurb": "Creating a zipper for a binary tree.",
+  "source": "https://en.wikipedia.org/wiki/Zipper_%28data_structure%29"
+}

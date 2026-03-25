@@ -85,6 +85,7 @@ import Generator.AnagramGenerator
 import Generator.BobGenerator
 import Generator.MatchingBracketsGenerator
 import Generator.ReverseStringGenerator
+import Generator.ZipperGenerator
 
 import Std
 import Lean.Data.Json
@@ -183,7 +184,8 @@ def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBod
     ("Anagram", (AnagramGenerator.genIntro, AnagramGenerator.genTestCase, AnagramGenerator.genEnd)),
     ("Bob", (BobGenerator.genIntro, BobGenerator.genTestCase, BobGenerator.genEnd)),
     ("MatchingBrackets", (MatchingBracketsGenerator.genIntro, MatchingBracketsGenerator.genTestCase, MatchingBracketsGenerator.genEnd)),
-    ("ReverseString", (ReverseStringGenerator.genIntro, ReverseStringGenerator.genTestCase, ReverseStringGenerator.genEnd))
+    ("ReverseString", (ReverseStringGenerator.genIntro, ReverseStringGenerator.genTestCase, ReverseStringGenerator.genEnd)),
+    ("Zipper", (ZipperGenerator.genIntro, ZipperGenerator.genTestCase, ZipperGenerator.genEnd))
   ]
 
 end Generator

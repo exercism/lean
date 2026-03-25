@@ -1,0 +1,15 @@
+name = "zipper"
+version = "0.1.0"
+defaultTargets = ["ZipperTest"]
+testDriver = "ZipperTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Zipper"
+
+[[lean_exe]]
+name = "ZipperTest"
+root = "ZipperTest"

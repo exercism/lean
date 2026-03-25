@@ -643,6 +643,14 @@
         "difficulty": 7
       },
       {
+        "slug": "zipper",
+        "name": "Zipper",
+        "uuid": "f7bdcd13-7231-4895-a1f8-2f22838a6738",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 7
+      },
+      {
         "slug": "all-your-base",
         "name": "All Your Base",
         "uuid": "da51714a-5399-40ed-9fd7-787cb1bcb925",

@@ -235,14 +235,6 @@
         "difficulty": 3
       },
       {
-        "slug": "list-ops",
-        "name": "List Ops",
-        "uuid": "e6e4e258-e669-4875-afce-c6a65405b3d0",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 3
-      },
-      {
         "slug": "gigasecond",
         "name": "Gigasecond",
         "uuid": "093a5dd4-a0ab-4e22-a9f8-0411b27d710c",
@@ -262,6 +254,14 @@
         "slug": "line-up",
         "name": "Line Up",
         "uuid": "d6972b96-7abb-47d8-a342-d874b297c471",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
+        "slug": "list-ops",
+        "name": "List Ops",
+        "uuid": "e6e4e258-e669-4875-afce-c6a65405b3d0",
         "practices": [],
         "prerequisites": [],
         "difficulty": 3

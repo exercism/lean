@@ -43,6 +43,10 @@ def listOpsTests : TestSuite :=
       return assertEqual 15 (ListOps.foldr (fun el acc => el + acc) 5 [1, 2, 3, 4]))
   |>.addTest "folds (reduces) the given list from the right with a function -> direction dependent function applied to non-empty list" (do
       return assertEqual 2 (ListOps.foldr (· / ·) 5 [2, 5]))
+  |>.addTest "folds (reduces) the given list from the left with a function -> direction dependent function applied to non-empty list (power)" (do
+      return assertEqual (512 : Int) (ListOps.foldl (fun acc el => el ^ acc.toNat) (2 : Int) [(3 : Int), 2]))
+  |>.addTest "folds (reduces) the given list from the right with a function -> direction dependent function applied to non-empty list (power)" (do
+      return assertEqual (81 : Int) (ListOps.foldr (fun el acc => el ^ acc.toNat) (2 : Int) [(3 : Int), 2]))
   |>.addTest "reverse the elements of the list -> empty list" (do
       return assertEqual ([] : List Int) (ListOps.reverse ([] : List Int)))
   |>.addTest "reverse the elements of the list -> non-empty list" (do

@@ -26,6 +26,8 @@ def functionToLean (property : String) (funStr : String) : String :=
   | "foldr", "\"(acc, el) -> el * acc\"" => "(fun el acc => el * acc)"
   | "foldr", "\"(acc, el) -> el + acc\"" => "(fun el acc => el + acc)"
   | "foldr", "\"(x, y) -> x / y\"" => "(· / ·)"
+  | "foldl", "\"(acc, el) -> el ^ acc\"" => "(fun acc el => el ^ acc.toNat)"
+  | "foldr", "\"(acc, el) -> el ^ acc\"" => "(fun el acc => el ^ acc.toNat)"
   | _, _ => funStr
 
 def serializeIntList (json : Json) : String :=

@@ -1,0 +1,28 @@
+{
+  "exercise": "list-ops",
+  "comments": [
+    "Extra test cases for the Lean track to test power function with foldl/foldr."
+  ],
+  "cases": [
+    {
+      "description": "folds (reduces) the given list from the left with a function -> direction dependent function applied to non-empty list (power)",
+      "property": "foldl",
+      "input": {
+        "list": [3, 2],
+        "initial": 2,
+        "function": "(acc, el) -> el ^ acc"
+      },
+      "expected": 512
+    },
+    {
+      "description": "folds (reduces) the given list from the right with a function -> direction dependent function applied to non-empty list (power)",
+      "property": "foldr",
+      "input": {
+        "list": [3, 2],
+        "initial": 2,
+        "function": "(acc, el) -> el ^ acc"
+      },
+      "expected": 81
+    }
+  ]
+}

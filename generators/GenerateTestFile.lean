@@ -12,10 +12,10 @@ This script implements utilities for generating test files for exercises in the 
 
 ## Running the generator
 
-Run the generator from this folder using the following command:
+Run the generator from the root folder using the following command:
 
 ```lean
-lake exe generator [Options] <exercise-slug> [Extra-Parameters]
+bin/run-generator [Options] <exercise-slug> [Extra-Parameters]
 ```
 
 The following options are available:
@@ -34,7 +34,7 @@ The slug must be in kebab-case, for example: `two-fer`.
 
 Generating test files requires a test generator in `./generators/Generator/Generator/`.
 
-This generator must be imported in `./generators/Generator/Generator.lean` and must define the following three functions:
+This test generator must be imported in `./generators/Generator/Generator.lean` and must define the following three functions:
 
 1. `introGenerator    : String → String`
 2. `testCaseGenerator : String → Std.TreeMap.Raw String Lean.Json → String`
@@ -257,7 +257,7 @@ def getIncludes (toml : String) : TreeMap String String :=
 
 def showUsage : IO Unit :=
   let usageMsg := s!"Usage is:
-    lake exe generator [Options] <exercise-slug> [Extra-Parameters]
+    bin/run-generator [Options] <exercise-slug> [Extra-Parameters]
 
     Options:
       -s / --stub :

@@ -12,6 +12,8 @@ Please read this [community blog post][guidelines] for details.
 2. Discuss the proposal with the maintainers
 3. After receiving the go-ahead, submit a pull request
 
+Pull requests are automatically closed and will **remain closed until approved by a maintainer**.
+
 Pull requests must follow [Exercism's style guide][style].
 
 Before submitting, please read:
@@ -27,9 +29,17 @@ When opening a PR:
 
 If the PR touches an existing exercise, please also consider [this warning][unnecessary-test-runs].
 
+### Using LLMs 
+
+Exercism is both an educational platform and an open-source project.
+As such, open issues in this track are not only about solving problems or adding content, but also about _involving the community_ and _providing opportunities for students to learn_.
+
+Although the use of LLMs is not forbidden, they should be treated as an **auxiliary educational tool**.
+Pull requests with reduced code quality or that fail to conform to our guidelines may be closed.
+
 ### Adding an exercise
 
-Practice exercises should follow the [Add a Practice Exercise docs][add-exercise].
+Practice exercises must follow the [Add a Practice Exercise docs][add-exercise].
 
 All exercises must include a test generator located in:
 
@@ -44,8 +54,9 @@ The generator must:
 - register them in the `dispatch` table
 
 The Lean track provides a generator script to help with this process.
-
 See the [generator documentation][generator-doc].
+
+**The test file must be generated from its test generator using the generator script.**
 
 [guidelines]: https://exercism.org/blog/contribution-guidelines-nov-2023
 [lean-forum]: https://forum.exercism.org/c/programming/lean/761

@@ -58,6 +58,8 @@ See the [generator documentation][generator-doc].
 
 **The test file must be generated from its test generator using the generator script.**
 
+After adding an exercise, run the `bin/sort-exercises` script to ensure the correct order in `config.json`.
+
 [guidelines]: https://exercism.org/blog/contribution-guidelines-nov-2023
 [lean-forum]: https://forum.exercism.org/c/programming/lean/761
 [style]: https://exercism.org/docs/building/markdown/style-guide

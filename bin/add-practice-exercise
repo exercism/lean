@@ -77,7 +77,7 @@ fi
 ./bin/fetch-configlet
 ./bin/configlet create --practice-exercise "${slug}" --author "${author}" --difficulty "${difficulty}"
 
-./bin/reorder-exercises
+./bin/sort-exercises
 
 exercise_dir="exercises/practice/${slug}"
 sed -e "s#%{kebab_slug}#${slug}#g" templates/lakefile.toml | sed -e "s#%{pascal_slug}#${pascal}#g" > "${exercise_dir}/lakefile.toml"

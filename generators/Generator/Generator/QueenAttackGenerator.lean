@@ -13,8 +13,8 @@ import {exercise}
 
 open LeanTest
 
-theorem check (q : {exercise}.Queen) : q.row < 8 ∧ q.col < 8 := by
-  exact q.h
+theorem check (q : {exercise}.Queen) : q.row ≥ 0 ∧ q.row < 8 ∧ q.col ≥ 0 ∧ q.col < 8 := by
+  simp [q.h]
 
 def {exercise.decapitalize}Tests : TestSuite :=
   (TestSuite.empty \"{exercise}\")"

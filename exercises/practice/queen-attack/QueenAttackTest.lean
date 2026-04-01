@@ -3,8 +3,8 @@ import QueenAttack
 
 open LeanTest
 
-theorem check (q : QueenAttack.Queen) : q.row < 8 ∧ q.col < 8 := by
-  exact q.h
+theorem check (q : QueenAttack.Queen) : q.row ≥ 0 ∧ q.row < 8 ∧ q.col ≥ 0 ∧ q.col < 8 := by
+  simp [q.h]
 
 def queenAttackTests : TestSuite :=
   (TestSuite.empty "QueenAttack")

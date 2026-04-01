@@ -5,6 +5,7 @@ It is used to write programs together with machine-checked correctness guarantee
 
 **Dependently typed** means that types can depend on values.
 This allows specifications and constraints to be encoded directly in the type system, making invalid states effectively _unrepresentable_.
+
 Lean is based on the propositions-as-types principle, where logical propositions are represented as types and proofs are programs inhabiting those types.
 Every value of a type that encodes a specification must be constructed in a way that _proves_ it is valid.
 

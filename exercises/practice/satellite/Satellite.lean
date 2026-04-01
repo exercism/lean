@@ -6,8 +6,8 @@ inductive Tree (α : Type) : Type where
   deriving BEq, Repr
 
 inductive Result where
-  | ok : Tree Char -> Result
-  | error : String -> Result
+  | ok : Tree Char → Result
+  | error : String → Result
   deriving BEq, Repr
 
 def treeFromTraversals (preorder inorder : List Char) : Result :=

@@ -1,12 +1,11 @@
 namespace HelloWorld
 
 inductive World where
-    | Earth : World
-    | Mars  : World
+    | earth | mars
 
 def hello (world : World) : String :=
     match world with
-    | Earth => "Hello, Earth!"
-    | Mars  => "Hi, Mars!"
+    | .earth => "Hello, Earth!"
+    | .mars  => "Hi, Mars!"
 
 end HelloWorld

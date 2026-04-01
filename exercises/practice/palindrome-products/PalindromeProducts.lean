@@ -11,10 +11,10 @@ structure Result where
   factors : List Factors
   deriving BEq, Repr
 
-def smallest (min max : Nat) (_ : min ≤ max) : Option Result :=
+def smallest (min max : Nat) (h₀ : min ≤ max) : Option Result :=
   sorry --remove this line and implement the function
 
-def largest (min max : Nat) (_ : min ≤ max) : Option Result :=
+def largest (min max : Nat) (h₀ : min ≤ max) : Option Result :=
   sorry --remove this line and implement the function
 
 end PalindromeProducts

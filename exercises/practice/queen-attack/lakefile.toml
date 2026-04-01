@@ -1,0 +1,15 @@
+name = "queen-attack"
+version = "0.1.0"
+defaultTargets = ["QueenAttackTest"]
+testDriver = "QueenAttackTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "QueenAttack"
+
+[[lean_exe]]
+name = "QueenAttackTest"
+root = "QueenAttackTest"

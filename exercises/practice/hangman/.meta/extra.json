@@ -1,0 +1,54 @@
+[
+    {
+      "description": "Big word, ongoing after many guesses",
+      "property": "guess",
+      "input": {
+        "word": "authentic",
+        "guesses": ["a", "e", "p", "m", "i", "l", "c", "n", "o", "r", "q", "u"]
+      },
+      "expected": {
+        "state": "Ongoing",
+        "maskedWord": "au__en_ic",
+        "remainingFailures": 3
+      }
+    },
+    {
+      "description": "Big word, win after few guesses",
+      "property": "guess",
+      "input": {
+        "word": "intelligence",
+        "guesses": ["a", "e", "i", "l", "n", "t", "g", "c"]
+      },
+      "expected": {
+        "state": "Win",
+        "maskedWord": "intelligence",
+        "remainingFailures": 8
+      }
+    },
+    {
+      "description": "Small word, win after few guesses",
+      "property": "guess",
+      "input": {
+        "word": "car",
+        "guesses": ["a", "m", "c", "p", "r"]
+      },
+      "expected": {
+        "state": "Win",
+        "maskedWord": "car",
+        "remainingFailures": 7
+      }
+    },
+    {
+      "description": "Small word, still lose with a gotcha",
+      "property": "guess",
+      "input": {
+        "word": "dye",
+        "guesses": ["a", "r", "m", "p", "c", "o", "q", "n", "u", "e", "d", "i"]
+      },
+      "expected": {
+        "state": "Lose",
+        "maskedWord": "d_e",
+        "remainingFailures": 0
+      }
+    }
+]

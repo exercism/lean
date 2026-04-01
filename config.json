@@ -555,6 +555,14 @@
         "difficulty": 6
       },
       {
+        "slug": "hangman",
+        "name": "Hangman",
+        "uuid": "29f77dfa-a3fc-4100-8b67-33fd7a5b9ac7",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 6
+      },
+      {
         "slug": "knapsack",
         "name": "Knapsack",
         "uuid": "8ed9aa32-f678-4b33-9717-544d85e1dfbf",

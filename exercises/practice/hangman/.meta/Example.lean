@@ -14,11 +14,11 @@ structure Result where
 
 private abbrev LetterSet := Std.HashSet Char
 
-structure Game where
+private structure Game where
   word : String
   state : State
   remainingFailures : Nat
-  foundLetters : Std.HashSet Char
+  foundLetters : LetterSet
 
 private def Game.toResult : Game → Result
   | { word, state, remainingFailures, foundLetters} =>
@@ -49,6 +49,7 @@ def guess (word : String) (guesses : List Char) : Except String Result :=
     remainingFailures := maxFailures,
     foundLetters := {}
   }
-  guesses.foldlM (step charSet) init |>.map Game.toResult
+  guesses.foldlM (step charSet) init
+  |>.map Game.toResult
 
 end Hangman

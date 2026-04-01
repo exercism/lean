@@ -11,6 +11,6 @@ structure Result where
   deriving BEq, Repr
 
 def guess (word : String) (guesses : List Char) : Except String Result :=
-  sorry
+  sorry --remove this line and implement the function
 
 end Hangman

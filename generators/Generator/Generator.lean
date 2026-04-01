@@ -1,3 +1,4 @@
+import Generator.HangmanGenerator
 import Generator.QueenAttackGenerator
 import Generator.CustomSetGenerator
 import Generator.WordCountGenerator
@@ -98,6 +99,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("Hangman", (HangmanGenerator.genIntro, HangmanGenerator.genTestCase, HangmanGenerator.genEnd)),
     ("QueenAttack", (QueenAttackGenerator.genIntro, QueenAttackGenerator.genTestCase, QueenAttackGenerator.genEnd)),
     ("CustomSet", (CustomSetGenerator.genIntro, CustomSetGenerator.genTestCase, CustomSetGenerator.genEnd)),
     ("WordCount", (WordCountGenerator.genIntro, WordCountGenerator.genTestCase, WordCountGenerator.genEnd)),

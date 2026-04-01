@@ -1,0 +1,15 @@
+name = "hangman"
+version = "0.1.0"
+defaultTargets = ["HangmanTest"]
+testDriver = "HangmanTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Hangman"
+
+[[lean_exe]]
+name = "HangmanTest"
+root = "HangmanTest"

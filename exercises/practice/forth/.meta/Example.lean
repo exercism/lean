@@ -1,4 +1,4 @@
-import Std
+import Std.Data.TreeMap
 
 namespace Forth
 

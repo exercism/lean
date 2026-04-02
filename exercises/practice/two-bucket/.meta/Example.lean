@@ -1,4 +1,4 @@
-import Std
+import Std.Data.HashSet
 
 open Std
 

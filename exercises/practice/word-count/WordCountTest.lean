@@ -1,5 +1,4 @@
 import LeanTest
-import Std
 import WordCount
 
 open LeanTest

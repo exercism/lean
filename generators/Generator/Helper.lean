@@ -1,7 +1,5 @@
-import Std
 import Lean.Data.Json
 
-open Std
 open Lean
 
 namespace Helper

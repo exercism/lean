@@ -1,6 +1,6 @@
 import LeanTest
 import Etl
-import Std
+import Std.Data.HashMap
 
 open LeanTest
 

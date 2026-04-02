@@ -1,5 +1,6 @@
 import LeanTest
 import SgfParsing
+import Std.Data.TreeMap
 
 open LeanTest
 

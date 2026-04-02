@@ -10,7 +10,7 @@ namespace EtlGenerator
 
 def genIntro (exercise : String) : String := s!"import LeanTest
 import {exercise}
-import Std
+import Std.Data.HashMap
 
 open LeanTest
 

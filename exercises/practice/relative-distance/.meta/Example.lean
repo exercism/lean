@@ -1,4 +1,5 @@
-import Std
+import Std.Data.HashSet
+import Std.Data.HashMap
 
 namespace RelativeDistance
 

@@ -1,5 +1,6 @@
 import LeanTest
 import ParallelLetterFrequency
+import Std.Data.TreeMap
 
 open LeanTest
 

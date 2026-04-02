@@ -1,4 +1,4 @@
-import Std.Data
+import Std.Data.HashSet
 
 namespace Hangman
 

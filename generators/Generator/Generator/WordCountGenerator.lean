@@ -9,7 +9,6 @@ open Helper
 namespace WordCountGenerator
 
 def genIntro (exercise : String) : String := s!"import LeanTest
-import Std
 import {exercise}
 
 open LeanTest

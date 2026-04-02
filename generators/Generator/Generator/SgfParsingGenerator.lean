@@ -10,6 +10,7 @@ namespace SgfParsingGenerator
 
 def genIntro (exercise : String) : String := s!"import LeanTest
 import {exercise}
+import Std.Data.TreeMap
 
 open LeanTest
 

@@ -1,6 +1,3 @@
-import Std
-open Std
-
 namespace LinkedList
 
 variable {α σ : Type} [BEq α] [Inhabited α]

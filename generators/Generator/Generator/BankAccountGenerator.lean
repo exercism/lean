@@ -10,7 +10,7 @@ namespace BankAccountGenerator
 
 def genIntro (exercise : String) : String := s!"import LeanTest
 import {exercise}
-import Std
+import Std.Sync.Mutex
 
 open LeanTest
 

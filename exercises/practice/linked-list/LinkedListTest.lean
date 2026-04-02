@@ -1,9 +1,7 @@
 import LeanTest
 import LinkedList
-import Std
 
 open LeanTest
-open Std
 
 instance : HAppend AssertionResult AssertionResult AssertionResult where
     hAppend

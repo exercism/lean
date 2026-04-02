@@ -10,10 +10,8 @@ namespace LinkedListGenerator
 
 def genIntro (exercise : String) : String := s!"import LeanTest
 import {exercise}
-import Std
 
 open LeanTest
-open Std
 
 {concatAsserts}
 

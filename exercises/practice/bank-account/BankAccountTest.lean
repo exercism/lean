@@ -1,6 +1,6 @@
 import LeanTest
 import BankAccount
-import Std
+import Std.Sync.Mutex
 
 open LeanTest
 

@@ -491,6 +491,14 @@
         "difficulty": 5
       },
       {
+        "slug": "nucleotide-count",
+        "name": "Nucleotide Count",
+        "uuid": "f5459e1a-786d-4c62-9989-e985b6e9f4c5",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "queen-attack",
         "name": "Queen Attack",
         "uuid": "e522fcb1-b8e3-4e0f-adc6-fba5e8e5ad81",

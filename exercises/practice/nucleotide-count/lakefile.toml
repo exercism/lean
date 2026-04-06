@@ -1,0 +1,15 @@
+name = "nucleotide-count"
+version = "0.1.0"
+defaultTargets = ["NucleotideCountTest"]
+testDriver = "NucleotideCountTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "NucleotideCount"
+
+[[lean_exe]]
+name = "NucleotideCountTest"
+root = "NucleotideCountTest"

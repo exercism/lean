@@ -26,7 +26,7 @@ def toCamel (string : String) : String :=
     |> String.decapitalize
 
 def toLiteral (string : String) : String :=
-  string.toList.filter (·!='"') |> (·.asString)
+  string.toList.filter (·!='"') |> String.ofList
 
 def getOk {α β} (except : Except α β) [Inhabited β] : β := except.toOption |> (·.get!)
 

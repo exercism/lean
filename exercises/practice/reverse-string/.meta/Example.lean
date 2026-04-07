@@ -7,6 +7,6 @@ def reverse (value : String) : String :=
     | [] => acc
     | x :: xs => helper (x :: acc) xs
   let reversed := helper [] stringList
-  reversed.asString
+  String.ofList reversed
 
 end ReverseString

@@ -3,7 +3,7 @@ namespace Acronym
 def abbreviate (phrase : String) : String :=
   let rec helper (input : List Char) (acc : List Char) (inWord : Bool) : String :=
     match input with
-    | [] => (List.reverse acc).asString
+    | [] => String.ofList (List.reverse acc)
     | c :: rest =>
         if Char.isAlpha c && !inWord
         then helper rest ((Char.toUpper c) :: acc) true

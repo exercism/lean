@@ -34,7 +34,7 @@ def proteins (strand : String) : Except String (Array Protein) :=
     | _ :: [] => none
     | _ :: _ :: [] => none
     | c1 :: c2 :: c3 :: cs =>
-      let codon := [c1, c2, c3].asString
+      let codon := String.ofList [c1, c2, c3]
       match codon with
       | "UAA" => some acc
       | "UAG" => some acc

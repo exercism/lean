@@ -12,7 +12,7 @@ def encode (string : String) : String :=
     | (first :: rest) => if first == letter
                          then loop (1 + n) letter rest
                          else (repeats n letter) ++ (loop 1 first rest)
-  (loop 0 '?' string.toList).asString
+  String.ofList (loop 0 '?' string.toList)
 
 def decode (string : String) : String :=
   let rec process (n : Nat) (input : List Char) :=
@@ -21,6 +21,6 @@ def decode (string : String) : String :=
     | (first :: rest) => if Char.isDigit first
                          then process (10 * n + first.val.toNat - 48) rest
                          else (List.replicate (max 1 n) first) ++ (process 0 rest)
-  (process 0 string.toList).asString
+  String.ofList (process 0 string.toList)
 
 end RunLengthEncoding

@@ -48,11 +48,11 @@ def inverse(a : Nat) : Option Nat :=
 def encode (phrase : String) (a : Nat) (b : Nat) : Option String :=
   match inverse a with
   | none => none
-  | some _ => some (chunk (process phrase a b)).asString
+  | some _ => some (chunk (process phrase a b) |> String.ofList)
 
 def decode (phrase : String) (a : Nat) (b : Nat) : Option String :=
   match inverse a with
   | none => none
-  | some inv => some (process phrase inv ((26 - inv) * b)).asString
+  | some inv => some (process phrase inv ((26 - inv) * b) |> String.ofList)
 
 end AffineCipher

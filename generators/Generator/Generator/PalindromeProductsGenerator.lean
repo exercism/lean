@@ -30,7 +30,7 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
     let expectedValue := expected.getObjValD "value"
     let expectedFactors := expected.getObjValD "factors"
                             |> (getOk ·.getArr?)
-                            |> (·.map (s!"{·}".dropRight 1 |> (· ++ ", by decide⟩") |> (·.drop 1) |> ("⟨" ++ ·)))
+                            |> (·.map (s!"{·}".dropEnd 1 |>.copy |> (· ++ ", by decide⟩") |> (·.drop 1 |>.copy) |> ("⟨" ++ ·)))
                             |> (·.toList) |> (String.intercalate ", ")
     let result := if expectedValue.isNull
                   then s!"none"

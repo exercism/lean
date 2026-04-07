@@ -36,7 +36,8 @@ def allVerses : List String := protagonists.mapIdx (λ i p =>
     String.intercalate " " (actions.take i |>.mapIdx (λ j a =>
       s!"that {a} the {protagonists[j]!}"
     ) |>.reverse)
-    |>.trimRight
+    |>.trimAsciiEnd
+    |>.copy
   )
 
 

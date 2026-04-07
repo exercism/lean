@@ -13,6 +13,6 @@ def transpose (lines : String) : String :=
       let right := tail ++ (List.replicate (len - tailLen) []) -- pads as necessary to accomodate all chars in a row
       List.zipWith (· :: ·) left right                         -- adds each Char of crt line at the beginning of each transposed line
   let transposed := helper matrix
-  String.intercalate "\n" $ transposed.map (·.asString)
+  String.intercalate "\n" $ String.ofList <$> transposed
 
 end Transpose

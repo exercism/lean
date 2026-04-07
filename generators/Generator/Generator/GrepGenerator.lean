@@ -9,7 +9,7 @@ namespace GrepGenerator
 def getOk {α β} (except : Except α β) [Inhabited β] : β := except.toOption |> (·.get!)
 
 def toLiteral (string : String) : String :=
-  string.dropWhile (·=='"') |> (·.dropRightWhile (·=='"'))
+  string.dropWhile (·=='"') |> (·.dropEndWhile (·=='"') |>.copy)
 
 def getFunName (property : Json) : String :=
   toLiteral property.compress

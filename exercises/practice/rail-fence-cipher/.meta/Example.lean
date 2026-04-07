@@ -35,7 +35,7 @@ def process (rails : Positive) (msg : String) (isDecode: Bool) : String := Id.ru
     rail := ((Int.ofNat rail) + direction).toNat
     direction := if ((rail > 0) && (rail + 1 < rails.val)) then direction else -direction
     output := if isDecode then output.set! i input[offset]! else output.set! offset input[i]!
-  (Array.toList output).asString
+  String.ofList (Array.toList output)
 
 def encode (rails : Positive) (msg : String) : String :=
   process rails msg false

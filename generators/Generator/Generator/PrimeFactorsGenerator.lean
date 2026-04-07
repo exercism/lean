@@ -30,7 +30,7 @@ def intLiteral (n : Int) : String :=
   else s!"{n}"
 
 def getFunName (property : Json) : String :=
-  property.compress.dropWhile (·=='"') |> (·.dropRightWhile (·=='"'))
+  property.compress.dropWhile (·=='"') |> (·.dropEndWhile (·=='"') |>.copy)
 
 def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let input := case.get! "input"

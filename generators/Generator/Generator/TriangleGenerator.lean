@@ -25,7 +25,7 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
               |> (·.compress)
               |> String.toList
               |> (·.filter (·!='"'))
-              |> List.asString
+              |> String.ofList
   let call := s!"({exercise}.{funName} {sides})"
   let assert := match expected with
                 | true => s!"assertTrue {call}"

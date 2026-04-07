@@ -21,10 +21,6 @@ def {exercise.decapitalize}Tests : TestSuite :=
 def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let input := case.get! "input"
   let expected := case.get! "expected"
-  let A := expected.getObjVal? "A" |> getOk
-  let C := expected.getObjVal? "C" |> getOk
-  let G := expected.getObjVal? "G" |> getOk
-  let T := expected.getObjVal? "T" |> getOk
   let description := case.get! "description"
               |> (·.compress)
   let funName := getFunName (case.get! "property")
@@ -35,6 +31,10 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   |>.addTest {description} (do
       return assertNone ({call}))"
   | .error _ =>
+    let A := expected.getObjVal? "A" |> getOk
+    let C := expected.getObjVal? "C" |> getOk
+    let G := expected.getObjVal? "G" |> getOk
+    let T := expected.getObjVal? "T" |> getOk
     s!"
   |>.addTest {description} (do
       match {call} with

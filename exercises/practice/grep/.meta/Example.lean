@@ -2,8 +2,8 @@ import Std.Data.HashSet
 
 namespace Grep
 
-def aggregateResults (results : List String) (prepend : String := "") : String :=
-  results.foldl (fun acc x => (prepend ++ x ++ "\n" ++ acc).trim) ""
+def aggregateResults (results : List String) (prepend : String := "") : String.Slice :=
+  results.foldl (fun acc x => (prepend ++ x ++ "\n" ++ acc).trimAscii) ""
 
 def processFile
   (check : String -> Bool)

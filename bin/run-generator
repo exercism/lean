@@ -3,4 +3,4 @@
 set -eu
 
 cd generators
-lake exe generator "$@"
+lake --wfail exe generator "$@"

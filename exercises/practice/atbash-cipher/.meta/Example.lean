@@ -15,9 +15,9 @@ def chunk (list : List Char) : List Char :=
   | _ => list
 
 def encode (phrase : String) : String :=
-  (chunk (process phrase)).asString
+  chunk (process phrase) |> String.ofList
 
 def decode (phrase : String) : String :=
-  (process phrase).asString
+  process phrase |> String.ofList
 
 end AtbashCipher

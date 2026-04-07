@@ -27,7 +27,7 @@ structure DateTimeValues where
   deriving Inhabited
 
 def charsToNat (chars : List Char) : Nat :=
-  chars.asString.toNat!
+  chars |> String.ofList |>.toNat!
 
 def parseInput : List Char → Option DateTimeValues
   | y1 :: y2 :: y3 :: y4 :: '-' :: m1 :: m2 :: '-' :: d1 :: d2 :: 'T' :: h1 :: h2 :: ':' :: mn1 :: mn2 :: ':' :: s1 :: s2 :: _ => some {

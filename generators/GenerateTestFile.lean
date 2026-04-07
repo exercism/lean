@@ -82,7 +82,7 @@ def empty : OrderedMap := { order := #[], map := .empty }
 def getOk {α β} (except : Except α β) [Inhabited β] : β := except.toOption |> Option.get!
 
 def strip (string : String) (char : Char) : String :=
-  String.dropWhile string (·==char) |> (String.dropRightWhile · (·==char))
+  string.dropWhile (·==char) |>.dropEndWhile (·==char) |>.copy
 
 def pascalCase  (input : String) : String :=
   input.splitOn "-" |> List.map String.capitalize |> String.join
@@ -118,7 +118,7 @@ def getPath (exercise : String) : IO String := do
     let dirPrefix := "Using cached 'problem-specifications' dir: "
     let directory := info.splitOn "\n" |>
       List.filter (·.startsWith dirPrefix) |>
-      List.map (·.stripPrefix dirPrefix) |>
+      List.map (·.dropPrefix dirPrefix) |>
       List.head!
     return s!"{directory}/exercises/{exercise}"
   catch _ =>
@@ -130,7 +130,7 @@ def getPath (exercise : String) : IO String := do
     let dirPrefix := "Using cached 'problem-specifications' dir: "
     let directory := info.splitOn "\n" |>
       List.filter (·.startsWith dirPrefix) |>
-      List.map (·.stripPrefix dirPrefix) |>
+      List.map (·.dropPrefix dirPrefix) |>
       List.head!
     return s!"{directory}/exercises/{exercise}"
 
@@ -228,28 +228,29 @@ def genTestFileContent (pascalExercise : String) (cases : OrderedMap) (extra : A
     let extraTests := getExtraTests genTestCase pascalExercise extra
     let ending := genEnd pascalExercise
     let testContent := intro ++ canonicalTests ++ extraTests ++ ending
-    .ok (testContent.trim ++ "\n")
+    .ok (testContent.trimAscii.copy ++ "\n")
 
 def getIncludes (toml : String) : TreeMap String String :=
   let cases := toml.splitOn "\n\n"
-            |> List.map (·.splitOn "\n" |> List.map String.trim)
+            |> List.map (·.splitOn "\n" |> List.map (·.trimAscii.copy))
   let includes := cases.filter (fun xs =>
-    let hasInclude := xs.find? (·.trim |> (·.startsWith "include"))
+    let hasInclude := xs.find? (·.trimAscii.startsWith "include")
     match hasInclude with
     | none => true
     | some string =>
-      let words := string.splitOn " " |> List.map String.trim |> String.join
+      let words := string.splitOn " " |> List.map (·.trimAscii.copy) |> String.join
       words != "include=false"
   )
   includes.foldr (fun xs acc =>
     match xs with
     | uuid :: descriptionLine :: _ =>
-      let formattedUUID := uuid.stripPrefix "[" |> (·.stripSuffix "]")
-      let description := descriptionLine.trim
-                        |> (·.stripPrefix "description")
-                        |> (·.trimLeft)
-                        |> (·.stripPrefix "=")
-                        |> (·.trimLeft)
+      let formattedUUID := uuid.dropPrefix "[" |>.dropSuffix "]" |>.copy
+      let description := descriptionLine.trimAscii
+                        |>.dropPrefix "description"
+                        |>.trimAsciiStart
+                        |>.dropPrefix "="
+                        |>.trimAsciiStart
+                        |>.copy
                         |> (strip · '"')
       acc.insert formattedUUID description
     | _ => acc
@@ -277,11 +278,15 @@ def showUsage : IO Unit :=
 
 def generateTestFile (exercise : String) : IO Unit := do
   let pascalExercise := pascalCase exercise
+  IO.println s!"\nGenerating for {pascalExercise}"
   let maybeToml ← getToml exercise
   let mut extra := #[]
   match ← readExtraCases exercise with
-  | .error msg  => IO.eprintln s!"{msg} Checking canonical data."
-  | .ok extraCases => extra := getOk extraCases.getArr?
+  | .error msg  =>
+    IO.eprintln s!"{msg} Checking canonical data."
+  | .ok extraCases =>
+    IO.println s!"Found extra cases."
+    extra := getOk extraCases.getArr?
   match maybeToml with
   | .error msg =>
     if extra.isEmpty
@@ -289,8 +294,11 @@ def generateTestFile (exercise : String) : IO Unit := do
     else
       IO.eprintln s!"{msg}. Trying to add extra cases."
       match genTestFileContent pascalExercise empty extra with
-      | .error msg => throw <| IO.userError msg
-      | .ok testContent => IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+      | .error msg =>
+        throw <| IO.userError msg
+      | .ok testContent =>
+        IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+        IO.println "Extra cases successfully added."
   | .ok toml =>
     let tests := getIncludes toml
     match ← readCanonicalData exercise with
@@ -300,8 +308,11 @@ def generateTestFile (exercise : String) : IO Unit := do
       else
         IO.eprintln s!"{msg}. Trying to add extra cases."
         match genTestFileContent pascalExercise empty extra with
-        | .error msg => throw <| IO.userError msg
-        | .ok testContent => IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+        | .error msg =>
+          throw <| IO.userError msg
+        | .ok testContent =>
+          IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+          IO.println "Extra cases successfully added."
     | .ok canonicalData =>
       match canonicalData.getObj? with
       | .error _ =>
@@ -310,8 +321,11 @@ def generateTestFile (exercise : String) : IO Unit := do
         else
           IO.eprintln s!"Canonical data could not be parsed. Trying to add extra cases."
           match genTestFileContent pascalExercise empty extra with
-          | .error msg => throw <| IO.userError msg
-          | .ok testContent => IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+          | .error msg =>
+            throw <| IO.userError msg
+          | .ok testContent =>
+            IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+            IO.println "Extra cases successfully added."
       | .ok maybeMap =>
         match getCanonicalCases maybeMap tests with
         | .error msg =>
@@ -320,12 +334,19 @@ def generateTestFile (exercise : String) : IO Unit := do
           else
             IO.eprintln s!"Parsing canonical data returned error: {msg}. Trying to add extra cases."
             match genTestFileContent pascalExercise empty extra with
-            | .error msg => throw <| IO.userError msg
-            | .ok testContent => IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+            | .error msg =>
+              throw <| IO.userError msg
+            | .ok testContent =>
+              IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+              IO.println "Extra cases successfully added."
         | .ok cases =>
           match genTestFileContent pascalExercise cases extra with
-          | .error msg => throw <| IO.userError msg
-          | .ok testContent => IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+          | .error msg =>
+            throw <| IO.userError msg
+          | .ok testContent =>
+            IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+            let extraMsg := if extra.isEmpty then "" else " Extra cases successfully added."
+            IO.println s!"Canonical data successfully added.{extraMsg}"
 
 def addImport (pascalExercise : String) : IO Unit := do
   let path := s!"generators/Generator/Generator.lean"
@@ -346,7 +367,19 @@ def kebabCase (pascal : String) : String :=
     else if ch.isUpper then
       (acc ++ s!"-{ch.toLower}", false)
     else (acc.push ch, false)
-  ) ("", true) |> Prod.fst
+  ) ("", true) |>.fst
+
+def addTemplates (exercise : String) : IO Unit := do
+  let toolchainPath := s!"exercises/practice/{exercise}/lean-toolchain"
+  if ← System.FilePath.pathExists toolchainPath then
+    try
+      let newToolchain ← IO.FS.readFile "templates/lean-toolchain"
+      IO.FS.writeFile toolchainPath newToolchain
+    catch _ =>
+      IO.eprintln "Couldn't find lean-toolchain in templates. Please add it manually."
+  else
+    IO.println s!"Couldn't find lean-toolchain in {toolchainPath}. Trying to add exercise"
+    addPracticeExercise exercise []
 
 def regenerateTestFiles : IO Unit := do
   let _ ← IO.Process.run {
@@ -355,7 +388,11 @@ def regenerateTestFiles : IO Unit := do
   }
   for (pascal, _) in Generator.dispatch do
     let kebab := kebabCase pascal
-    generateTestFile kebab
+    try
+      generateTestFile kebab
+      addTemplates kebab
+    catch msg =>
+      IO.eprintln s!"Regeneration for {pascal} failed. Error logged was: {msg}"
 
 def generateStub (exercise : String) : IO Unit := do
   let pascalExercise := pascalCase exercise
@@ -399,7 +436,7 @@ def main : IO UInt32 := do
 end {pascalExercise}Generator
 "
   let path := s!"generators/Generator/Generator/{pascalExercise}Generator.lean"
-  IO.FS.writeFile path (content.trim ++ "\n")
+  IO.FS.writeFile path (content.trimAscii.copy ++ "\n")
   match Generator.dispatch.get? pascalExercise with
   | none => addImport pascalExercise
   | some _ => return
@@ -410,20 +447,20 @@ def main (args : List String) : IO Unit := do
   | "-a" :: exercise :: as
   | "--add" :: exercise :: as =>
     addPracticeExercise exercise as
-    IO.println "Exercise successfully added."
-    generateTestFile exercise.trim
-    IO.println "Test cases successfully generated."
+    IO.println "\nExercise successfully added."
+    generateTestFile exercise.trimAscii.copy
+    IO.println "\nTest cases successfully generated."
   | "-g" :: exercise :: _
   | "--generate" :: exercise :: _ =>
-    generateTestFile exercise.trim
-    IO.println "Test cases successfully generated."
+    generateTestFile exercise.trimAscii.copy
+    IO.println "\nTest cases successfully generated."
   | "-s" :: exercise :: _
   | "--stub" :: exercise :: _ =>
-    generateStub exercise.trim
+    generateStub exercise.trimAscii.copy
   | "-r" :: _
   | "--regenerate" :: _ =>
     fetchConfiglet
     regenerateTestFiles
-    IO.println "Test cases successfully regenerated."
+    IO.println "\nTest cases successfully regenerated."
   | _ =>
     showUsage

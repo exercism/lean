@@ -21,7 +21,7 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
               |> (·.compress)
               |> String.toList
               |> (·.filter (·!='"'))
-              |> List.asString
+              |> String.ofList
   let input := case.get! "input"
   let value := input.getObjValD "value"
   let array := input.getObjValD "array"

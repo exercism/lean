@@ -18,7 +18,7 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
   let input := case.get! "input" |> (·.getObjVal? "n") |> Except.toOption |> Option.get!
   let result := case.get! "expected" |> (·.getArr?) |> Except.toOption |> Option.get! |> Array.toList
   let description := case.get! "description" |> (·.compress)
-  let funName := case.get! "property" |> (·.compress) |> String.toList |> (·.filter (·!='"')) |> List.asString
+  let funName := case.get! "property" |> (·.compress) |> String.toList |> (·.filter (·!='"')) |> String.ofList
   s!"
   |>.addTest {description} (do
       return assertEqual {result} ({exercise}.{funName} {input}))"

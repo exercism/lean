@@ -7,6 +7,6 @@ def clean (phrase : String) : Option String := Id.run do
     if digits.length == 11 && digits[0]! == '1' then
       digits := List.tail? digits |> Option.get!
     if digits.length != 10 || digits[0]! <= '1' || digits[3]! <= '1' then none
-    else some digits.asString
+    else some (digits |> String.ofList)
 
 end PhoneNumber

@@ -25,6 +25,6 @@ def ciphertext (plaintext : String) : String :=
         let index := (count % columns) * (rows + 1) + (count / columns)
         chars := chars.set! index c
         count := count + 1
-    return chars.toList.asString
+    return String.ofList chars.toList
 
 end CryptoSquare

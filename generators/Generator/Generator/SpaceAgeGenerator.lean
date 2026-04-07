@@ -49,7 +49,7 @@ def toFloat (value : Json) : Float :=
   value.getNum? |> (getOk .) |> (·.toFloat)
 
 def toLiteral (string : String) : String :=
-  string.dropWhile (·=='"') |> (·.dropRightWhile (·=='"'))
+  string.dropWhile (·=='"') |> (·.dropEndWhile (·=='"') |>.copy)
 
 def getFunName (property : Json) : String :=
   toLiteral property.compress

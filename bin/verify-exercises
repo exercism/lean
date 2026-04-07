@@ -35,7 +35,7 @@ unskip_tests() {
 }
 
 run_tests() {
-    lake test
+    lake --wfail test
 }
 
 verify_exercise() {

@@ -315,6 +315,14 @@
         "difficulty": 3
       },
       {
+        "slug": "strain",
+        "name": "Strain",
+        "uuid": "b22117f8-5c1e-4988-8ffa-a6ddb0a9026a",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "sublist",
         "name": "Sublist",
         "uuid": "e30dc3a1-c0a8-4c93-b198-2929e4ebf022",

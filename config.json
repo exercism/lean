@@ -427,6 +427,14 @@
         "difficulty": 4
       },
       {
+        "slug": "resistor-color",
+        "name": "Resistor Color",
+        "uuid": "189eb2e7-d2b2-4439-aa13-ade013566bdb",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "roman-numerals",
         "name": "Roman Numerals",
         "uuid": "c6213ea4-ba17-4030-b6e1-a30019ae1840",

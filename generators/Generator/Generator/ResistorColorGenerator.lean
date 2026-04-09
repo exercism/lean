@@ -22,13 +22,13 @@ def genTestCase (_exercise : String) (case : TreeMap.Raw String Json) : String :
   let funName := getFunName (case.get! "property")
   match funName with
   | "colors" =>
-    let result := expected.getArr?.map (·.map (·.compress |> toLiteral |> (s!"c!{·}"))) |> getOk
+    let result := expected.getArr?.map (·.map (·.compress |> toLiteral |> (s!"c*{·}"))) |> getOk
     let theorems := result.toList.mapIdx fun i color =>
-      let c := color.dropPrefix "c!" |>.copy
+      let c := color.dropPrefix "c*" |>.copy
       s!"
 theorem h_{c}: {color} = ({i} : Fin 10) := by rfl"
     (String.join theorems) ++ s!"
-theorem h_all: c!all = {result} := by rfl"
+theorem h_all: c*all = {result} := by rfl"
   | _ => ""
 
 def genEnd (_exercise : String) : String :=

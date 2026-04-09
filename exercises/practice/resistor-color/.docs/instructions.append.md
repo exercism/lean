@@ -2,9 +2,9 @@
 
 ## Defining syntax
 
-In this exercise, you must define syntax for colors using the `c!` prefix, e.g., `c!black`.
+In this exercise, you must define syntax for colors using the `c*` prefix, e.g., `c*black`.
 This syntax should expand at compile time to each color's corresponding value as a `Fin 10`, according to the instructions.
-In the same way, you must define syntax for an array of all color values using `c!all`.
+In the same way, you must define syntax for an array of all color values using `c*all`.
 
 This task will likely require you to use either notations or macros.
 You might want to check a [reference][macro-reference].

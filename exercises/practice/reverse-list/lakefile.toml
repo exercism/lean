@@ -1,0 +1,20 @@
+name = "reverse-list"
+version = "0.1.0"
+defaultTargets = ["ReverseListTest"]
+testDriver = "ReverseListTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "ReverseList"
+
+[[lean_lib]]
+name = "Spec"
+
+[[lean_exe]]
+name = "ReverseListTest"
+root = "ReverseListTest"
+

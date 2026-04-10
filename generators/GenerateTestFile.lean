@@ -77,7 +77,7 @@ structure OrderedMap where
   order : Array String
   map : TreeMap.Raw String Json
 
-def empty : OrderedMap := { order := #[], map := .empty }
+def OrderedMap.empty : OrderedMap := { order := #[], map := .empty }
 
 def getOk {α β} (except : Except α β) [Inhabited β] : β := except.toOption |> Option.get!
 
@@ -290,12 +290,19 @@ def generateTestFile (exercise : String) : IO Unit := do
   match maybeToml with
   | .error msg =>
     if extra.isEmpty
-    then throw <| IO.userError s!"{msg} and no extra cases found."
+    then
+      IO.eprintln s!"{msg} and no extra cases found."
+      match genTestFileContent pascalExercise OrderedMap.empty #[] with
+      | .error msg =>
+        IO.eprintln msg
+      | .ok testContent =>
+        IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+        IO.println s!"Added intro and ending."
     else
       IO.eprintln s!"{msg}. Trying to add extra cases."
-      match genTestFileContent pascalExercise empty extra with
+      match genTestFileContent pascalExercise OrderedMap.empty extra with
       | .error msg =>
-        throw <| IO.userError msg
+        IO.eprintln msg
       | .ok testContent =>
         IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
         IO.println "Extra cases successfully added."
@@ -304,12 +311,19 @@ def generateTestFile (exercise : String) : IO Unit := do
     match ← readCanonicalData exercise with
     | .error msg =>
       if extra.isEmpty
-      then throw <| IO.userError s!"{msg} and no extra cases found."
+      then
+        IO.eprintln s!"{msg} and no extra cases found."
+        match genTestFileContent pascalExercise OrderedMap.empty #[] with
+        | .error msg =>
+          IO.eprintln msg
+        | .ok testContent =>
+          IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+          IO.println s!"Added intro and ending."
       else
         IO.eprintln s!"{msg}. Trying to add extra cases."
-        match genTestFileContent pascalExercise empty extra with
+        match genTestFileContent pascalExercise OrderedMap.empty extra with
         | .error msg =>
-          throw <| IO.userError msg
+          IO.eprintln msg
         | .ok testContent =>
           IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
           IO.println "Extra cases successfully added."
@@ -317,12 +331,19 @@ def generateTestFile (exercise : String) : IO Unit := do
       match canonicalData.getObj? with
       | .error _ =>
         if extra.isEmpty
-        then throw <| IO.userError "Canonical data could not be parsed and no extra cases found."
+        then
+          IO.eprintln "Canonical data could not be parsed and no extra cases found."
+          match genTestFileContent pascalExercise OrderedMap.empty #[] with
+          | .error msg =>
+            IO.eprintln msg
+          | .ok testContent =>
+            IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+            IO.println s!"Added intro and ending."
         else
           IO.eprintln s!"Canonical data could not be parsed. Trying to add extra cases."
-          match genTestFileContent pascalExercise empty extra with
+          match genTestFileContent pascalExercise OrderedMap.empty extra with
           | .error msg =>
-            throw <| IO.userError msg
+            IO.eprintln msg
           | .ok testContent =>
             IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
             IO.println "Extra cases successfully added."
@@ -330,19 +351,26 @@ def generateTestFile (exercise : String) : IO Unit := do
         match getCanonicalCases maybeMap tests with
         | .error msg =>
           if extra.isEmpty
-          then throw <| IO.userError s!"{msg} and no extra cases found."
+          then
+            IO.eprintln s!"{msg} and no extra cases found."
+            match genTestFileContent pascalExercise OrderedMap.empty #[] with
+            | .error msg =>
+              IO.eprintln msg
+            | .ok testContent =>
+              IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+              IO.println s!"Added intro and ending."
           else
             IO.eprintln s!"Parsing canonical data returned error: {msg}. Trying to add extra cases."
-            match genTestFileContent pascalExercise empty extra with
+            match genTestFileContent pascalExercise OrderedMap.empty extra with
             | .error msg =>
-              throw <| IO.userError msg
+              IO.eprintln msg
             | .ok testContent =>
               IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
               IO.println "Extra cases successfully added."
         | .ok cases =>
           match genTestFileContent pascalExercise cases extra with
           | .error msg =>
-            throw <| IO.userError msg
+            IO.eprintln msg
           | .ok testContent =>
             IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
             let extraMsg := if extra.isEmpty then "" else " Extra cases successfully added."

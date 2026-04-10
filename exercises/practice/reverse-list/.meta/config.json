@@ -1,0 +1,21 @@
+{
+  "authors": [
+    "oxe-i"
+  ],
+  "files": {
+    "solution": [
+      "ReverseList.lean"
+    ],
+    "test": [
+      "ReverseListTest.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ],
+    "editor": [
+      "Spec.lean"
+    ]
+  },
+  "icon": "array-loops",
+  "blurb": "Prove equality between a custom function and the built-in List.reverse function."
+}

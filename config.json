@@ -276,10 +276,11 @@
       },
       {
         "slug": "reverse-list",
-        "name": "reverse-list",
+        "name": "Reverse List",
         "uuid": "367e9ad0-d3a1-403a-9c05-fc53a246c63b",
         "practices": [],
         "prerequisites": [],
+        "status": "wip",
         "difficulty": 3
       },
       {

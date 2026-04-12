@@ -17,5 +17,5 @@
     ]
   },
   "icon": "array-loops",
-  "blurb": "Prove the equality between a custom function and the built-in List.reverse function."
+  "blurb": "Prove the equality between a custom function and the built-in List.reverse."
 }

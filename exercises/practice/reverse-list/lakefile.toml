@@ -12,7 +12,7 @@ srcDir = "vendor/LeanTest"
 name = "ReverseList"
 
 [[lean_lib]]
-name = "Spec"
+name = "Extra"
 
 [[lean_exe]]
 name = "ReverseListTest"

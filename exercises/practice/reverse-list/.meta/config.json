@@ -13,7 +13,7 @@
       ".meta/Example.lean"
     ],
     "editor": [
-      "Spec.lean"
+      "Extra.lean"
     ]
   },
   "icon": "array-loops",

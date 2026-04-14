@@ -1,0 +1,18 @@
+[
+    {
+        "description": "Encode a series of integers, producing a series of bytes. -> big number",
+        "property": "encode",
+        "input": {
+        "integers": [6734734192409283617213650083744412813817389736008238494387248]
+        },
+        "expected": [195, 135, 158, 227, 201, 169, 168, 216, 243, 217, 150, 229, 249, 158, 219, 184, 135, 139, 172, 205, 232, 158, 153, 252, 230, 222, 176, 152, 48]
+    },
+    {
+        "description": "Decode a series of bytes, producing a series of integers. -> big number",
+        "property": "decode",
+        "input": {
+        "integers": [139, 199, 214, 207, 165, 200, 207, 193, 165, 250, 150, 183, 216, 207, 207, 230, 231, 162, 211, 239, 212, 240, 214, 222, 250, 18]
+        },
+        "expected": [553612784957720002932751723682307655243628583457373458]
+    }
+]

@@ -1,0 +1,15 @@
+name = "variable-length-quantity"
+version = "0.1.0"
+defaultTargets = ["VariableLengthQuantityTest"]
+testDriver = "VariableLengthQuantityTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "VariableLengthQuantity"
+
+[[lean_exe]]
+name = "VariableLengthQuantityTest"
+root = "VariableLengthQuantityTest"

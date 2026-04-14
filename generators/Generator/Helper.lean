@@ -84,8 +84,8 @@ def serializeList
     : String :=
     let contents := serializeContent json serializer
     match contents with
-    | [] => "[]"
-    | xs =>
+    | []  => "[]"
+    | xs  =>
       let joined := String.intercalate separator xs
       s!"[\n{indent}  {joined}\n{indent}]"
 

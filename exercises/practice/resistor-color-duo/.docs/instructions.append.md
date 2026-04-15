@@ -2,6 +2,13 @@
 
 ## Defining syntax
 
+~~~~exercism/caution
+This exercise is intended as a continuation of [`Resistor Color`][resistor-color] and builds upon it.
+Although you may solve practice exercises in any order, we encourage you to follow the suggested sequence.
+
+[resistor-color]: https://exercism.org/tracks/lean/exercises/resistor-color
+~~~~
+
 In this exercise, you are given syntax for colors already predefined using the `c*` prefix, e.g., `c*black`.
 You must then define syntax that associates a sequence of colors to a number, according to the instructions.
 The colors are within `*[[` and `]]` and separated by `, `, e.g., `*[[c*black, c*yellow, c*violet]]`.

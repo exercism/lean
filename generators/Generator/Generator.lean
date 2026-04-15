@@ -1,3 +1,4 @@
+import Generator.ResistorColorDuoGenerator
 import Generator.VariableLengthQuantityGenerator
 import Generator.ReverseListGenerator
 import Generator.ResistorColorGenerator
@@ -104,6 +105,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("ResistorColorDuo", (ResistorColorDuoGenerator.genIntro, ResistorColorDuoGenerator.genTestCase, ResistorColorDuoGenerator.genEnd)),
     ("VariableLengthQuantity", (VariableLengthQuantityGenerator.genIntro, VariableLengthQuantityGenerator.genTestCase, VariableLengthQuantityGenerator.genEnd)),
     ("ReverseList", (ReverseListGenerator.genIntro, ReverseListGenerator.genTestCase, ReverseListGenerator.genEnd)),
     ("ResistorColor", (ResistorColorGenerator.genIntro, ResistorColorGenerator.genTestCase, ResistorColorGenerator.genEnd)),

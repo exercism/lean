@@ -539,6 +539,14 @@
         "difficulty": 5
       },
       {
+        "slug": "resistor-color-duo",
+        "name": "Resistor Color Duo",
+        "uuid": "de08a88e-1fd2-49fa-b501-11649b2e42af",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "transpose",
         "name": "Transpose",
         "uuid": "d6227270-629b-4db3-9698-e332dbf42ef2",

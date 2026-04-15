@@ -1,0 +1,19 @@
+name = "resistor-color-duo"
+version = "0.1.0"
+defaultTargets = ["ResistorColorDuoTest"]
+testDriver = "ResistorColorDuoTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "ResistorColorDuo"
+
+[[lean_lib]]
+name = "Extra"
+
+[[lean_exe]]
+name = "ResistorColorDuoTest"
+root = "ResistorColorDuoTest"

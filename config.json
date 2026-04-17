@@ -635,6 +635,14 @@
         "difficulty": 6
       },
       {
+        "slug": "pascals-triangle",
+        "name": "Pascal's Triangle",
+        "uuid": "d37330c0-a6b9-4e24-b28d-0d4b1b2b35b0",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 6
+      },
+      {
         "slug": "rail-fence-cipher",
         "name": "Rail Fence Cipher",
         "uuid": "f0f8afa4-a9d9-46f4-b0e1-94a8db2e7bad",

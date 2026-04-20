@@ -723,6 +723,14 @@
         "difficulty": 8
       },
       {
+        "slug": "alphametics",
+        "name": "Alphametics",
+        "uuid": "ac086674-808b-4f36-be70-725174f1caff",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 8
+      },
+      {
         "slug": "bank-account",
         "name": "Bank Account",
         "uuid": "73c36249-5649-4cb0-b176-dae77d52f3ca",

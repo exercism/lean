@@ -1,0 +1,20 @@
+[
+  {
+    "description": "puzzle with a colors theme",
+    "property": "solve",
+    "input": {
+      "puzzle": "GREEN + ORANGE == COLORS"
+    },
+    "expected": {
+      "A": 5,
+      "C": 2,
+      "E": 4,
+      "G": 8,
+      "L": 9,
+      "N": 6,
+      "O": 1,
+      "R": 3,
+      "S": 0
+    }
+  }
+]

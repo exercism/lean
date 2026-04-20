@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "keiravillekode"
+  ],
+  "files": {
+    "solution": [
+      "Alphametics.lean"
+    ],
+    "test": [
+      "AlphameticsTest.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ]
+  },
+  "blurb": "Given an alphametics puzzle, find the correct solution."
+}

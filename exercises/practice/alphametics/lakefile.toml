@@ -1,0 +1,15 @@
+name = "alphametics"
+version = "0.1.0"
+defaultTargets = ["AlphameticsTest"]
+testDriver = "AlphameticsTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Alphametics"
+
+[[lean_exe]]
+name = "AlphameticsTest"
+root = "AlphameticsTest"

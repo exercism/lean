@@ -1,0 +1,18 @@
+{
+  "authors": [
+    "oxe-i"
+  ],
+  "files": {
+    "solution": [
+      "Assemble.lean"
+    ],
+    "test": [
+      "AssembleTest.lean"
+    ],
+    "example": [
+      ".meta/Example.lean"
+    ]
+  },
+  "icon": "binary",
+  "blurb": "Define the syntax of a minimal x86-64–inspired assembly language"
+}

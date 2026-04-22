@@ -1,0 +1,184 @@
+[
+  {
+    "description": "Copy a value",
+    "property": "assemble",
+    "input": {
+       "args": [10],
+       "code": [
+        "mov rax, rdi"
+       ]
+    },
+    "expected": {
+      "rax": 10
+    }
+  },
+  {
+    "description": "Sum and subtraction",
+    "property": "assemble",
+    "input": {
+       "args": [10, 20],
+       "code": [
+        "mov rax, rdi",
+        "add rax, rdi",
+        "sub rax, rsi"
+       ]
+    },
+    "expected": {
+      "rax": 0
+    }
+  },
+  {
+    "description": "Multiplication and division",
+    "property": "assemble",
+    "input": {
+      "args": [100, 5, 6],
+      "code": [
+        "mov rax, rdi",
+        "mul rax, rdx",
+        "div rax, rsi"
+      ]
+    },
+    "expected": {
+      "rax": 120
+    }
+  },
+  {
+    "description": "Bitwise operations",
+    "property": "assemble",
+    "input": {
+       "args": [49, 16, 1, 255],
+       "code": [
+        "or rax, rcx",
+        "and rax, rdi",
+        "xor rax, rsi",
+        "shr rax, rdx"
+       ]
+    },
+    "expected": {
+      "rax": 16
+    }
+  },
+  {
+    "description": "Skip instructions",
+    "property": "assemble",
+    "input": {
+       "args": [50000000000, -3000000000],
+       "code": [
+        "mov rax, rdi",
+        "jmp end_program",
+        "add rax, rsi",
+        "end_program:"
+       ]
+    },
+    "expected": {
+      "rax": 50000000000
+    }
+  },
+  {
+    "description": "Condition met",
+    "property": "assemble",
+    "input": {
+       "args": [40010, -40020],
+       "code": [
+        "mov rax, rdi",
+        "cmp rax, rsi",
+        "jg end_program",
+        "add rax, rsi",
+        "end_program:"
+       ]
+    },
+    "expected": {
+      "rax": 40010
+    }
+  },
+  {
+    "description": "Condition not met",
+    "property": "assemble",
+    "input": {
+       "args": [400, -600],
+       "code": [
+        "mov rax, rdi",
+        "cmp rax, rsi",
+        "jl end_program",
+        "add rax, rsi",
+        "end_program:"
+       ]
+    },
+    "expected": {
+      "rax": -200
+    }
+  },
+  {
+    "description": "Calculate the sum of the first 10 natural numbers",
+    "property": "assemble",
+    "input": {
+       "args": [10],
+       "code": [
+        "sum_first_N:",
+        "cmp rdi, 0",
+        "je base_case",
+        "add rax, rdi",
+        "sub rdi, 1",
+        "jmp sum_first_N",
+        "base_case:"
+       ]
+    },
+    "expected": {
+      "rax": 55
+    }
+  },
+  {
+    "description": "Count how many bits are set in 2000000000",
+    "property": "assemble",
+    "input": {
+       "args": [2000000000],
+       "code": [
+        "pop_count:",
+        "cmp rdi, 0",
+        "je base_case",
+        "add rax, 1",
+        "mov rdx, rdi",
+        "sub rdx, 1",
+        "and rdi, rdx",
+        "jmp pop_count",
+        "base_case:"
+       ]
+    },
+    "expected": {
+      "rax": 13
+    }
+  },
+  {
+    "description": "Count steps in the Collatz Conjecture starting with 1000000, -1 indicates error",
+    "property": "assemble",
+    "input": {
+       "args": [1000000],
+       "code": [
+        "steps:",
+        "cmp rdi, 1",
+        "jl error",
+        "je base_case",
+        "loop:",
+        "add rax, 1",
+        "mov rdx, rdi",
+        "and rdx, 1",
+        "cmp rdx, 0",
+        "je even",
+        "mul rdi, 3",
+        "add rdi, 1",
+        "jmp loop",
+        "even:",
+        "shr rdi, 1",
+        "cmp rdi, 1",
+        "je base_case",
+        "jmp loop",
+        "error:",
+        "mov rax, -1",
+        "base_case:"
+       ]
+    },
+    "expected": {
+      "rax": 152
+    }
+  }
+]

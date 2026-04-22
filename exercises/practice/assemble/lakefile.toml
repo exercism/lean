@@ -1,0 +1,15 @@
+name = "assemble"
+version = "0.1.0"
+defaultTargets = ["AssembleTest"]
+testDriver = "AssembleTest"
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "Assemble"
+
+[[lean_exe]]
+name = "AssembleTest"
+root = "AssembleTest"

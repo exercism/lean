@@ -137,11 +137,11 @@ macro_rules
          match dest with
         | `(x86_dest| $destId:ident) =>
           let opStr   := mkStrLit $ getStr opId
-          let destStr := mkStrLit $ getStr destId
+          let destStr := mkStrLit destId.getId.toString
           ops := ops.push (← `([$opStr, $destStr]))
         | _ => throwUnsupported
       | `(x86_inst| $labelId:ident :) =>
-        labelNames := labelNames.push (mkStrLit $ getStr labelId)
+        labelNames := labelNames.push (mkStrLit labelId.getId.toString)
         labelIndices := labelIndices.push (mkNumLit s!"{i}")
         ops := ops.push (← `([]))
       | _ => throwUnsupported

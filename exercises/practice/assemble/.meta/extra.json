@@ -109,6 +109,57 @@
     }
   },
   {
+    "description": "Registers are case-insensitive",
+    "property": "assemble",
+    "input": {
+       "args": [4010, -3010],
+       "code": [
+        "mov RAX, rdi",
+        "SUB rax, Rsi"
+       ]
+    },
+    "expected": {
+      "rax": 7020
+    }
+  },
+  {
+    "description": "Labels are case-sensitive",
+    "property": "assemble",
+    "input": {
+       "args": [4010, -3010, 10],
+       "code": [
+        "mov rax, rdi",
+        "cmp rax, rsi",
+        "jg End_program",
+        "sub rax, rsi",
+        "End_program:",
+        "div rax, rdx",
+        "end_program:"
+       ]
+    },
+    "expected": {
+      "rax": 401
+    }
+  },
+  {
+    "description": "All registers are used",
+    "property": "assemble",
+    "input": {
+       "args": [4, -75590, -10, 890, 435, -235],
+       "code": [
+        "mov rax, r8",
+        "add rax, r9",
+        "mul rax, rdx",
+        "sub rax, rcx",
+        "and rax, rdi",
+        "or rax, rsi"
+       ]
+    },
+    "expected": {
+      "rax": -75586
+    }
+  },
+  {
     "description": "Calculate the sum of the first 10 natural numbers",
     "property": "assemble",
     "input": {

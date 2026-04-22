@@ -58,6 +58,33 @@ def assembleTests : TestSuite :=
         end_program:
       )
       return assertEqual (-200) (program(400, -600)))
+  |>.addTest "Registers are case-insensitive" (do
+      let program := assemble!(
+          mov RAX, rdi
+          SUB rax, Rsi
+      )
+      return assertEqual (7020) (program(4010, -3010)))
+  |>.addTest "Labels are case-sensitive" (do
+      let program := assemble!(
+          mov rax, rdi
+          cmp rax, rsi
+          jg End_program
+          sub rax, rsi
+        End_program:
+          div rax, rdx
+        end_program:
+      )
+      return assertEqual (401) (program(4010, -3010, 10)))
+  |>.addTest "All registers are used" (do
+      let program := assemble!(
+          mov rax, r8
+          add rax, r9
+          mul rax, rdx
+          sub rax, rcx
+          and rax, rdi
+          or rax, rsi
+      )
+      return assertEqual (-75586) (program(4, -75590, -10, 890, 435, -235)))
   |>.addTest "Calculate the sum of the first 10 natural numbers" (do
       let program := assemble!(
         sum_first_N:

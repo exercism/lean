@@ -49,6 +49,9 @@ program(10, -20)
 
 The return value of the program is always stored in `rax`.
 
+Note that register names are _case-insensitive_.
+This means that `rax`, `RAX` and `rAx` all refer to the same register.
+
 ## Assembly code
 
 Each line in the assembly code can be of two forms:
@@ -68,6 +71,9 @@ Labels have the following syntax:
 ```
 
 They do not alter the values of any register or have any effect to the program other than marking specific places of the code so they can be used by instructions.
+
+Note that labels are _case-sensitive_.
+This means that `Start`, `start` and `sTart` are all different labels.
 
 ### Two-operand instructions
 

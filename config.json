@@ -809,6 +809,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 9
+      },
+      {
+        "slug": "assemble",
+        "name": "assemble",
+        "uuid": "17337704-ef28-490b-bbdd-f8e3f51e326b",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 10
       }
     ]
   },

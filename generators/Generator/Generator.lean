@@ -1,3 +1,4 @@
+import Generator.AssembleGenerator
 import Generator.AlphameticsGenerator
 import Generator.PascalsTriangleGenerator
 import Generator.ResistorColorDuoGenerator
@@ -107,6 +108,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("Assemble", (AssembleGenerator.genIntro, AssembleGenerator.genTestCase, AssembleGenerator.genEnd)),
     ("Alphametics", (AlphameticsGenerator.genIntro, AlphameticsGenerator.genTestCase, AlphameticsGenerator.genEnd)),
     ("PascalsTriangle", (PascalsTriangleGenerator.genIntro, PascalsTriangleGenerator.genTestCase, PascalsTriangleGenerator.genEnd)),
     ("ResistorColorDuo", (ResistorColorDuoGenerator.genIntro, ResistorColorDuoGenerator.genTestCase, ResistorColorDuoGenerator.genEnd)),

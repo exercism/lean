@@ -115,7 +115,7 @@ This instruction does not modify any register, but instead compares the `destina
 
 - _greater than_, if `destination` > `source`
 - _equal_, if `destination` == `source`
-- _lesser than_, if `destination` < `source`
+- _less than_, if `destination` < `source`
 
 How you keep track internally of this state is up to you.
 
@@ -141,7 +141,7 @@ Those are the jumping instructions your program must support:
 |-------------|----------------------------------------------------|
 | `jmp`       | unconditional jump. The jump is always performed |
 | `je`        | jumps if the internal state is _equal_             |
-| `jl`        | jumps if the internal state is _lesser than_         |
+| `jl`        | jumps if the internal state is _less than_         |
 | `jg`        | jumps if the internal state is _greater than_      |
 
 ~~~~exercism/note

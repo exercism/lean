@@ -6,7 +6,7 @@
 This exercise is intended as a continuation of [`Resistor Color Duo`][resistor-color-duo] and builds upon it.
 Although you may solve practice exercises in any order, we encourage you to follow the suggested sequence.
 
-[resistor-color]: https://exercism.org/tracks/lean/exercises/resistor-color-duo
+[resistor-color-duo]: https://exercism.org/tracks/lean/exercises/resistor-color-duo
 ~~~~
 
 In this exercise, you are given syntax for colors already predefined using the `c*` prefix, e.g., `c*black`.

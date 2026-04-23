@@ -24,7 +24,7 @@ You may consider the absence of an error as a passing test.
 If you work locally or in Lean's [online playground][playground], you will get instant feedback on any error reported by `#guard_msgs` through Lean InfoView.
 
 ~~~~exercism/note
-The resistance value should be output using the unit `Ω` (ohms), possibly with a metric prefix.
+The resistance value should be output using the unit `Ω` (ohm).
 This unicode character can be generated locally on in Lean's online playground with the shortcut `\ohm`.
 If you are working in Exercism's online editor, feel free to copy the character from the instructions.
 ~~~~

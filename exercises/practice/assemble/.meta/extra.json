@@ -46,16 +46,17 @@
     "description": "Bitwise operations",
     "property": "assemble",
     "input": {
-       "args": [49, 16, 1, 255],
+       "args": [49, 16, 3, 255],
        "code": [
         "or rax, rcx",
         "and rax, rdi",
         "xor rax, rsi",
-        "shr rax, rdx"
+        "shr rax, 2",
+        "shl rax, rdx"
        ]
     },
     "expected": {
-      "rax": 16
+      "rax": 64
     }
   },
   {
@@ -114,12 +115,28 @@
     "input": {
        "args": [4010, -3010],
        "code": [
-        "mov RAX, rdi",
-        "SUB rax, Rsi"
+        "mov RAX, rDi",
+        "sub raX, RsI"
        ]
     },
     "expected": {
       "rax": 7020
+    }
+  },
+  {
+    "description": "Instructions are case-insensitive",
+    "property": "assemble",
+    "input": {
+       "args": [-500, 10000, -80000],
+       "code": [
+        "MOV rax, rdi",
+        "mUl rax, rdx",
+        "diV rax, rsi",
+        "ShR rax, 2"
+       ]
+    },
+    "expected": {
+      "rax": 1000
     }
   },
   {
@@ -147,12 +164,12 @@
     "input": {
        "args": [4, -75590, -10, 890, 435, -235],
        "code": [
-        "mov rax, r8",
-        "add rax, r9",
-        "mul rax, rdx",
-        "sub rax, rcx",
-        "and rax, rdi",
-        "or rax, rsi"
+        "MOV RAX, R8",
+        "ADD RAX, R9",
+        "MUL RAX, RDX",
+        "SUB RAX, RCX",
+        "AND RAX, RDI",
+        "OR RAX, RSI"
        ]
     },
     "expected": {
@@ -165,13 +182,13 @@
     "input": {
        "args": [10],
        "code": [
-        "sum_first_N:",
-        "cmp rdi, 0",
-        "je base_case",
-        "add rax, rdi",
-        "sub rdi, 1",
-        "jmp sum_first_N",
-        "base_case:"
+        "Sum_first_N:",
+        "Cmp Rdi, 0",
+        "Je Base_case",
+        "Add Rax, Rdi",
+        "Sub Rdi, 1",
+        "Jmp Sum_first_N",
+        "Base_case:"
        ]
     },
     "expected": {
@@ -186,13 +203,13 @@
        "code": [
         "pop_count:",
         "cmp rdi, 0",
-        "je base_case",
+        "je EXIT",
         "add rax, 1",
         "mov rdx, rdi",
         "sub rdx, 1",
         "and rdi, rdx",
         "jmp pop_count",
-        "base_case:"
+        "EXIT:"
        ]
     },
     "expected": {
@@ -208,7 +225,7 @@
         "steps:",
         "cmp rdi, 1",
         "jl error",
-        "je base_case",
+        "je EXIT",
         "loop:",
         "add rax, 1",
         "mov rdx, rdi",
@@ -221,11 +238,11 @@
         "even:",
         "shr rdi, 1",
         "cmp rdi, 1",
-        "je base_case",
+        "je EXIT",
         "jmp loop",
         "error:",
         "mov rax, -1",
-        "base_case:"
+        "EXIT:"
        ]
     },
     "expected": {

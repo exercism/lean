@@ -1,6 +1,6 @@
 # Instructions
 
-In this exercise, you will define the syntax and execution model for a small assembly-like language inspired by the `x86-64` assembly language.
+In this exercise, you will define the syntax and execution model for a small language inspired by the `x86-64` assembly language.
 
 The goal is to formalize how code is written, parsed, and executed within a constrained environment.
 
@@ -41,7 +41,7 @@ Your language must support the following registers:
 
 Registers start with a default value of `0`, unless they are used to pass arguments to the function.
 
-For example, in the following program, all registers have a value of `0` with the exception of `rdi`, which is initialized with `10`, and `rsi`. which is initialized with `-20`:
+For example, in the following program, all registers have a value of `0` with the exception of `rdi`, which is initialized with `10`, and `rsi`, which is initialized with `-20`:
 
 ```lean
 program(10, -20)
@@ -49,8 +49,10 @@ program(10, -20)
 
 The return value of the program is always stored in `rax`.
 
-Note that register names are _case-insensitive_.
+~~~~exercism/note
+Register names are _case-insensitive_.
 This means that `rax`, `RAX` and `rAx` all refer to the same register.
+~~~~
 
 ## Assembly code
 
@@ -70,10 +72,12 @@ Labels have the following syntax:
 <label>:
 ```
 
-They do not alter the values of any register or have any effect to the program other than marking specific places of the code so they can be used by instructions.
+They do not alter the value of any register or have any effect on the program other than marking specific places of the code so they can be used by instructions.
 
-Note that labels are _case-sensitive_.
+~~~~exercism/note
+Labels are _case-sensitive_.
 This means that `Start`, `start` and `sTart` are all different labels.
+~~~~
 
 ### Two-operand instructions
 
@@ -101,13 +105,13 @@ This is a list of instructions your program must support:
 | `div`  | destination := destination / source   |
 | `xor`  | destination := destination ^^^ source |
 | `and`  | destination := destination &&& source |
-| `or`   | destination := destination ||| source |
+| `or`   | destination := destination \|\|\| source |
 | `shl`  | destination := destination <<< source |
 | `shr`  | destination := destination >>> source |
 
 Other than those, your program must support the two-operand `cmp` instruction.
 
-This instruction does not modify any register, but instead compares the `destination` and the `source` operands and sets an internal state of the program to one of three states:
+This instruction does not modify any register, but instead compares the `destination` and the `source` operands and sets an internal state of the program to one of three options:
 
 - _greater than_, if `destination` > `source`
 - _equal_, if `destination` == `source`
@@ -137,5 +141,10 @@ Those are the jumping instructions your program must support:
 |-------------|----------------------------------------------------|
 | `jmp`       | unconditional jump. The jump is always performed |
 | `je`        | jumps if the internal state is _equal_             |
-| `jl`        | jumps if the internal state is _less than_         |
+| `jl`        | jumps if the internal state is _lesser than_         |
 | `jg`        | jumps if the internal state is _greater than_      |
+
+~~~~exercism/note
+Instruction opcodes, be they two-operand or one-operand, are _case-insensitive_.
+This means that `add`, `ADD` and `aDd` all refer to the same instruction.
+~~~~

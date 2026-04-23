@@ -651,6 +651,14 @@
         "difficulty": 6
       },
       {
+        "slug": "resistor-color-trio",
+        "name": "Resistor Color Trio",
+        "uuid": "a3763bb0-6eb4-4cec-8879-6069fb1418a2",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 6
+      },
+      {
         "slug": "book-store",
         "name": "Book Store",
         "uuid": "b98c9123-8c26-455f-9b1f-787fb61b5be0",

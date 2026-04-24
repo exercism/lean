@@ -2,6 +2,7 @@ name = "resistor-color-trio"
 version = "0.1.0"
 defaultTargets = ["ResistorColorTrioTest"]
 testDriver = "ResistorColorTrioTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"

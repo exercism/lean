@@ -2,6 +2,7 @@ name = "largest-series-product"
 version = "0.1.0"
 defaultTargets = ["LargestSeriesProductTest"]
 testDriver = "LargestSeriesProductTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "LargestSeriesProduct"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "LargestSeriesProductTest"

@@ -17,4 +17,3 @@ name = "Extra"
 [[lean_exe]]
 name = "ReverseListTest"
 root = "ReverseListTest"
-

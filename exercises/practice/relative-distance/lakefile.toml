@@ -2,6 +2,7 @@ name = "relative-distance"
 version = "0.1.0"
 defaultTargets = ["RelativeDistanceTest"]
 testDriver = "RelativeDistanceTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "RelativeDistance"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "RelativeDistanceTest"

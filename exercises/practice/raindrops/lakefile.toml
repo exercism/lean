@@ -2,6 +2,7 @@ name = "raindrops"
 version = "0.1.0"
 defaultTargets = ["RaindropsTest"]
 testDriver = "RaindropsTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "Raindrops"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "RaindropsTest"

@@ -2,6 +2,7 @@ name = "leap"
 version = "0.1.0"
 defaultTargets = ["LeapTest"]
 testDriver = "LeapTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "Leap"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "LeapTest"

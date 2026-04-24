@@ -2,6 +2,7 @@ name = "grep"
 version = "0.1.0"
 defaultTargets = ["GrepTest"]
 testDriver = "GrepTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "Grep"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "GrepTest"

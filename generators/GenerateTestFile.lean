@@ -397,17 +397,23 @@ def kebabCase (pascal : String) : String :=
     else (acc.push ch, false)
   ) ("", true) |>.fst
 
-def addTemplates (exercise : String) : IO Unit := do
-  let toolchainPath := s!"exercises/practice/{exercise}/lean-toolchain"
-  if ← System.FilePath.pathExists toolchainPath then
+def addTemplates (pascal kebab : String) : IO Unit := do
+  let paths ← System.FilePath.walkDir "templates"
+  for path in paths do
+    if ← path.isDir then continue
+    let strPath := path.toString
+    let newPath := strPath.replace "templates" s!"exercises/practice/{kebab}"
     try
-      let newToolchain ← IO.FS.readFile "templates/lean-toolchain"
-      IO.FS.writeFile toolchainPath newToolchain
+      let content ← (do
+        if strPath.trimAsciiEnd.endsWith "lakefile.toml" then
+          IO.FS.readFile path
+            >>= (return ·.replace "%{pascal_slug}" pascal)
+            >>= (return ·.replace "%{kebab_slug}" kebab)
+        else
+          IO.FS.readFile path)
+      IO.FS.writeFile newPath content
     catch _ =>
-      IO.eprintln "Couldn't find lean-toolchain in templates. Please add it manually."
-  else
-    IO.println s!"Couldn't find lean-toolchain in {toolchainPath}. Trying to add exercise"
-    addPracticeExercise exercise []
+      IO.eprintln s!"Failed to add templates to {pascal}."
 
 def regenerateTestFiles : IO Unit := do
   let _ ← IO.Process.run {
@@ -418,7 +424,7 @@ def regenerateTestFiles : IO Unit := do
     let kebab := kebabCase pascal
     try
       generateTestFile kebab
-      addTemplates kebab
+      addTemplates pascal kebab
     catch msg =>
       IO.eprintln s!"Regeneration for {pascal} failed. Error logged was: {msg}"
 

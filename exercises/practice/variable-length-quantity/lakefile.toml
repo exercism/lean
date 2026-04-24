@@ -2,6 +2,7 @@ name = "variable-length-quantity"
 version = "0.1.0"
 defaultTargets = ["VariableLengthQuantityTest"]
 testDriver = "VariableLengthQuantityTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "VariableLengthQuantity"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "VariableLengthQuantityTest"

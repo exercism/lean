@@ -2,6 +2,7 @@ name = "protein-translation"
 version = "0.1.0"
 defaultTargets = ["ProteinTranslationTest"]
 testDriver = "ProteinTranslationTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "ProteinTranslation"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "ProteinTranslationTest"

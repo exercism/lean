@@ -2,6 +2,7 @@ name = "prime-factors"
 version = "0.1.0"
 defaultTargets = ["PrimeFactorsTest"]
 testDriver = "PrimeFactorsTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "PrimeFactors"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "PrimeFactorsTest"

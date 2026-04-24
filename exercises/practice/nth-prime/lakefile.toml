@@ -2,6 +2,7 @@ name = "nth-prime"
 version = "0.1.0"
 defaultTargets = ["NthPrimeTest"]
 testDriver = "NthPrimeTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "NthPrime"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "NthPrimeTest"

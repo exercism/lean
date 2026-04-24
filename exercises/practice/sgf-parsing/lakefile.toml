@@ -2,6 +2,7 @@ name = "sgf-parsing"
 version = "0.1.0"
 defaultTargets = ["SgfParsingTest"]
 testDriver = "SgfParsingTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "SgfParsing"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "SgfParsingTest"

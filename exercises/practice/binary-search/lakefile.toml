@@ -2,6 +2,7 @@ name = "binary-search"
 version = "0.1.0"
 defaultTargets = ["BinarySearchTest"]
 testDriver = "BinarySearchTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "BinarySearch"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "BinarySearchTest"

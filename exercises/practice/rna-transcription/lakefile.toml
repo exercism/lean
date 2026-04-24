@@ -2,6 +2,7 @@ name = "rna-transcription"
 version = "0.1.0"
 defaultTargets = ["RnaTranscriptionTest"]
 testDriver = "RnaTranscriptionTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "RnaTranscription"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "RnaTranscriptionTest"

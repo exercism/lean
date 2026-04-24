@@ -2,6 +2,7 @@ name = "two-fer"
 version = "0.1.0"
 defaultTargets = ["TwoFerTest"]
 testDriver = "TwoFerTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "TwoFer"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "TwoFerTest"

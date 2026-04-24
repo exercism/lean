@@ -2,6 +2,7 @@ name = "armstrong-numbers"
 version = "0.1.0"
 defaultTargets = ["ArmstrongNumbersTest"]
 testDriver = "ArmstrongNumbersTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "ArmstrongNumbers"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "ArmstrongNumbersTest"

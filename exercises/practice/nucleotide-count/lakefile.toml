@@ -2,6 +2,7 @@ name = "nucleotide-count"
 version = "0.1.0"
 defaultTargets = ["NucleotideCountTest"]
 testDriver = "NucleotideCountTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "NucleotideCount"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "NucleotideCountTest"

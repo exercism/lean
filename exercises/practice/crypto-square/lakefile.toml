@@ -2,6 +2,7 @@ name = "crypto-square"
 version = "0.1.0"
 defaultTargets = ["CryptoSquareTest"]
 testDriver = "CryptoSquareTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "CryptoSquare"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "CryptoSquareTest"

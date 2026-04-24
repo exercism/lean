@@ -2,6 +2,7 @@ name = "flatten-array"
 version = "0.1.0"
 defaultTargets = ["FlattenArrayTest"]
 testDriver = "FlattenArrayTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "FlattenArray"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "FlattenArrayTest"

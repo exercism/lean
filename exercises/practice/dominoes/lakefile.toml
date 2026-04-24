@@ -2,6 +2,7 @@ name = "dominoes"
 version = "0.1.0"
 defaultTargets = ["DominoesTest"]
 testDriver = "DominoesTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "Dominoes"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "DominoesTest"

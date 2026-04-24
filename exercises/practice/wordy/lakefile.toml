@@ -2,6 +2,7 @@ name = "wordy"
 version = "0.1.0"
 defaultTargets = ["WordyTest"]
 testDriver = "WordyTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
 
 [[lean_lib]]
 name = "LeanTest"
@@ -9,6 +10,9 @@ srcDir = "vendor/LeanTest"
 
 [[lean_lib]]
 name = "Wordy"
+
+[[lean_lib]]
+name = "Extra"
 
 [[lean_exe]]
 name = "WordyTest"

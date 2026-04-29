@@ -763,6 +763,14 @@
         "difficulty": 8
       },
       {
+        "slug": "dot-dsl",
+        "name": "DOT DSL",
+        "uuid": "92943eac-29ac-47a8-98bc-aec4d473e52f",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 8
+      },
+      {
         "slug": "grep",
         "name": "Grep",
         "uuid": "f5f84a44-4e65-4598-811a-31766f68567c",

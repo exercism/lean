@@ -11,6 +11,9 @@
     ],
     "example": [
       ".meta/Example.lean"
+    ],
+    "editor": [
+      "Extra.lean"
     ]
   },
   "blurb": "Convert color codes, as used on resistors, to a human-readable label.",

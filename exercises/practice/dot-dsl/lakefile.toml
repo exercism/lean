@@ -1,0 +1,19 @@
+name = "dot-dsl"
+version = "0.1.0"
+defaultTargets = ["DotDslTest"]
+testDriver = "DotDslTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "DotDsl"
+
+[[lean_lib]]
+name = "Extra"
+
+[[lean_exe]]
+name = "DotDslTest"
+root = "DotDslTest"

@@ -1,5 +1,7 @@
 # Instructions Append
 
+## Implementation
+
 To complete this exercise you need to define the data type `Clock`, add a `BEq` and a `ToString` instance, and implement the functions:
 
 * `create`, that takes two integers, possibly negative, representing hours and minutes respectively, and creates a valid Clock.

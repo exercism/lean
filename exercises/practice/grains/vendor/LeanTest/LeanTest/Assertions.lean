@@ -1,4 +1,4 @@
-/-
+/-!
 Assertion functions for unit testing.
 -/
 

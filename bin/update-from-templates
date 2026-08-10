@@ -18,7 +18,7 @@ vendor_hash=$(hash_dir templates/vendor)
 toolchain_hash=$(md5sum templates/lean-toolchain | cut -d' ' -f1)
 
 num_updated=0
-for exercise_dir in exercises/practice/*; do
+for exercise_dir in exercises/{practice,concept}/*; do
     [[ -d "${exercise_dir}" ]] || continue
 
     # Update lean-toolchain

@@ -1,4 +1,4 @@
-/-!
+/-
 Minimal, dependency-free JSON string building.
 
 This intentionally avoids `import Lean` (the compiler's own JSON support

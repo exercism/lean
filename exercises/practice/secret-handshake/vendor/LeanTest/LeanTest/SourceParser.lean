@@ -1,4 +1,4 @@
-/-!
+/-
 Extracts the literal source text of each `.addTest "<name>" (...)` call from
 a test file, for use as the v3 interface's `test_code` field.
 -/

@@ -1,6 +1,5 @@
 /-
-Extracts the literal source text of each `.addTest "<name>" (...)` call from
-a test file, for use as the v3 interface's `test_code` field.
+Extracts the literal source text of each `.addTest "<name>" (...)` call.
 -/
 
 namespace LeanTest.SourceParser
@@ -13,15 +12,12 @@ private def listStartsWith : List Char → List Char → Bool
 private def isSpace (c : Char) : Bool :=
   c == ' ' || c == '\t' || c == '\n' || c == '\r'
 
-/-- Trim leading/trailing whitespace. Implemented over `List Char` rather
-than `String.trim` because that function's signature has changed across
-recent Lean versions. -/
+/-- Trim leading/trailing whitespace. -/
 private def trimStr (s : String) : String :=
   let chars := s.toList.dropWhile isSpace
   String.ofList (chars.reverse.dropWhile isSpace).reverse
 
-/-- Find the first occurrence of `marker`, returning the remainder of the
-list just after it, or `none` if `marker` doesn't occur. -/
+/-- Return the remainder of the list after `marker`, or `none` if it doesn't occur. -/
 private partial def findMarker (xs : List Char) (marker : List Char) : Option (List Char) :=
   match xs with
   | [] => none
@@ -29,8 +25,6 @@ private partial def findMarker (xs : List Char) (marker : List Char) : Option (L
     if listStartsWith xs marker then some (xs.drop marker.length)
     else findMarker rest marker
 
-/-- Read a (possibly-escaped) string literal's contents, given the list
-right after the opening quote. Returns `(contents, remainder-after-close)`. -/
 private partial def readStringLiteral (xs : List Char) : String × List Char :=
   go xs #[]
 where
@@ -41,10 +35,6 @@ where
     | '"' :: rest => (String.ofList acc.toList, rest)
     | c :: rest => go rest (acc.push c)
 
-/-- Given the list starting right at an opening `(`, return
-`(body, remainder-after-matching-close-paren)`, where `body` is everything
-strictly between the matching parens. Parens and escapes inside string
-literals are not counted towards nesting depth. -/
 private partial def readParenBody (xs : List Char) : String × List Char :=
   match xs with
   | '(' :: rest => go rest 0 #[] false
@@ -66,10 +56,7 @@ where
       else go rest (depth - 1) (acc.push ')') inString
     | c :: rest => go rest depth (acc.push c) inString
 
-/-- Extract `(test name, source body)` pairs for each `.addTest "<name>" (...)`
-occurrence in `source`, in source order. The body has its outer `(do ... )`
-wrapper stripped down to just the statements, mirroring the interface spec's
-own `test_code` example (method body without the `def`/`end` wrapper). -/
+/-- Extract `(test name, source body)` pairs for each `.addTest "<name>" (...)` in `source`. -/
 partial def extractTestBodies (source : String) : List (String × String) :=
   go source.toList #[]
 where
@@ -88,8 +75,7 @@ where
         else trimmed
       go rest (acc.push (name, String.ofList trimmed))
 
-/-- Look up the captured source for `name`, or `""` if extraction found
-nothing for it (e.g. parsing failed, or the file couldn't be read). -/
+/-- Look up the captured source for `name`, or `""` if extraction found nothing. -/
 def lookup (name : String) (bodies : List (String × String)) : String :=
   match bodies.find? (fun p => p.1 == name) with
   | some (_, code) => code

@@ -12,9 +12,7 @@ namespace LeanTest
 structure TestCase where
   description : String
   test : IO AssertionResult
-  /-- v3 interface: links this test to a numbered task in `instructions.md`.
-  Only meaningful for Concept Exercises; `none` for everything else. -/
-  taskId : Option Nat := none
+  taskId : Option Nat := none -- set for concept exercises
   deriving Inhabited
 
 /-- A collection of tests (test suite) -/
@@ -52,8 +50,7 @@ def TestStatus.toReportString : TestStatus → String
 structure TestResult where
   description : String
   status : TestStatus
-  /-- Failure/error explanation. `none` when `status = .pass`. -/
-  message : Option String
+  message : Option String -- `none` when `status = .pass`
   taskId : Option Nat
   deriving Repr
 
@@ -84,12 +81,8 @@ def yellowColor : String := "\x1b[33m"
 def resetColor : String := "\x1b[0m"
 def boldColor : String := "\x1b[1m"
 
-/-- Run a single test, printing a colored result line, and returning a
-structured `TestResult`. Any exception thrown by the test's `IO` action
-(e.g. an unimplemented `sorry` panicking at runtime) is caught and reported
-as a per-test `error`, rather than crashing the whole test binary — without
-this, a single `sorry` anywhere in a solution would take down every test in
-the suite instead of just the ones that call it. -/
+/-- Run a single test, printing a colored result line, and returning a structured `TestResult`.
+    Exceptions are caught and returned as a per-test `error`. -/
 def runTest (testCase : TestCase) : IO TestResult := do
   try
     let result ← testCase.test
@@ -134,18 +127,10 @@ def printSummary (stats : TestStats) : IO Unit := do
     IO.println s!"\n{greenColor}ALL TESTS PASSED{resetColor}"
 
 /-- Build the v3 `results.json` payload for a full run's `TestResult`s.
-`testCode` maps each test's description to its captured source (see
-`SourceParser.extractTestBodies`); a missing entry degrades to `""` rather
-than failing the run. -/
+    `testCode` maps each test's description to its captured source.
+    `results` may be empty if an exercise is compile-time only (theorem proving, etc.). -/
 def buildResultsJson (results : List TestResult) (testCode : List (String × String)) : String :=
   open Json in
-  -- Note: some exercises (e.g. resistor-color) prove their properties as
-  -- compile-time `theorem ... := by rfl` obligations instead of runtime
-  -- `addTest` cases, so `results` can legitimately be empty. Reaching this
-  -- function at all means the binary ran to completion - i.e. every such
-  -- theorem already typechecked - so an empty `results` is a `pass` (with
-  -- an empty `tests` array), matching this exercise style's pre-v3
-  -- behavior. It is NOT reported as `error`.
   let overall : TestStatus :=
     if results.all (fun t => t.status == .pass) then .pass
     else if !results.isEmpty && results.all (fun t => t.status == .error) then .error
@@ -161,9 +146,6 @@ def buildResultsJson (results : List TestResult) (testCode : List (String × Str
             | none => []
             | some n => [s!"\"task_id\": {n}"])
     object fields
-  -- The `error` top-level status requires a top-level `message`
-  -- (spec: "no test was executed correctly"). It's only reachable here
-  -- when every test errored (e.g. every test hits the same `sorry`).
   let topMessage : Option String :=
     match overall with
     | .error =>
@@ -178,9 +160,8 @@ def buildResultsJson (results : List TestResult) (testCode : List (String × Str
   ]
 
 /-- If the runner set `EXERCISM_OUTPUT_DIR`, write `results.json` there.
-Reads `EXERCISM_TEST_FILE` (if set) to source `test_code` from the test
-file's own text. Silently does nothing when `EXERCISM_OUTPUT_DIR` is unset,
-so `lake test` keeps working for local development without an output dir. -/
+    Reads `EXERCISM_TEST_FILE` (if set) to source `test_code` from the test file.
+    Silently does nothing when `EXERCISM_OUTPUT_DIR` is unset. -/
 def writeResultsIfRequested (results : List TestResult) : IO Unit := do
   match (← IO.getEnv "EXERCISM_OUTPUT_DIR") with
   | none => pure ()
@@ -196,8 +177,8 @@ def writeResultsIfRequested (results : List TestResult) : IO Unit := do
     IO.FS.createDirAll outputDir
     IO.FS.writeFile s!"{outputDir}/results.json" (buildResultsJson results testCode)
 
-/-- Run multiple test suites, print a summary, and (if requested via env
-vars) write `results.json`. -/
+/-- Run multiple test suites, print a summary.
+    If the proper env vars are set, write `results.json`. -/
 def runTestSuites (suites : List TestSuite) : IO (List TestResult) := do
   let mut allResults : List TestResult := []
   for suite in suites do

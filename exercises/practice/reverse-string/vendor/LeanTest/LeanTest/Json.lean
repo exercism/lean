@@ -1,10 +1,5 @@
 /-
 Minimal, dependency-free JSON string building.
-
-This intentionally avoids `import Lean` (the compiler's own JSON support
-lives in the `Lean` library, which is deliberately stripped from the
-test-runner image to save ~1.2GB — see the Dockerfile). Everything here is
-plain `String`/`Char`/`List` manipulation.
 -/
 
 namespace LeanTest.Json
@@ -46,8 +41,7 @@ def natOrNull : Option Nat → String
   | none => "null"
   | some n => toString n
 
-/-- Truncate `s` to at most `maxLen` characters, per the interface spec's
-hard limit on the top-level `message` field (65535 chars). -/
+/-- Truncate `s` to at most `maxLen` characters. -/
 def truncate (s : String) (maxLen : Nat) : String :=
   if s.length <= maxLen then s
   else String.ofList (s.toList.take (maxLen - 1)) ++ "…"

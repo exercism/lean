@@ -37,7 +37,7 @@ As such, open issues in this track are not only about solving problems or adding
 Although the use of LLMs is not forbidden, they should be treated as an **auxiliary educational tool**.
 Pull requests with reduced code quality or that fail to conform to our guidelines may be closed.
 
-### Adding an exercise
+### Adding a Practice exercise
 
 Practice exercises must follow the [Add a Practice Exercise docs][add-exercise].
 
@@ -59,6 +59,40 @@ See the [generator documentation][generator-doc].
 **The test file must be generated from its test generator using the generator script.**
 
 After adding an exercise, run the `bin/sort-exercises` script to ensure the correct order in `config.json`.
+
+### Adding a concept exercise
+
+Concept exercises must be scaffolded with:
+
+```text
+bin/fetch-configlet && bin/configlet create --concept-exercise <slug>
+```
+
+Each concept exercise teaches exactly one concept, and has a matching `concepts/<slug>/` doc set.
+This track requires two extra rules on top of Exercism's usual concept exercise guidelines, both enforced by a CI workflow:
+
+- A concept exercise's `.docs/introduction.md` must be generated from its concept's `introduction.md`.
+  Write a `.docs/introduction.md.tpl` file with a single `%{concept: <slug>}` placeholder, then run `bin/sync-concept-introductions`.
+- `config.json`'s `concepts` and `exercises.concept` arrays must list no exercise before any of its prerequisites.
+
+Concept exercises must include a test generator located in:
+
+```text
+generator/Generator/Generator
+```
+
+The generator must:
+
+- be imported by `generator/Generator/Generator.lean`
+- define the required generator functions
+- register them in the `dispatch` table
+
+The Lean track provides a generator script to help with this process.
+See the [generator documentation][generator-doc].
+
+**The test file must be generated from its test generator using the generator script.**
+
+After adding or reordering a concept exercise, run `bin/sort-concepts` to ensure the correct order in `config.json`.
 
 [guidelines]: https://exercism.org/blog/contribution-guidelines-nov-2023
 [lean-forum]: https://forum.exercism.org/c/programming/lean/761

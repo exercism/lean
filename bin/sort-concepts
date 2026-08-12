@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# Synopsis:
+# Topologically sort the top-level `concepts` array and the
+# `exercises.concept` array in `config.json`, so that no concept exercise
+# appears before any of its prerequisites' concept exercises.
+#
+# Example: rewrite config.json in a valid order
+# bin/sort-concepts
+#
+# Example: check config.json is already in a valid order, without writing
+# bin/sort-concepts --check
+
+set -eo pipefail
+
+die() { echo "$*" >&2; exit 1; }
+
+required_tool() {
+    command -v "${1}" >/dev/null 2>&1 ||
+        die "${1} is required but not installed. Please install it and make sure it's in your PATH."
+}
+
+required_tool jq
+
+cd "$(dirname "$0")/.."
+
+order_of() {
+    jq -c '{concepts: [(.concepts // [])[].slug], exercises: [(.exercises.concept // [])[].slug]}' "$1"
+}
+
+sorted=$(jq -f bin/sort-concepts.jq config.json)
+
+if [[ "${1:-}" == "--check" ]]; then
+    current_order=$(order_of config.json)
+    sorted_order=$(order_of <(echo "${sorted}"))
+
+    if [[ "${current_order}" != "${sorted_order}" ]]; then
+        die "config.json's 'concepts' and/or 'exercises.concept' arrays are not in a valid topological order (a concept exercise appears before one of its prerequisites). Run 'bin/sort-concepts' to fix. Expected order: ${sorted_order}"
+    fi
+
+    echo "config.json concept ordering is valid."
+    exit 0
+fi
+
+echo "${sorted}" > config.json
+bin/fetch-configlet && bin/configlet fmt --update --yes

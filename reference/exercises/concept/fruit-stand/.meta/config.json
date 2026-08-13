@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "oxe-i"
+  ],
+  "files": {
+    "solution": [
+      "FruitStand.lean"
+    ],
+    "test": [
+      "FruitStandTest.lean"
+    ],
+    "exemplar": [
+      ".meta/Exemplar.lean"
+    ]
+  },
+  "blurb": "Learn the basics of Lean by pricing the apples sold at a small fruit stand."
+}

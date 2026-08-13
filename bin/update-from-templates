@@ -6,10 +6,21 @@
 
 set -eo pipefail
 
-die() { echo "$*" >&2; exit 3; }
-
 hash_dir() {
     (cd "$1" && find . ! -name "*.o" -type f | sort --unique | xargs cat) | md5sum
+}
+
+toPascalCase() {
+    # "some-kebab-case-word" => "SomeKebabCaseWord"
+    local word=${1^}
+    while [[ ${word} =~ (.*)-(.*) ]]; do
+        word=${BASH_REMATCH[1]}${BASH_REMATCH[2]^}
+    done
+    echo "${word}"
+}
+
+render_lakefile() {
+    sed -e "s/%{pascal_slug}/$2/g" -e "s/%{kebab_slug}/$1/g" templates/lakefile.toml
 }
 
 cd "$(dirname "$0")/.."
@@ -51,8 +62,29 @@ for exercise_dir in exercises/{practice,concept}/*; do
         cp -r templates/vendor "${vendor_dir}"
         num_updated=$((num_updated + 1))
     fi
+
+    lakefile="${exercise_dir}/lakefile.toml"
+    kebab_slug="$(basename "${exercise_dir}")"
+    pascal_slug="$(toPascalCase "${kebab_slug}")"
+    expected_lakefile_hash=$(render_lakefile "${kebab_slug}" "${pascal_slug}" | md5sum | cut -d' ' -f1)
+    if [[ -f "${lakefile}" ]]; then
+        current_lakefile_hash=$(md5sum "${lakefile}" | cut -d' ' -f1)
+        if [[ "${current_lakefile_hash}" != "${expected_lakefile_hash}" ]]; then
+            echo "Updating ${lakefile}"
+            render_lakefile "${kebab_slug}" "${pascal_slug}" > "${lakefile}"
+            num_updated=$((num_updated + 1))
+        fi
+    else
+        echo "Adding ${lakefile}"
+        render_lakefile "${kebab_slug}" "${pascal_slug}" > "${lakefile}"
+        num_updated=$((num_updated + 1))
+    fi
 done
 
-[[ ${num_updated} -eq 0 ]] || exit 1
+if [[ ${num_updated} -eq 0 ]]; then
+    echo "Everything up-to-date."
+else
+    echo "Number of items updated: ${num_updated}"
+    exit 1
+fi
 
-echo "Everything up-to-date."

@@ -15,7 +15,8 @@ The following options are available:
 * `-s` or `--stub`       - Generates a stub test generator in `./generators/Generator/Generator/`
 * `-a` or `--add`        - Adds a practice exercise to `./exercises/practice` and generates a test file if a test generator exists.
                            The author and the difficulty of the new exercise may be passed as extra parameters.
-* `-g` or `--generate`   - Generates a test file in `./exercises/practice/<exercise-slug>/`
+* `-g` or `--generate`   - Generates a test file for the exercise, in `./exercises/concept/<exercise-slug>/` if the directory exists.
+                           Otherwise, generates the test file in `./exercises/practice/<exercise-slug>/`.
 * `-r` or `--regenerate` - Regenerates all test files with a test generator, syncing all docs and test data.
                            This option does not take any parameters.
 
@@ -60,6 +61,7 @@ In particular, *do not* import the entire `Lean` package.
 
 Practice exercises get their test cases from `https://github.com/exercism/problem-specifications/`.
 
-Additional test cases may be defined by the author in JSON format in an `extra.json` file in `exercises/practice/<exercise-slug>/.meta` folder.
+Additional test cases may be defined by the author in JSON format in an `extra.json` file in the exercise's `.meta` folder.
+`extra.json` is _required_ for concept exercises.
 
 The `testCaseGenerator` function is called for each case from `problem-specifications` and for any extra cases.

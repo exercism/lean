@@ -1,0 +1,28 @@
+// Draft entries for real config.json, one concept/exercise pair per block below.
+// Not valid JSON on its own (comments, multiple top-level fragments) — this file is
+// never parsed by configlet or CI. Copy each block into the matching real array
+// (top-level "concepts", "exercises.concept") when a concept is promoted out of
+// ./reference, in the same relative order it appears here, then delete the block.
+//
+// After copying entries in, run `bin/sort-concepts` and `bin/configlet fmt --update --yes`.
+
+// ---- basics / fruit-stand ----
+
+// Append to the top-level "concepts" array:
+{
+  "uuid": "528e0c94-0742-43d7-ab62-3f6f60976505",
+  "slug": "basics",
+  "name": "Basics"
+}
+
+// Append to "exercises.concept":
+{
+  "slug": "fruit-stand",
+  "name": "Fruit Stand",
+  "uuid": "b12ed283-7ebc-4db3-bf42-f4b9d9e0a165",
+  "concepts": [
+    "basics"
+  ],
+  "prerequisites": [],
+  "status": "beta"
+}

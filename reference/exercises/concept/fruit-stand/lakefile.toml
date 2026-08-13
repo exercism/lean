@@ -1,0 +1,19 @@
+name = "fruit-stand"
+version = "0.1.0"
+defaultTargets = ["FruitStandTest"]
+testDriver = "FruitStandTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "FruitStand"
+
+[[lean_lib]]
+name = "Extra"
+
+[[lean_exe]]
+name = "FruitStandTest"
+root = "FruitStandTest"

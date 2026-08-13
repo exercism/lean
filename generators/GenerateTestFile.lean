@@ -23,7 +23,8 @@ The following options are available:
 * `-s` or `--stub`       - Generates a stub test generator in `./generators/Generator/Generator/`
 * `-a` or `--add`        - Adds a practice exercise to `./exercises/practice` and generates a test file if a test generator exists.
                            The author and the difficulty of the new exercise may be passed as extra parameters.
-* `-g` or `--generate`   - Generates a test file in `./exercises/practice/<exercise-slug>/`
+* `-g` or `--generate`   - Generates a test file for the exercise, in `./exercises/concept/<exercise-slug>/` if the directory exists.
+                           Otherwise, generates the test file in `./exercises/practice/<exercise-slug>/`.
 * `-r` or `--regenerate` - Regenerates all test files with a test generator, syncing all docs and test data.
                            This option does not take any parameters.
 
@@ -68,7 +69,8 @@ In particular, *do not* import the entire `Lean` package.
 
 Practice exercises get their test cases from `https://github.com/exercism/problem-specifications/`.
 
-Additional test cases may be defined by the author in JSON format in an `extra.json` file in `exercises/practice/<exercise-slug>/.meta` folder.
+Additional test cases may be defined by the author in JSON format in an `extra.json` file in the exercise's `.meta` folder.
+`extra.json` is _required_ for concept exercises.
 
 The `testCaseGenerator` function is called for each case from `problem-specifications` and for any extra cases.
 -/
@@ -135,6 +137,15 @@ def getPath (exercise : String) : IO String := do
     return s!"{directory}/exercises/{exercise}"
 
 
+def isConceptExercise (exercise : String) : IO Bool :=
+  System.FilePath.pathExists (System.FilePath.mk s!"exercises/concept/{exercise}")
+
+def exerciseDir (exercise : String) : IO String := do
+  if ← isConceptExercise exercise then
+    return s!"exercises/concept/{exercise}"
+  else
+    return s!"exercises/practice/{exercise}"
+
 def getToml (exercise : String) : IO (Except String String) := do
   let path := s!"exercises/practice/{exercise}/.meta/tests.toml"
   try
@@ -183,7 +194,8 @@ def getCanonicalCases (canonical : TreeMap.Raw String Json) (tests : TreeMap Str
 
 def checkExtraCases (exercise : String) : IO (Except String String) := do
   try
-    let json <- IO.FS.readFile (s!"exercises/practice/{exercise}/.meta/extra.json")
+    let dir ← exerciseDir exercise
+    let json <- IO.FS.readFile (s!"{dir}/.meta/extra.json")
     return .ok json
   catch _ =>
     return .error "No extra cases found."
@@ -269,7 +281,8 @@ def showUsage : IO Unit :=
         The author and the difficulty of the new exercise may be passed as extra parameters.
 
       -g / --generate :
-        Generates a test file for the exercise in `./exercises/practice/<exercise-slug>/`
+        Generates a test file for the exercise, in `./exercises/concept/<exercise-slug>/` if the directory exists.
+        Otherwise, generates the test file in `./exercises/practice/<exercise-slug>/`.
 
       -r / --regenerate :
         Regenerates all test files with a test generator, syncing all docs and test data.
@@ -278,6 +291,7 @@ def showUsage : IO Unit :=
 
 def generateTestFile (exercise : String) : IO Unit := do
   let pascalExercise := pascalCase exercise
+  let dir ← exerciseDir exercise
   IO.println s!"\nGenerating for {pascalExercise}"
   let maybeToml ← getToml exercise
   let mut extra := #[]
@@ -296,7 +310,7 @@ def generateTestFile (exercise : String) : IO Unit := do
       | .error msg =>
         IO.eprintln msg
       | .ok testContent =>
-        IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+        IO.FS.writeFile s!"{dir}/{pascalExercise}Test.lean" testContent
         IO.println s!"Added intro and ending."
     else
       IO.eprintln s!"{msg}. Trying to add extra cases."
@@ -304,7 +318,7 @@ def generateTestFile (exercise : String) : IO Unit := do
       | .error msg =>
         IO.eprintln msg
       | .ok testContent =>
-        IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+        IO.FS.writeFile s!"{dir}/{pascalExercise}Test.lean" testContent
         IO.println "Extra cases successfully added."
   | .ok toml =>
     let tests := getIncludes toml
@@ -317,7 +331,7 @@ def generateTestFile (exercise : String) : IO Unit := do
         | .error msg =>
           IO.eprintln msg
         | .ok testContent =>
-          IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+          IO.FS.writeFile s!"{dir}/{pascalExercise}Test.lean" testContent
           IO.println s!"Added intro and ending."
       else
         IO.eprintln s!"{msg}. Trying to add extra cases."
@@ -325,7 +339,7 @@ def generateTestFile (exercise : String) : IO Unit := do
         | .error msg =>
           IO.eprintln msg
         | .ok testContent =>
-          IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+          IO.FS.writeFile s!"{dir}/{pascalExercise}Test.lean" testContent
           IO.println "Extra cases successfully added."
     | .ok canonicalData =>
       match canonicalData.getObj? with
@@ -337,7 +351,7 @@ def generateTestFile (exercise : String) : IO Unit := do
           | .error msg =>
             IO.eprintln msg
           | .ok testContent =>
-            IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+            IO.FS.writeFile s!"{dir}/{pascalExercise}Test.lean" testContent
             IO.println s!"Added intro and ending."
         else
           IO.eprintln s!"Canonical data could not be parsed. Trying to add extra cases."
@@ -345,7 +359,7 @@ def generateTestFile (exercise : String) : IO Unit := do
           | .error msg =>
             IO.eprintln msg
           | .ok testContent =>
-            IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+            IO.FS.writeFile s!"{dir}/{pascalExercise}Test.lean" testContent
             IO.println "Extra cases successfully added."
       | .ok maybeMap =>
         match getCanonicalCases maybeMap tests with
@@ -357,7 +371,7 @@ def generateTestFile (exercise : String) : IO Unit := do
             | .error msg =>
               IO.eprintln msg
             | .ok testContent =>
-              IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+              IO.FS.writeFile s!"{dir}/{pascalExercise}Test.lean" testContent
               IO.println s!"Added intro and ending."
           else
             IO.eprintln s!"Parsing canonical data returned error: {msg}. Trying to add extra cases."
@@ -365,14 +379,14 @@ def generateTestFile (exercise : String) : IO Unit := do
             | .error msg =>
               IO.eprintln msg
             | .ok testContent =>
-              IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+              IO.FS.writeFile s!"{dir}/{pascalExercise}Test.lean" testContent
               IO.println "Extra cases successfully added."
         | .ok cases =>
           match genTestFileContent pascalExercise cases extra with
           | .error msg =>
             IO.eprintln msg
           | .ok testContent =>
-            IO.FS.writeFile s!"exercises/practice/{exercise}/{pascalExercise}Test.lean" testContent
+            IO.FS.writeFile s!"{dir}/{pascalExercise}Test.lean" testContent
             let extraMsg := if extra.isEmpty then "" else " Extra cases successfully added."
             IO.println s!"Canonical data successfully added.{extraMsg}"
 
@@ -397,23 +411,12 @@ def kebabCase (pascal : String) : String :=
     else (acc.push ch, false)
   ) ("", true) |>.fst
 
-def addTemplates (pascal kebab : String) : IO Unit := do
-  let paths ← System.FilePath.walkDir "templates"
-  for path in paths do
-    if ← path.isDir then continue
-    let strPath := path.toString
-    let newPath := strPath.replace "templates" s!"exercises/practice/{kebab}"
-    try
-      let content ← (do
-        if strPath.trimAsciiEnd.endsWith "lakefile.toml" then
-          IO.FS.readFile path
-            >>= (return ·.replace "%{pascal_slug}" pascal)
-            >>= (return ·.replace "%{kebab_slug}" kebab)
-        else
-          IO.FS.readFile path)
-      IO.FS.writeFile newPath content
-    catch _ =>
-      IO.eprintln s!"Failed to add templates to {pascal}."
+def addTemplates : IO Unit := do
+  let out ← IO.Process.output {
+    cmd := "bin/update-from-templates"
+    args := #[]
+  }
+  IO.print out.stdout
 
 def regenerateTestFiles : IO Unit := do
   let _ ← IO.Process.run {
@@ -424,9 +427,9 @@ def regenerateTestFiles : IO Unit := do
     let kebab := kebabCase pascal
     try
       generateTestFile kebab
-      addTemplates pascal kebab
     catch msg =>
       IO.eprintln s!"Regeneration for {pascal} failed. Error logged was: {msg}"
+  addTemplates
 
 def generateStub (exercise : String) : IO Unit := do
   let pascalExercise := pascalCase exercise
@@ -456,9 +459,12 @@ def genTestCase (exercise : String) (case : TreeMap.Raw String Json) : String :=
               |> (·.compress)
   let funName := getFunName (case.get! \"property\")
   let call := s!\"(\{exercise}.\{funName} \{insertAllInputs input})\"
+  let taskArg := match case.get? \"task\" with
+    | some task => s!\" (taskId := some \{task})\"
+    | none => \"\"
   s!\"
   |>.addTest \{description} (do
-      return assertEqual \{expected} \{call})\"
+      return assertEqual \{expected} \{call})\{taskArg}\"
 
 def genEnd (exercise : String) : String :=
   s!\"

@@ -1,0 +1,10 @@
+[
+  {
+    "url": "https://lean-lang.org/theorem_proving_in_lean4/introduction.html",
+    "description": "Theorem Proving in Lean 4: Introduction, including a first look at `def` and `#eval`"
+  },
+  {
+    "url": "https://lean-lang.org/doc/reference/latest/Definitions/",
+    "description": "The Lean Language Reference: Definitions"
+  }
+]

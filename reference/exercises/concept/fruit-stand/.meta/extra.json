@@ -1,0 +1,37 @@
+[
+  {
+    "property": "applePrice",
+    "description": "the price of one apple",
+    "input": {},
+    "expected": 50,
+    "task": 1
+  },
+  {
+    "property": "revenue",
+    "description": "revenue from selling some apples",
+    "input": { "applesSold": 10 },
+    "expected": 500,
+    "task": 2
+  },
+  {
+    "property": "revenue",
+    "description": "revenue from selling no apples",
+    "input": { "applesSold": 0 },
+    "expected": 0,
+    "task": 2
+  },
+  {
+    "property": "profit",
+    "description": "profit after paying expenses",
+    "input": { "applesSold": 10, "expenses": 30 },
+    "expected": 470,
+    "task": 3
+  },
+  {
+    "property": "profit",
+    "description": "profit with no sales and no expenses",
+    "input": { "applesSold": 0, "expenses": 0 },
+    "expected": 0,
+    "task": 3
+  }
+]

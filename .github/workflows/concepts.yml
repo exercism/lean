@@ -1,0 +1,37 @@
+# This workflow enforces two track-specific rules for Learning Mode that
+# `configlet lint` does not check:
+#
+# - A concept exercise's `.docs/introduction.md` must be byte-identical to
+#   its concept's `introduction.md` (see bin/sync-concept-introductions).
+# - `config.json`'s `concepts` and `exercises.concept` arrays must be in a
+#   valid topological order: no concept exercise may appear before any of
+#   its prerequisites' concept exercises (see bin/sort-concepts).
+#
+# Requires scripts:
+# - bin/sync-concept-introductions
+# - bin/sort-concepts
+
+name: Concepts
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify_concepts:
+    runs-on: ubuntu-26.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+
+      - name: Verify concept exercise introductions are byte-identical to their concept
+        run: bin/sync-concept-introductions --check
+
+      - name: Verify concept and exercise ordering in config.json
+        run: bin/sort-concepts --check

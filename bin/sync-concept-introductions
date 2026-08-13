@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+# Synopsis:
+# For every concept exercise's `.docs/introduction.md.tpl`, regenerate its
+# `.docs/introduction.md` as a byte-for-byte copy of the corresponding
+# `concepts/<slug>/introduction.md`.
+#
+# A template file must contain exactly one placeholder, in configlet's own
+# syntax (see `bin/configlet generate`):
+#
+#   %{concept: some-slug}
+#
+# and nothing else (surrounding whitespace is fine). This keeps a concept's
+# `introduction.md` and its concept exercise's `.docs/introduction.md`
+# byte-identical, which `bin/configlet generate`'s own heading-rewriting
+# does not guarantee.
+#
+# Example: regenerate every concept exercise's introduction.md
+# bin/sync-concept-introductions
+#
+# Example: check every introduction.md is already up to date, without writing
+# bin/sync-concept-introductions --check
+
+set -eo pipefail
+
+cd "$(dirname "$0")/.."
+
+check_only=0
+[[ "${1:-}" == "--check" ]] && check_only=1
+
+placeholder_re='^[[:space:]]*%\{[[:space:]]*concept[[:space:]]*:[[:space:]]*([a-z0-9]+(-[a-z0-9]+)*)[[:space:]]*\}[[:space:]]*$'
+
+status=0
+shopt -s nullglob
+for tpl in exercises/concept/*/.docs/introduction.md.tpl; do
+    exercise_dir=$(dirname "$(dirname "${tpl}")")
+    exercise_slug=$(basename "${exercise_dir}")
+    target="${exercise_dir}/.docs/introduction.md"
+
+    content=$(<"${tpl}")
+    if [[ ! "${content}" =~ ${placeholder_re} ]]; then
+        echo "error: ${tpl} must contain exactly one '%{concept: <slug>}' placeholder and nothing else" >&2
+        status=1
+        continue
+    fi
+    concept_slug="${BASH_REMATCH[1]}"
+    concept_intro="concepts/${concept_slug}/introduction.md"
+
+    if [[ ! -f "${concept_intro}" ]]; then
+        echo "error: ${tpl} (exercise '${exercise_slug}') refers to concept '${concept_slug}', but ${concept_intro} does not exist" >&2
+        status=1
+        continue
+    fi
+
+    if [[ "${check_only}" -eq 1 ]]; then
+        if [[ ! -f "${target}" ]] || ! diff -q "${concept_intro}" "${target}" > /dev/null 2>&1; then
+            echo "error: ${target} is missing or not byte-identical to ${concept_intro}. Run 'bin/sync-concept-introductions' to fix." >&2
+            status=1
+        fi
+    else
+        cp "${concept_intro}" "${target}"
+    fi
+done
+
+if [[ "${status}" -eq 0 ]]; then
+    if [[ "${check_only}" -eq 1 ]]; then
+        echo "Every concept exercise introduction.md is byte-identical to its concept's introduction.md."
+    else
+        echo "Every concept exercise introduction.md is up to date."
+    fi
+fi
+
+exit "${status}"

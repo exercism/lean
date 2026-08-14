@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "oxe-i"
+  ],
+  "files": {
+    "solution": [
+      "MountainHike.lean"
+    ],
+    "test": [
+      "MountainHikeTest.lean"
+    ],
+    "exemplar": [
+      ".meta/Exemplar.lean"
+    ]
+  },
+  "blurb": "Learn Nat and Int arithmetic in Lean by logging data from a mountain hike."
+}

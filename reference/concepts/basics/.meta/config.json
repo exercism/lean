@@ -1,5 +1,5 @@
 {
-  "blurb": "Learn the basics of Lean by defining values and functions with `def`, trying out expressions with `#eval`, and writing comments.",
+  "blurb": "Learn how to write comments, and how to define and evaluate values in Lean.",
   "authors": [
     "oxe-i"
   ]

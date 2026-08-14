@@ -1,0 +1,72 @@
+[
+  {
+    "property": "totalMinutes",
+    "description": "two hours and thirty minutes",
+    "input": { "hours": 2, "minutes": 30 },
+    "expected": 150,
+    "task": 1
+  },
+  {
+    "property": "totalMinutes",
+    "description": "zero hours and forty-five minutes",
+    "input": { "hours": 0, "minutes": 45 },
+    "expected": 45,
+    "task": 1
+  },
+  {
+    "property": "fullHours",
+    "description": "one hundred fifty minutes is two full hours",
+    "input": { "totalMinutes": 150 },
+    "expected": 2,
+    "task": 2
+  },
+  {
+    "property": "remainingMinutes",
+    "description": "one hundred fifty minutes leaves thirty minutes over",
+    "input": { "totalMinutes": 150 },
+    "expected": 30,
+    "task": 2
+  },
+  {
+    "property": "fullHours",
+    "description": "forty-five minutes is zero full hours",
+    "input": { "totalMinutes": 45 },
+    "expected": 0,
+    "task": 2
+  },
+  {
+    "property": "remainingMinutes",
+    "description": "forty-five minutes leaves forty-five minutes over",
+    "input": { "totalMinutes": 45 },
+    "expected": 45,
+    "task": 2
+  },
+  {
+    "property": "waterLeft",
+    "description": "some water left in the canteen",
+    "input": { "capacity": 2000, "used": 500 },
+    "expected": 1500,
+    "task": 3
+  },
+  {
+    "property": "waterLeft",
+    "description": "using more water than the canteen holds",
+    "input": { "capacity": 2000, "used": 5000 },
+    "expected": 0,
+    "task": 3
+  },
+  {
+    "property": "elevationChange",
+    "description": "hiking uphill",
+    "input": { "beginAlt": 1200, "endAlt": 1450 },
+    "expected": 250,
+    "task": 4
+  },
+  {
+    "property": "elevationChange",
+    "description": "hiking downhill",
+    "input": { "beginAlt": 1200, "endAlt": 950 },
+    "expected": -250,
+    "task": 4
+  }
+]

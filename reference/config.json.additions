@@ -26,3 +26,26 @@
   "prerequisites": [],
   "status": "beta"
 }
+
+// ---- numbers / mountain-hike ----
+
+// Append to the top-level "concepts" array:
+{
+  "uuid": "12c205a2-ed8e-4d43-946a-295ab9295751",
+  "slug": "numbers",
+  "name": "Numbers"
+}
+
+// Append to "exercises.concept":
+{
+  "slug": "mountain-hike",
+  "name": "Mountain Hike",
+  "uuid": "103f0b43-eb57-47df-ba9f-a88e4e3c8190",
+  "concepts": [
+    "numbers"
+  ],
+  "prerequisites": [
+    "basics"
+  ],
+  "status": "beta"
+}

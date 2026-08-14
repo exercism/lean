@@ -47,9 +47,24 @@ def lineUpTests : TestSuite :=
   |>.addTest "format exceptional ordinal numeral 21" (do
       return assertEqual "Washi, you are the 21st customer we serve today. Thank you!"
           (LineUp.format "Washi" 21))
+  |>.addTest "format exceptional ordinal numeral 22 ending in nd even though it is a multiple of 11" (do
+      return assertEqual "Ingrid, you are the 22nd customer we serve today. Thank you!"
+          (LineUp.format "Ingrid" 22))
+  |>.addTest "format exceptional ordinal numeral 33 ending in rd even though it is a multiple of 11" (do
+      return assertEqual "Mario, you are the 33rd customer we serve today. Thank you!"
+          (LineUp.format "Mario" 33))
+  |>.addTest "format exceptional ordinal numeral 52 ending in nd even though it is a multiple of 13" (do
+      return assertEqual "Quentin, you are the 52nd customer we serve today. Thank you!"
+          (LineUp.format "Quentin" 52))
   |>.addTest "format exceptional ordinal numeral 62" (do
       return assertEqual "Nayra, you are the 62nd customer we serve today. Thank you!"
           (LineUp.format "Nayra" 62))
+  |>.addTest "format non-exceptional ordinal numeral 72 ending in nd even though it is a multiple of 12" (do
+      return assertEqual "Ugo, you are the 72nd customer we serve today. Thank you!"
+          (LineUp.format "Ugo" 72))
+  |>.addTest "format exceptional ordinal numeral 91 ending in st even though it is a multiple of 13" (do
+      return assertEqual "Boris, you are the 91st customer we serve today. Thank you!"
+          (LineUp.format "Boris" 91))
   |>.addTest "format exceptional ordinal numeral 100" (do
       return assertEqual "John, you are the 100th customer we serve today. Thank you!"
           (LineUp.format "John" 100))
@@ -62,6 +77,9 @@ def lineUpTests : TestSuite :=
   |>.addTest "format exceptional ordinal numeral 123" (do
       return assertEqual "Yma, you are the 123rd customer we serve today. Thank you!"
           (LineUp.format "Yma" 123))
+  |>.addTest "format large number 972 ending in nd even though it is a multiple of 12" (do
+      return assertEqual "Elias, you are the 972nd customer we serve today. Thank you!"
+          (LineUp.format "Elias" 972))
 
 def main : IO UInt32 := do
   runTestSuitesWithExitCode [lineUpTests]

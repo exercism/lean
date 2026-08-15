@@ -1,3 +1,4 @@
+import Generator.MountainHikeGenerator
 import Generator.FruitStandGenerator
 import Generator.DotDslGenerator
 import Generator.ResistorColorTrioGenerator
@@ -111,6 +112,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("MountainHike", (MountainHikeGenerator.genIntro, MountainHikeGenerator.genTestCase, MountainHikeGenerator.genEnd)),
     ("FruitStand", (FruitStandGenerator.genIntro, FruitStandGenerator.genTestCase, FruitStandGenerator.genEnd)),
     ("DotDsl", (DotDslGenerator.genIntro, DotDslGenerator.genTestCase, DotDslGenerator.genEnd)),
     ("ResistorColorTrio", (ResistorColorTrioGenerator.genIntro, ResistorColorTrioGenerator.genTestCase, ResistorColorTrioGenerator.genEnd)),

@@ -1,0 +1,100 @@
+[
+  {
+    "property": "canJoin",
+    "description": "Confirmed and invited can join",
+    "input": { "hasConfirmed": true, "isInvited": true },
+    "expected": true,
+    "task": 1
+  },
+  {
+    "property": "canJoin",
+    "description": "Confirmed but not invited cannot join",
+    "input": { "hasConfirmed": true, "isInvited": false },
+    "expected": false,
+    "task": 1
+  },
+  {
+    "property": "canJoin",
+    "description": "invited but has not confirmed cannot join",
+    "input": { "hasConfirmed": false, "isInvited": true },
+    "expected": false,
+    "task": 1
+  },
+  {
+    "property": "bringsSnacks",
+    "description": "host brings snacks",
+    "input": { "isHost": true, "volunteered": false },
+    "expected": true,
+    "task": 2
+  },
+  {
+    "property": "bringsSnacks",
+    "description": "volunteer brings snacks",
+    "input": { "isHost": false, "volunteered": true },
+    "expected": true,
+    "task": 2
+  },
+  {
+    "property": "bringsSnacks",
+    "description": "neither host nor volunteer brings no snacks",
+    "input": { "isHost": false, "volunteered": false },
+    "expected": false,
+    "task": 2
+  },
+  {
+    "property": "isSkipping",
+    "description": "coming is not skipping",
+    "input": { "isComing": true },
+    "expected": false,
+    "task": 3
+  },
+  {
+    "property": "isSkipping",
+    "description": "not coming is skipping",
+    "input": { "isComing": false },
+    "expected": true,
+    "task": 3
+  },
+  {
+    "property": "votedSame",
+    "description": "both voted for the board game",
+    "input": { "firstVote": true, "secondVote": true },
+    "expected": true,
+    "task": 4
+  },
+  {
+    "property": "votedSame",
+    "description": "voted for different games",
+    "input": { "firstVote": true, "secondVote": false },
+    "expected": false,
+    "task": 4
+  },
+  {
+    "property": "votedSame",
+    "description": "both voted for the video game",
+    "input": { "firstVote": false, "secondVote": false },
+    "expected": true,
+    "task": 4
+  },
+  {
+    "property": "hasScorekeeper",
+    "description": "exactly one volunteer is the scorekeeper",
+    "input": { "aVolunteers": true, "bVolunteers": false },
+    "expected": true,
+    "task": 5
+  },
+  {
+    "property": "hasScorekeeper",
+    "description": "both volunteering means no single scorekeeper",
+    "input": { "aVolunteers": true, "bVolunteers": true },
+    "expected": false,
+    "task": 5
+  },
+  {
+    "property": "hasScorekeeper",
+    "description": "neither volunteering means no scorekeeper",
+    "input": { "aVolunteers": false, "bVolunteers": false },
+    "expected": false,
+    "task": 5
+  }
+]

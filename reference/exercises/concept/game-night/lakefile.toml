@@ -1,0 +1,19 @@
+name = "game-night"
+version = "0.1.0"
+defaultTargets = ["GameNightTest"]
+testDriver = "GameNightTest"
+moreLeanArgs = [ "-DwarningAsError=true" ]
+
+[[lean_lib]]
+name = "LeanTest"
+srcDir = "vendor/LeanTest"
+
+[[lean_lib]]
+name = "GameNight"
+
+[[lean_lib]]
+name = "Extra"
+
+[[lean_exe]]
+name = "GameNightTest"
+root = "GameNightTest"

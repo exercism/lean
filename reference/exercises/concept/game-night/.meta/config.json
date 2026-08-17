@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "oxe-i"
+  ],
+  "files": {
+    "solution": [
+      "GameNight.lean"
+    ],
+    "test": [
+      "GameNightTest.lean"
+    ],
+    "exemplar": [
+      ".meta/Exemplar.lean"
+    ]
+  },
+  "blurb": "Learn Lean's Bool type by organizing a game night."
+}

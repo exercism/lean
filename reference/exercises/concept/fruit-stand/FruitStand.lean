@@ -1,6 +1,7 @@
 namespace FruitStand
 
-def applePrice : Nat := sorry --remove this line and define the constant
+def applePrice : Nat :=
+  sorry --remove this line and define the constant
 
 def revenue (applesSold : Nat) : Nat :=
   sorry --remove this line and implement the function

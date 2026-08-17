@@ -100,6 +100,7 @@ import Generator.AnagramGenerator
 import Generator.BobGenerator
 import Generator.MatchingBracketsGenerator
 import Generator.ReverseStringGenerator
+import Generator.GameNightGenerator
 
 import Std
 import Lean.Data.Json
@@ -112,6 +113,7 @@ abbrev endBodyGenerator := String -> String
 
 def dispatch : Std.HashMap String (introGenerator × testCaseGenerator × endBodyGenerator) :=
   Std.HashMap.ofList [
+    ("GameNight", (GameNightGenerator.genIntro, GameNightGenerator.genTestCase, GameNightGenerator.genEnd)),
     ("MountainHike", (MountainHikeGenerator.genIntro, MountainHikeGenerator.genTestCase, MountainHikeGenerator.genEnd)),
     ("FruitStand", (FruitStandGenerator.genIntro, FruitStandGenerator.genTestCase, FruitStandGenerator.genEnd)),
     ("DotDsl", (DotDslGenerator.genIntro, DotDslGenerator.genTestCase, DotDslGenerator.genEnd)),

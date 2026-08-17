@@ -1,5 +1,5 @@
 {
-  "blurb": "Learn Lean's `Bool` type, the operators `&& || !`, short-circuit evaluation, and comparing `Bool` values.",
+  "blurb": "Learn Lean's Bool type.",
   "authors": [
     "oxe-i"
   ]

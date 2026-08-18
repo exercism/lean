@@ -49,3 +49,27 @@
   ],
   "status": "beta"
 }
+
+// ---- booleans / game-night ----
+
+// Append to the top-level "concepts" array:
+{
+  "uuid": "5193a16c-2f38-48a6-8d23-c81fd5cd8a6e",
+  "slug": "booleans",
+  "name": "Booleans"
+}
+
+// Append to "exercises.concept":
+{
+  "slug": "game-night",
+  "name": "Game Night",
+  "uuid": "13718a3a-ad48-492a-951f-75e325c0537b",
+  "concepts": [
+    "booleans"
+  ],
+  "prerequisites": [
+    "basics",
+    "numbers"
+  ],
+  "status": "beta"
+}

@@ -1,0 +1,9 @@
+def mostCommonWord (text : String) : String := Id.run do
+  let mut counts : Std.HashMap String Nat := {}
+  let mut best := ""
+  for word in text.toLower.splitOn " " do
+    let count := counts.getD word 0 + 1
+    counts := counts.insert word count
+    if count > counts.getD best 0 then
+      best := word
+  return s!"\"{best}\" appears {counts.getD best 0} times"
